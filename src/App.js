@@ -1,8 +1,8 @@
+import Radio from "./components/Radio";
+
 function App() {
   return (
-    <div>
-     
-    </div>
+    <Radio value="radio" name="options">Radio label</Radio>
   );
 }
 
