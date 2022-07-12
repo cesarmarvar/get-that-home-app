@@ -8,9 +8,11 @@ import { FaPaw } from "react-icons/fa";
 import { colors } from "../styles/colors";
 import { typography } from "../styles/typography";
 import { fonts } from "../styles/fonts";
+import { FaRegEdit } from "react-icons/fa";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
 
 const CardContainer = styled.div`
-
 `
 
 const DefaultCard = styled.div`
@@ -62,7 +64,7 @@ const PropertyType = styled.div`
 const AddressAndIcons = styled.div`
   display: flex;
   flex-direction: column;
-  height: 97px;
+  height: 110px;
   justify-content: space-between;
   align-items: flex-start;
 `
@@ -71,7 +73,7 @@ const Adress = styled.text`
   color: ${colors.gray.dark};
   font-family: ${fonts.secundary};
   ${typography.subtitle.s1}; // Pendiente corregir el line height: debe ser 24.
-  padding-top: 8px;
+  padding-top: 1rem;
 `
 
 const IconsRow = styled.div`
@@ -90,13 +92,53 @@ const SingleIcon = styled.div`
   gap: 4px;
 `
 
-const ColorBottom = styled.div`
+// ======== Bottom para el default card (cuando no eres un landlord) ==================================
+
+const DefaultBottom = styled.div`
   width: 300px;
   height: 7px;
   background-color: ${colors.pink.dark};
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 `
+
+// ======== Bottom para los landlords (tienen botones para editar y cerrar la venta/alquiler) ==========
+
+const LandlordButtons = styled.div`
+  width: 300px;
+  height: 47px;
+  background-color: ${colors.pink.dark};
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+`
+
+  const ButtonsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 32px;
+  `
+
+  const CardButton = styled.button`
+    border: none;
+    background-color: ${colors.pink.dark};
+    color: ${colors.white};
+    font-family: ${fonts.primary};
+    ${typography.button};
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  `
 
 // style={{border: "2px solid brown"}} ====> debug
 
@@ -138,7 +180,19 @@ export function Card() {
           </AddressAndIcons>
         </PropertyData>
       </DefaultCard>
-      <ColorBottom />
+      {/* <LandlordButtons>
+        <ButtonsContainer>
+          <CardButton>
+            <FaRegEdit size="18px"/>
+            <text>EDIT</text>
+          </CardButton>
+          <CardButton>
+            <AiOutlineCloseCircle size="20px"/>
+            <text>CLOSE</text>
+          </CardButton>
+        </ButtonsContainer>
+      </LandlordButtons> */}
+      <DefaultBottom />
     </CardContainer>
   )
 }
