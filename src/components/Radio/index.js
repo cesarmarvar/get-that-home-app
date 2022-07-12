@@ -1,17 +1,17 @@
 import * as Style from "./styles";
 
 function Radio({ children = "", value, name }) {
-  const labelParsed = children.toLowerCase();
+  const downcase = children.toLowerCase();
 
   return (
     <Style.Container>
       <Style.Button 
         type="radio"
-        id={labelParsed}
+        id={downcase}
         value={value}
         name={name}
       />
-      <Style.Label htmlFor={labelParsed}>{ children }</Style.Label>
+      <Style.Label htmlFor={downcase}>{ children }</Style.Label>
     </Style.Container>
   );
 }
