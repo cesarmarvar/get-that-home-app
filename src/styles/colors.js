@@ -23,5 +23,6 @@ export const colors = {
   },
 
   white: "#FFFFFF",
-  shallowPink: "rgba(244, 143, 177, 0.15)"
+  shallowPink: "rgba(244, 143, 177, 0.15)",
+  shallowGray: "rgba(97, 97, 97, 0.15)",
 }
