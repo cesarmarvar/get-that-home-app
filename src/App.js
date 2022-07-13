@@ -1,8 +1,9 @@
+import Button from "./components/Button/button";
+import { BsPerson } from "react-icons/bs";
+
 function App() {
   return (
-    <div>
-     
-    </div>
+   <Button  IconL={BsPerson} disabled> Button </Button>
   );
 }
 
