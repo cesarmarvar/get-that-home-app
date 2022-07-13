@@ -1,10 +1,15 @@
 import styled from "@emotion/styled"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function Header() {
+function Header({ auth, type }) {
 
-  const [login, setLogin] = useState(false)
-  const [typeUser, setTypeUser] = useState("")
+  const [login, setLogin] = useState(false);
+  const [typeUser, setTypeUser] = useState("");
+
+  useEffect(() => {
+    setLogin(auth);
+    setTypeUser(type);
+  }, [auth, type])
 
   const Logo = styled.img`
     padding: 0;
@@ -29,6 +34,15 @@ function Header() {
     )
   }
 
+  function Logout() {
+    const Logout = styled.button`
+      cursor: pointer;
+    `
+    return (
+      <Logout>LOGOUT</Logout>
+    )
+  }
+
   function UnauthenticateHeader() {
     function Signup() {
       const  Signup = styled.button`
@@ -43,7 +57,6 @@ function Header() {
       const Login = styled.button`
         cursor: pointer;
       `
-  
       return (
         <Login>LOGIN</Login>
       )
@@ -59,20 +72,12 @@ function Header() {
   }
 
   function AuthenticateBuyerHeader() {
-    function Logout() {
-      const Logout = styled.button`
-        cursor: pointer;
-      `
-      return (
-        <Logout>LOGOUT</Logout>
-      )
-    }
+    
 
     function Favorites() {
       const Favorites = styled.button`
         cursor: pointer;
       `
-
       return (
         <Favorites>SAVED PROPERTIES</Favorites>
       )
@@ -81,8 +86,29 @@ function Header() {
     return (
       <div>
         <Search/>
+        <Logout />
         <Favorites/>
         <Profile/>
+      </div>
+    )
+  }
+
+  function AuthenticateLandlordHeader() {
+    function Properties() {
+      const Properties = styled.button`
+        cursor: pointer;
+      `
+      return (
+        <Properties>MY PROPERTIES</Properties>
+      )
+    }
+
+    return (
+      <div>
+        <Search />
+        <Logout />
+        <Properties />
+        <Profile />
       </div>
     )
   }
@@ -90,8 +116,7 @@ function Header() {
 
   return (
     <div>
-
-
+      { login ? <AuthenticateBuyerHeader/> : <UnauthenticateHeader/>}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import Header from "./components/header";
 function App() {
   return (
     <div>
-      <Header></Header>
+      <Header auth={false} />
     </div>
   );
 }
