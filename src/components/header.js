@@ -16,7 +16,16 @@ function Header() {
       cursor: pointer;
     `
     return (
-      <Search>Find a Home</Search>
+      <Search>FIND A HOME</Search>
+    )
+  }
+
+  function Profile() {
+    const Profile = styled.button`
+      cursor: pointer;
+    `
+    return (
+      <Profile>PROFILE</Profile>
     )
   }
 
@@ -26,7 +35,7 @@ function Header() {
         cursor: pointer;
       `
       return (
-        <Signup>Join</Signup>
+        <Signup>JOIN</Signup>
       )
     }
 
@@ -36,7 +45,7 @@ function Header() {
       `
   
       return (
-        <Login>Login</Login>
+        <Login>LOGIN</Login>
       )
     }
 
@@ -49,13 +58,13 @@ function Header() {
     )
   }
 
-  function AuthenticateHeader() {
+  function AuthenticateBuyerHeader() {
     function Logout() {
       const Logout = styled.button`
         cursor: pointer;
       `
       return (
-        <Logout>Logout</Logout>
+        <Logout>LOGOUT</Logout>
       )
     }
 
@@ -65,9 +74,17 @@ function Header() {
       `
 
       return (
-        <Favorites />
+        <Favorites>SAVED PROPERTIES</Favorites>
       )
     }
+
+    return (
+      <div>
+        <Search/>
+        <Favorites/>
+        <Profile/>
+      </div>
+    )
   }
 
 
