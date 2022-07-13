@@ -3,7 +3,7 @@ import { PropertyCard } from "./components/card";
 function App() {
   return (
     <div>
-      <PropertyCard />
+      <PropertyCard user="homeseeker" contract="rent"/>
     </div>
   );
 }

@@ -15,7 +15,7 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 
 const RentalChip = styled.div`
-  width: 100px;
+  width: 110px;
   height: 25px;  
   display: flex;
   flex-direction: row;
@@ -28,7 +28,7 @@ const RentalChip = styled.div`
   font-family: ${fonts.primary};
   ${typography.body.b2}
   position: absolute;
-  left: 200px;
+  left: 190px;
   border-top-right-radius: 8px;
 `
 
@@ -180,24 +180,21 @@ const LandlordButtons = styled.div`
 
 // style={{border: "2px solid brown"}} ====> debug
 
-export function PropertyCard() {
-
+export function PropertyCard({user, contract}) {
 
   return(
     <>
-    {/* ======== El de abajo es el chip en caso de renta ======== */}
-    {/* <RentalChip>
-      <RiCoinsLine size="22px"/>
-      <text>For Rental</text>
-    </RentalChip> */}
-
-    {/* ======== El de abajo es el chip en caso de venta ======== */}
-
-    <SaleChip>
-      <RiMoneyDollarCircleFill size="22px"/>
-      <text>For Sale</text>
-    </SaleChip>
-
+    { contract === "rent" ? (
+      <RentalChip>
+        <RiCoinsLine size="22px"/>
+        <text>For Rental</text>
+      </RentalChip>
+    ) : (
+      <SaleChip>
+        <RiMoneyDollarCircleFill size="22px"/>
+        <text>For Sale</text>
+      </SaleChip>
+    )}
       <DefaultCard>
         <PropertyImg>photo</PropertyImg>
         <PropertyData>
@@ -231,11 +228,8 @@ export function PropertyCard() {
           </AddressAndIcons>
         </PropertyData>
       </DefaultCard>
-      {/* ==============El de abajo es el bottom para el default view============== */}
-      <DefaultBottom /> 
-
-      {/* ==============El de abajo es el bottom para el landlord view ==============*/}
-      {/* <LandlordButtons>
+      { user === "homeseeker" ? <DefaultBottom /> : (
+        <LandlordButtons>
         <ButtonsContainer>
           <CardButton>
             <FaRegEdit size="18px"/>
@@ -246,7 +240,8 @@ export function PropertyCard() {
             <text>CLOSE</text>
           </CardButton>
         </ButtonsContainer>
-      </LandlordButtons> */}
+      </LandlordButtons>
+      )}
     </>
   )
 }
