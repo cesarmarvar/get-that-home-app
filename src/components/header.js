@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
-import { useEffect, useState } from "react";
 import Button from "./Button/button";
 import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine, RiHeartFill, RiHome8Line, RiLogoutCircleLine } from "react-icons/ri"
+import { ReactComponent as Logo } from "./../assets/logo.svg";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -17,26 +17,10 @@ const NavContainer = styled.div`
   gap: 1rem;
 `
 
-function Header({ auth, type }) { // isAuth - without type 
+function Header({ isAuth }) { 
 
-  // without states
+  const typeUser = "landlord"
 
-  // const typeUser = "buyer"
-
-  const [login, setLogin] = useState(false);
-  const [typeUser, setTypeUser] = useState("");
-
-  useEffect(() => {
-    setLogin(auth);
-    setTypeUser(type);
-  }, [auth, type])
-
-  const Logo = styled.img`
-    padding: 0;
-    width: 136px;
-    height: 40px;
-  `
-  
   function Search() {
     return (
       <Button IconL={ RiSearchLine } type="ghost" size="sm" children="FIND A HOME" />
@@ -124,8 +108,8 @@ function Header({ auth, type }) { // isAuth - without type
 
   return (
     <HeaderContainer>
-      <Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png" />
-      { login ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
+      <Logo />
+      { isAuth ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
     </HeaderContainer>
   )
 }
