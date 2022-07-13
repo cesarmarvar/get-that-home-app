@@ -90,7 +90,7 @@ function Button({children="Button",IconL,IconR, ...props}) {
 
 Button.propTypes = {
   disable: PropTypes.bool,
-  type: PropTypes.oneOf([ "primay", "secundary", "ghost"]),
+  type: PropTypes.oneOf([ "primary", "secundary", "ghost"]),
   size: PropTypes.oneOf(["sm", "lg"]),
   iconL: PropTypes.element,
   iconR: PropTypes.element,
