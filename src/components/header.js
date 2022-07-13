@@ -13,6 +13,8 @@ function Header({ auth, type }) {
 
   const Logo = styled.img`
     padding: 0;
+    width: 136px;
+    height: 40px;
   `
   
   function Search() {
@@ -113,10 +115,19 @@ function Header({ auth, type }) {
     )
   }
 
+  function AuthenticateHeader() {
+    if (typeUser === "buyer") {
+      return <AuthenticateBuyerHeader />
+    } else {
+      return <AuthenticateLandlordHeader />
+    } 
+  }
+
 
   return (
     <div>
-      { login ? <AuthenticateBuyerHeader/> : <UnauthenticateHeader/>}
+      <Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png" />
+      { login ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
     </div>
   )
 }
