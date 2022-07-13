@@ -33,15 +33,43 @@ function Signup() {
     padding: 1rem 1.25rem;
     gap: 0.5rem;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    background: white
+  `
+
+  const TypeUser = styled.h6`
+    ${typography.headline["h6"]}
+  `
+
+  const DescriptionUser = styled.p`
+    ${typography.subtitle["s2"]}
+  `
+
+  const LandlordImage = styled.img`
+    width: 240px;
+    height: 180px;
+  `
+
+  const HomeseekerImage = styled.img`
+    width: 240px;
+    height: 180px;
   `
 
   return (
     <Fondo>
-      {/* <img src="assets/rafiki.svg" alt="prueba"/> */}
       <ContainerText>
         <Intro>Selecciona el perfil que estas buscando</Intro>
         <Question>Que estas buscando?</Question>
       </ContainerText>
+      <Card>
+        <LandlordImage src="assets/rafiki.svg" alt="Landlord reference"/>
+        <TypeUser>Landlord</TypeUser>
+        <DescriptionUser>You want to rent or sell a home</DescriptionUser>
+      </Card>
+      <Card>
+        <HomeseekerImage src="assets/pana.svg" alt="Home Seeker reference"/>
+        <TypeUser>Homse seeker</TypeUser>
+        <DescriptionUser>You want to find a home</DescriptionUser>
+      </Card>
     </Fondo>
   )
 }
