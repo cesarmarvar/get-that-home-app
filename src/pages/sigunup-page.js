@@ -13,6 +13,14 @@ function Signup() {
     padding-top: 4rem;
   `
 
+  const ContainerCards = styled.div`
+    display: flex;
+    flex-direction: grow;
+    gap: 54px;
+    margin: 195px;
+    justify-content: center;
+  `
+
   const Intro = styled.h5`
   text-align: center;
     ${typography.headline["h5"]}
@@ -60,16 +68,18 @@ function Signup() {
         <Intro>Selecciona el perfil que estas buscando</Intro>
         <Question>Que estas buscando?</Question>
       </ContainerText>
-      <Card>
-        <LandlordImage src="assets/rafiki.svg" alt="Landlord reference"/>
-        <TypeUser>Landlord</TypeUser>
-        <DescriptionUser>You want to rent or sell a home</DescriptionUser>
-      </Card>
-      <Card>
-        <HomeseekerImage src="assets/pana.svg" alt="Home Seeker reference"/>
-        <TypeUser>Homse seeker</TypeUser>
-        <DescriptionUser>You want to find a home</DescriptionUser>
-      </Card>
+      <ContainerCards>
+        <Card>
+          <LandlordImage src="assets/rafiki.svg" alt="Landlord reference"/>
+          <TypeUser>Landlord</TypeUser>
+          <DescriptionUser>You want to rent or sell a home</DescriptionUser>
+        </Card>
+        <Card>
+          <HomeseekerImage src="assets/pana.svg" alt="Home Seeker reference"/>
+          <TypeUser>Homse seeker</TypeUser>
+          <DescriptionUser>You want to find a home</DescriptionUser>
+        </Card>
+      </ContainerCards>
     </Fondo>
   )
 }
