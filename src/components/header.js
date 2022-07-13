@@ -41,7 +41,7 @@ function Header({ auth, type }) {
 
   function Profile() {
     return (
-      <Button type="primary" size="sm" children="PROFILE"/>
+      <Button IconL={ RiUserLine } type="primary" size="sm" children="PROFILE"/>
     )
   }
 
