@@ -17,7 +17,11 @@ const NavContainer = styled.div`
   gap: 1rem;
 `
 
-function Header({ auth, type }) {
+function Header({ auth, type }) { // isAuth - without type 
+
+  // without states
+
+  // const typeUser = "buyer"
 
   const [login, setLogin] = useState(false);
   const [typeUser, setTypeUser] = useState("");
