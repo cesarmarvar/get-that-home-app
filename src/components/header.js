@@ -1,5 +1,18 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
+import Button from "./Button/button";
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: grow;
+  justify-content: space-around;
+`
+
+const NavContainer = styled.div`
+  display: flex;
+  flex-direction: grow;
+  gap: 1rem;
+`
 
 function Header({ auth, type }) {
 
@@ -18,57 +31,41 @@ function Header({ auth, type }) {
   `
   
   function Search() {
-    const Search = styled.button`
-      border: none;
-      cursor: pointer;
-    `
     return (
-      <Search>FIND A HOME</Search>
+      <Button type={"ghost"} size={"sm"} children={"FIND A HOME"} />
     )
   }
 
   function Profile() {
-    const Profile = styled.button`
-      cursor: pointer;
-    `
     return (
-      <Profile>PROFILE</Profile>
+      <Button type={"primary"} size={"sm"} children={"PROFILE"}/>
     )
   }
 
   function Logout() {
-    const Logout = styled.button`
-      cursor: pointer;
-    `
     return (
-      <Logout>LOGOUT</Logout>
+      <Button type={"secundary"} size={"sm"} children={"LOGOUT"} />
     )
   }
 
   function UnauthenticateHeader() {
     function Signup() {
-      const  Signup = styled.button`
-        cursor: pointer;
-      `
       return (
-        <Signup>JOIN</Signup>
+        <Button type={"secundary"} size={"sm"} children={"JOIN"}/>
       )
     }
 
     function Login() {
-      const Login = styled.button`
-        cursor: pointer;
-      `
       return (
-        <Login>LOGIN</Login>
+        <Button type={"secundary"} size={"sm"} children={"LOGIN"} />
       )
     }
 
     return (
       <div>
-        <Search></Search>
-        <Login></Login>
-        <Signup></Signup>
+        <Search />
+        <Login />
+        <Signup />
       </div>
     )
   }
@@ -77,11 +74,8 @@ function Header({ auth, type }) {
     
 
     function Favorites() {
-      const Favorites = styled.button`
-        cursor: pointer;
-      `
       return (
-        <Favorites>SAVED PROPERTIES</Favorites>
+        <Button type={"primary"} size={"sm"} children={"SAVED PROPERTIES"}/>
       )
     }
 
@@ -97,11 +91,8 @@ function Header({ auth, type }) {
 
   function AuthenticateLandlordHeader() {
     function Properties() {
-      const Properties = styled.button`
-        cursor: pointer;
-      `
       return (
-        <Properties>MY PROPERTIES</Properties>
+        <Button type={"primary"} size={"sm"} children={"MY PROPERTIES"} />
       )
     }
 
@@ -125,10 +116,12 @@ function Header({ auth, type }) {
 
 
   return (
-    <div>
+    <HeaderContainer>
       <Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png" />
-      { login ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
-    </div>
+      <NavContainer>
+        { login ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
+      </NavContainer>
+    </HeaderContainer>
   )
 }
 
