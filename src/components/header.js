@@ -62,11 +62,11 @@ function Header({ auth, type }) {
     }
 
     return (
-      <div>
+      <NavContainer>
         <Search />
         <Login />
         <Signup />
-      </div>
+      </NavContainer>
     )
   }
 
@@ -80,12 +80,12 @@ function Header({ auth, type }) {
     }
 
     return (
-      <div>
+      <NavContainer>
         <Search/>
         <Logout />
         <Favorites/>
         <Profile/>
-      </div>
+      </NavContainer>
     )
   }
 
@@ -97,12 +97,12 @@ function Header({ auth, type }) {
     }
 
     return (
-      <div>
+      <NavContainer>
         <Search />
         <Logout />
         <Properties />
         <Profile />
-      </div>
+      </NavContainer>
     )
   }
 
@@ -118,9 +118,7 @@ function Header({ auth, type }) {
   return (
     <HeaderContainer>
       <Logo src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png" />
-      <NavContainer>
-        { login ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
-      </NavContainer>
+      { login ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
     </HeaderContainer>
   )
 }

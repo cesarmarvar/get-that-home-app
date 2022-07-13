@@ -58,7 +58,6 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 0.75rem;
-  margin: 50px;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   background-color: ${colors.pink.regular};
