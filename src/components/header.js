@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
 import Button from "./Button/button";
-import { RiUserReceived2Fill } from "react-icons/ri"
+import { RiUserReceived2Fill, RiUserAddLine } from "react-icons/ri"
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -54,21 +54,21 @@ function Header({ auth, type }) {
   function UnauthenticateHeader() {
     function Signup() {
       return (
-        <Button type={"secundary"} size={"sm"} children={"JOIN"}/>
+        <Button IconL={ RiUserAddLine } type="secundary" size="sm" children="JOIN" />
       )
     }
 
     function Login() {
       return (
-        <Button IconL={ RiUserReceived2Fill } type="secundary" size="sm" children="LOGIN" />
+        <Button IconL={ RiUserReceived2Fill } type="primary" size="sm" children="LOGIN" />
       )
     }
 
     return (
       <NavContainer>
         <Search />
-        <Login />
         <Signup />
+        <Login />
       </NavContainer>
     )
   }
