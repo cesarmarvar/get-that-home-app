@@ -37,7 +37,13 @@ const StyledInput = styled.input`
   }
 `;
 
+const LabelInput = styled.label`
+  ${typography.overline};
+  color: ${colors.gray.dark};
+  text-transform: uppercase;
+`
 export {
   Wrapper,
-  StyledInput
+  StyledInput,
+  LabelInput
 };
