@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
 import Button from "./Button/button";
-import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine, RiHeartFill, RiHome8Line } from "react-icons/ri"
+import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine, RiHeartFill, RiHome8Line, RiLogoutCircleLine } from "react-icons/ri"
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ function Header({ auth, type }) {
 
   function Logout() {
     return (
-      <Button type={"secundary"} size={"sm"} children={"LOGOUT"} />
+      <Button IconL={ RiLogoutCircleLine } type={"secundary"} size={"sm"} children={"LOGOUT"} />
     )
   }
 
