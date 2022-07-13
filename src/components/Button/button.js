@@ -16,7 +16,7 @@ function typeButton(type) {
       return`
         background-color: ${colors.white};
         color: ${colors.gray.regular};
-        border: 1px solid #F48FB1;
+        border: 1px solid ${colors.pink.add};
         &:hover {
           background-color: ${colors.shallowPink};
           border: 1px solid #BF5F82;
