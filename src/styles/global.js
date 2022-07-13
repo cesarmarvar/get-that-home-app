@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { colors } from './colors';
 import { fonts } from './fonts';
