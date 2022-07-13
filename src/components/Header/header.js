@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import Button from "./Button/button";
+import Button from "../Button/button";
 import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine, RiHeartFill, RiHome8Line, RiLogoutCircleLine } from "react-icons/ri"
 import { ReactComponent as Logo } from "./../assets/logo.svg";
 
