@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
 import Button from "./Button/button";
-import { RiUserReceived2Fill, RiUserAddLine } from "react-icons/ri"
+import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine } from "react-icons/ri"
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ function Header({ auth, type }) {
   
   function Search() {
     return (
-      <Button type="ghost" size="sm" children="FIND A HOME" />
+      <Button IconL={ RiSearchLine } type="ghost" size="sm" children="FIND A HOME" />
     )
   }
 
