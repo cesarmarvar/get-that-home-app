@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
 import Button from "./Button/button";
-import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine } from "react-icons/ri"
+import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine, RiHeartFill, RiHome8Line } from "react-icons/ri"
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -78,7 +78,7 @@ function Header({ auth, type }) {
 
     function Favorites() {
       return (
-        <Button type={"primary"} size={"sm"} children={"SAVED PROPERTIES"}/>
+        <Button IconL={ RiHeartFill } type={"primary"} size={"sm"} children={"SAVED PROPERTIES"}/>
       )
     }
 
@@ -95,7 +95,7 @@ function Header({ auth, type }) {
   function AuthenticateLandlordHeader() {
     function Properties() {
       return (
-        <Button type={"primary"} size={"sm"} children={"MY PROPERTIES"} />
+        <Button IconL={ RiHome8Line } type={"primary"} size={"sm"} children={"MY PROPERTIES"} />
       )
     }
 
