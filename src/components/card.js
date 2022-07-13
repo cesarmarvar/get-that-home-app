@@ -10,6 +10,7 @@ import { typography } from "../styles/typography";
 import { fonts } from "../styles/fonts";
 import { FaRegEdit } from "react-icons/fa";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiFillHeart } from "react-icons/ai";
 import { RiCoinsLine } from "react-icons/ri";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
@@ -224,6 +225,7 @@ export function PropertyCard({user, contract}) {
                 <div>180 m2</div>
               </SingleIcon>
               <FaPaw size="20px" color={`${colors.gray.regular}`}/>
+              <AiFillHeart size="20px" color={`${colors.gray.regular}`}/>
             </IconsRow>
           </AddressAndIcons>
         </PropertyData>
