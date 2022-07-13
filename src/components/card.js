@@ -33,7 +33,7 @@ const RentalChip = styled.div`
 `
 
 const SaleChip = styled.div`
-  width: 100px;
+  width: 110px;
   height: 25px;  
   display: flex;
   flex-direction: row;
@@ -46,7 +46,7 @@ const SaleChip = styled.div`
   font-family: ${fonts.primary};
   ${typography.body.b2}
   position: absolute;
-  left: 200px;
+  left: 190px;
   border-top-right-radius: 8px;
 `
 
