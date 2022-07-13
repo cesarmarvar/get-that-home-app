@@ -8,7 +8,8 @@ export const colors = {
   pink: {
     regular: "#F48FB1",
     light: "#FFC1E3",
-    dark: "#BF5F82"
+    dark: "#BF5F82",
+    add: "#F48FB1"
   },
 
   background: {
