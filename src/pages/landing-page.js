@@ -25,7 +25,7 @@ const Introduction = styled.div`
   gap: 8px;
 `
 
-const Title = styled.h2`
+const Title = styled.h2` // este podria reemplazarse por el typography.headline.h2 pero falta corregir unos datos
   font-weight: 300;
   font-size: 64px;
   line-height: 88px;
