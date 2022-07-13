@@ -10,15 +10,51 @@ import { typography } from "../styles/typography";
 import { fonts } from "../styles/fonts";
 import { FaRegEdit } from "react-icons/fa";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { RiCoinsLine } from "react-icons/ri";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
 
 
-const CardContainer = styled.div`
+const RentalChip = styled.div`
+  width: 100px;
+  height: 25px;  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 4px;
+  gap: 4px;
+  background-color: ${colors.pink.regular};
+  color: ${colors.white};
+  font-family: ${fonts.primary};
+  ${typography.body.b2}
+  position: absolute;
+  left: 200px;
+  border-top-right-radius: 8px;
+`
+
+const SaleChip = styled.div`
+  width: 100px;
+  height: 25px;  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 4px;
+  gap: 4px;
+  background-color: ${colors.pink.dark};
+  color: ${colors.white};
+  font-family: ${fonts.primary};
+  ${typography.body.b2}
+  position: absolute;
+  left: 200px;
+  border-top-right-radius: 8px;
 `
 
 const DefaultCard = styled.div`
+  position: relative;
   width: 300px;
   height: 360px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
 `
@@ -98,6 +134,7 @@ const DefaultBottom = styled.div`
   width: 300px;
   height: 7px;
   background-color: ${colors.pink.dark};
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
 `
@@ -116,6 +153,7 @@ const LandlordButtons = styled.div`
   align-items: center;
   padding: 0px;
   gap: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 `
 
   const ButtonsContainer = styled.div`
@@ -142,11 +180,24 @@ const LandlordButtons = styled.div`
 
 // style={{border: "2px solid brown"}} ====> debug
 
-export function Card() {
+export function PropertyCard() {
 
 
   return(
-    <CardContainer>
+    <>
+    {/* ======== El de abajo es el chip en caso de renta ======== */}
+    {/* <RentalChip>
+      <RiCoinsLine size="22px"/>
+      <text>For Rental</text>
+    </RentalChip> */}
+
+    {/* ======== El de abajo es el chip en caso de venta ======== */}
+
+    <SaleChip>
+      <RiMoneyDollarCircleFill size="22px"/>
+      <text>For Sale</text>
+    </SaleChip>
+
       <DefaultCard>
         <PropertyImg>photo</PropertyImg>
         <PropertyData>
@@ -180,6 +231,10 @@ export function Card() {
           </AddressAndIcons>
         </PropertyData>
       </DefaultCard>
+      {/* ==============El de abajo es el bottom para el default view============== */}
+      <DefaultBottom /> 
+
+      {/* ==============El de abajo es el bottom para el landlord view ==============*/}
       {/* <LandlordButtons>
         <ButtonsContainer>
           <CardButton>
@@ -192,7 +247,6 @@ export function Card() {
           </CardButton>
         </ButtonsContainer>
       </LandlordButtons> */}
-      <DefaultBottom />
-    </CardContainer>
+    </>
   )
 }

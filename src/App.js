@@ -1,9 +1,10 @@
-import Button from "./components/Button/button";
-import { BsPerson } from "react-icons/bs";
+import { PropertyCard } from "./components/card";
 
 function App() {
   return (
-   <Button  IconL={BsPerson} disabled> Button </Button>
+    <div>
+      <PropertyCard />
+    </div>
   );
 }
 
