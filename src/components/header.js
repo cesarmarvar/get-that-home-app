@@ -1,11 +1,14 @@
 import styled from "@emotion/styled"
 import { useEffect, useState } from "react";
 import Button from "./Button/button";
+import { RiUserReceived2Fill } from "react-icons/ri"
 
 const HeaderContainer = styled.div`
   display: flex;
   flex-direction: grow;
   justify-content: space-around;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
 `
 
 const NavContainer = styled.div`
@@ -32,13 +35,13 @@ function Header({ auth, type }) {
   
   function Search() {
     return (
-      <Button type={"ghost"} size={"sm"} children={"FIND A HOME"} />
+      <Button type="ghost" size="sm" children="FIND A HOME" />
     )
   }
 
   function Profile() {
     return (
-      <Button type={"primary"} size={"sm"} children={"PROFILE"}/>
+      <Button type="primary" size="sm" children="PROFILE"/>
     )
   }
 
@@ -57,7 +60,7 @@ function Header({ auth, type }) {
 
     function Login() {
       return (
-        <Button type={"secundary"} size={"sm"} children={"LOGIN"} />
+        <Button IconL={ RiUserReceived2Fill } type="secundary" size="sm" children="LOGIN" />
       )
     }
 
