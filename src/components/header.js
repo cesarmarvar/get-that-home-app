@@ -4,6 +4,7 @@ import { useState } from "react";
 function Header() {
 
   const [login, setLogin] = useState(false)
+  const [typeUser, setTypeUser] = useState("")
 
   const Logo = styled.img`
     padding: 0;
@@ -55,6 +56,16 @@ function Header() {
       `
       return (
         <Logout>Logout</Logout>
+      )
+    }
+
+    function Favorites() {
+      const Favorites = styled.button`
+        cursor: pointer;
+      `
+
+      return (
+        <Favorites />
       )
     }
   }
