@@ -47,7 +47,7 @@ function Header({ auth, type }) {
 
   function Logout() {
     return (
-      <Button IconL={ RiLogoutCircleLine } type={"secundary"} size={"sm"} children={"LOGOUT"} />
+      <Button IconL={ RiLogoutCircleLine } type="secundary" size="sm" children="LOGOUT" />
     )
   }
 
