@@ -28,6 +28,7 @@ const Wrapper = styled.div`
   align-items: center;
   padding: 0.5rem;
   gap: 0.5rem;
+  width: 100%;
   border: 1px solid ${colors.pink.add};
   ${(props)=> sizeInput(props.size)}
 `;
@@ -36,6 +37,7 @@ const StyledInput = styled.input`
   outline: none;
   border: none;
   width: 100%;
+  box-sizing: border-box;
   ${typography.body.b1};
   &:placeholder {
     ${typography.body.b1};
@@ -48,6 +50,7 @@ const LabelInput = styled.label`
   color: ${colors.gray.dark};
 `
 const IndividualInput = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;

@@ -28,10 +28,6 @@ function Form({userType}) {
     signup(dataForm)
   }
 
-  const Label = styled.label`
-    ${typography.overline}
-  `
-
   const Sugerence = styled.p`
     font-weight: 400;
     font-size: 0.75rem;
@@ -42,7 +38,7 @@ function Form({userType}) {
 
   return (
     <>
-      <form style={{display: "block", alignItems: "center", justifyContent: "center"}} onSubmit={handleSubmit}>
+      <form style={{display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "center", justifyContent: "center"}} onSubmit={handleSubmit}>
         <div>
           <Input 
             id="name"
@@ -79,7 +75,7 @@ function Form({userType}) {
         <div>
           <Input 
             id="password"
-            type="text"
+            type="password"
             name="password"
             label="PASSWORD"
             placeholder={"******"}
@@ -88,18 +84,18 @@ function Form({userType}) {
           />
           <Sugerence>At least 6 characteres</Sugerence>
         </div>
-        <div>
+        {/* <div>
           <Input 
             id="password2"
-            type="text"
+            type="password"
             name="password"
             label="CONFIRM PASSWORD"
             placeholder={"******"}
             value={password} 
             onChange={handleChange}
           />
-        </div>
-        <Button style={{justifyContent: "center"}} type="primary" size="sm" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
+        </div> */}
+        <Button  type="primary" size="default" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
       </form>
     </>
   )
@@ -119,7 +115,7 @@ function SignupForm() {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
     gap: 1rem;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     background: white;
@@ -131,7 +127,6 @@ function SignupForm() {
     height: 332px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 0;
     gap: 0.5rem;
   `
