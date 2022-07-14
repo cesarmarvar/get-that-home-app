@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { useState } from "react"
+import { signup } from "../services/sessions-service"
 import { typography } from "../styles"
 
 function SignupForm({ typeUser }) {
@@ -53,57 +54,63 @@ function SignupForm({ typeUser }) {
 
   const [dataForm, setDataForm] = useState({
     name: "",
-    user_type: typeUser,
+    user_type: null,
     email: "",
     password: "",
     phone: ""
-  })
+  });
+  
+  const { name, user_type, email, password, phone } = dataForm;
 
   function handleChange(e) {
     const { name, value } = e.target
     setDataForm({ ...dataForm, [name]: value})
   }
 
-  const { name, user_type, email, password, phone } = dataForm
+  function handleSubmit(e) {
+    setDataForm({ ...dataForm, [user_type]: typeUser})
+    e.preventDefault();
+    signup(dataForm)
+  }
 
   return (
     <Fondo>
       <SigunpContainer>
         <TitleForm>Create your Account</TitleForm>
+        <InputContainer>
+          <form onSubmit={handleSubmit}>
+            <Input 
+              label={"Name"}
+              prop={"name"}
+              type={"text"} 
+              value={name} 
+              onChange={handleChange}
+            />
+            <Input 
+              label={"Email"}
+              prop={"email"}
+              type={"email"} 
+              value={email} 
+              onChange={handleChange}
+            />
+            <Input 
+              label={"Phone"}
+              prop={"phone"}
+              type={"number"} 
+              value={phone} 
+              onChange={handleChange}
+            />
+            <Input 
+              label={"Password"}
+              prop={"password"}
+              type={"password"} 
+              value={password} 
+              onChange={handleChange}
+            />
+            <button>CREATE ACCOUNT</button>
+          </form>
+        </InputContainer>
       </SigunpContainer>
-      <InputContainer>
-        <form>
-          <Input 
-            label={"Name"}
-            prop={"name"}
-            type={"text"} 
-            value={name} 
-            onChange={handleChange}
-          />
-          <Input 
-            label={"Email"}
-            prop={"email"}
-            type={"email"} 
-            value={email} 
-            onChange={handleChange}
-          />
-          <Input 
-            label={"Phone"}
-            prop={"phone"}
-            type={"number"} 
-            value={phone} 
-            onChange={handleChange}
-          />
-          <Input 
-            label={"Password"}
-            prop={"password"}
-            type={"password"} 
-            value={password} 
-            onChange={handleChange}
-          />
-
-        </form>
-      </InputContainer>
     </Fondo>
   )
 }
