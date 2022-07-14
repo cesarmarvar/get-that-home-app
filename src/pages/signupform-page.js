@@ -53,6 +53,7 @@ function Form({userType}) {
             type="text"
             name="name"
             label="NAME"
+            size="sm"
             placeholder={"John Doe"}
             value={name} 
             onChange={handleChange}
@@ -64,6 +65,7 @@ function Form({userType}) {
             type="email"
             name="email"
             label="EMAIL"
+            size="sm"
             placeholder={"user@mail.com"}
             value={email} 
             onChange={handleChange}
@@ -75,6 +77,7 @@ function Form({userType}) {
             type="text"
             name="phone"
             label="PHONE"
+            size="sm"
             placeholder={"999-999-999"}
             value={phone} 
             onChange={handleChange}
@@ -86,6 +89,7 @@ function Form({userType}) {
             type="password"
             name="password"
             label="PASSWORD"
+            size="sm"
             placeholder={"******"}
             value={password} 
             onChange={handleChange}
@@ -98,13 +102,14 @@ function Form({userType}) {
             type="password"
             name="password2"
             label="CONFIRM PASSWORD"
+            size="sm"
             placeholder={"******"}
             value={passwordValid.password} 
             onChange={validPassword}
           />
           {password && !passwordValid.isValid && <Sugerence>NO COINCIDE</Sugerence>}
         </div>
-        <Button  type="primary" size="default" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
+        <Button style={{margin: "1rem"}} type="primary" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
       </form>
     </>
   )
@@ -114,12 +119,14 @@ function SignupForm() {
 
   const Fondo = styled.div`
     height: 100vh;
-    background: linear-gradient(rgba(244, 143, 177, 0.15) 50%, white 50%)
+    background: linear-gradient(rgba(244, 143, 177, 0.15) 50%, white 50%);
+    display: flex;
+    justify-content: center;
   `
 
   const SigunpContainer = styled.div`
     width: 388px;
-    height: 468px;
+    height: 500px;
     border-radius: 0.5rem;
     padding: 1rem;
     display: flex;
@@ -128,7 +135,8 @@ function SignupForm() {
     gap: 1rem;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     background: white;
-    position: 50%;
+    margin: auto;
+    // margin-bottom: 10px;
   `
 
   const InputContainer = styled.div`
