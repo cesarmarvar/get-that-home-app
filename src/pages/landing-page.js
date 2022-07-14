@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Header from "../components/header";
 import { ReactComponent as Ilustration } from "../assets/illustration.svg"
-import { fonts, typography } from "../styles";
+import { colors, fonts, typography } from "../styles";
 import Button from "../components/Button/button";
 import { LandingSelect } from "../components/landing-select";
 
@@ -44,7 +44,11 @@ const SearchBar = styled.form`
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 `
-
+const Division = styled.div`
+  width: 0px;
+  height: 56px;
+  border: 1px solid ${colors.background.regular};
+`
 
 export function LandingPage() {
 
@@ -64,6 +68,7 @@ export function LandingPage() {
             options={["house", "apartment"]}
             />
           </div>
+          <Division />
           <Button>search</Button>
         </SearchBar>
       </SearchSection>
