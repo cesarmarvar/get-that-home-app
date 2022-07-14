@@ -11,6 +11,12 @@ function sizeInput(size) {
       return`
         width: 356px;
       `;
+    case "other":
+      return`
+        width: 600px;
+        min-height: 76px;
+        align-items: start;
+      `;
     default:
       break;
   }
@@ -37,7 +43,19 @@ const StyledInput = styled.input`
   }
 `;
 
+const LabelInput = styled.label`
+  ${typography.overline};
+  color: ${colors.gray.dark};
+`
+const IndividualInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+`; 
+
 export {
   Wrapper,
-  StyledInput
+  StyledInput,
+  LabelInput,
+  IndividualInput
 };

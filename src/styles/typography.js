@@ -90,5 +90,6 @@ export const typography= {
     font-size: 10px;
     line-height: 16px;
     letter-spacing: 1.5px;
+    text-transform: uppercase;
   ` 
 } 
