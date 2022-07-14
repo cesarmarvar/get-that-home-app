@@ -42,8 +42,15 @@ const LabelInput = styled.label`
   color: ${colors.gray.dark};
   text-transform: uppercase;
 `
+const IndividualInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+`; 
+
 export {
   Wrapper,
   StyledInput,
-  LabelInput
+  LabelInput,
+  IndividualInput
 };

@@ -1,8 +1,8 @@
-import { LabelInput, StyledInput, Wrapper } from "./styles";
+import { IndividualInput, LabelInput, StyledInput, Wrapper } from "./styles";
 
 function Input({id, placeholder, type, onChange, value, IconL, label,IconR,...props }) {
   return(
-    <>
+    <IndividualInput>
      { label && <LabelInput htmlFor={id}>{label}</LabelInput>}
       <Wrapper {...props} >
         {IconL && <IconL size="16px"/>}
@@ -16,7 +16,7 @@ function Input({id, placeholder, type, onChange, value, IconL, label,IconR,...pr
         />
         {IconR && <IconR size="16px"/>}
       </Wrapper>
-    </>
+    </IndividualInput>
   );
 };
 
