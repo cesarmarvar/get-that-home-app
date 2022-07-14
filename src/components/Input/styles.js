@@ -11,6 +11,11 @@ function sizeInput(size) {
       return`
         width: 356px;
       `;
+    case "other":
+      return`
+        width: 600px;
+        min-height: 76px;
+      `;
     default:
       break;
   }
