@@ -4,17 +4,22 @@ import { ReactComponent as Ilustration } from "../assets/illustration.svg"
 import { colors, fonts, typography } from "../styles";
 import Button from "../components/Button/button";
 import { LandingSelect } from "../components/landing-select";
+import { PropertyCard } from "../components/card"
 
+/* ===== Main section que muestra la barra de busqueda de propiedades =====*/
 
 const Illustration = styled.div`
 width: 100vw;
 height: 600px;
+// position: absolute;
+// z-index: 999px;
 `
 
-const SearchSection = styled.section`
+const SearchSection = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 600px;
 `
 
 const Introduction = styled.div`
@@ -44,11 +49,43 @@ const SearchBar = styled.form`
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 `
-const Division = styled.div`
+const Division = styled.div` // linea divisora entre select/options
   width: 0px;
   height: 56px;
   border: 1px solid ${colors.background.regular};
 `
+/* ===== Seccion que muestra ejemplos de depas =====*/
+
+const ExamplesSection = styled.section`
+  height: 604px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+`
+
+const TextsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 1rem;
+  ${typography.subtitle.s2};
+  font-family: ${fonts.secundary};
+`
+const ExamplesHeading = styled.h4`
+  ${typography.headline.h4};
+  color: ${colors.pink.dark}
+
+`
+const ExampleCardsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+`
+
+
+// style={{border: "2px solid brown"}} ====> debug
 
 export function LandingPage() {
 
@@ -80,6 +117,17 @@ export function LandingPage() {
           <Button>search</Button>
         </SearchBar>
       </SearchSection>
+      <ExamplesSection style={{border: "2px solid brown"}}>
+        <TextsContainer>
+          <p>Find an Apartment you Love</p>
+          <ExamplesHeading>Homes for rent at the best prices</ExamplesHeading>
+        </TextsContainer>
+        <ExampleCardsContainer>
+          <PropertyCard user="homeseeker" contract="rent"/>
+          <PropertyCard user="homeseeker" contract="sale"/>
+          <PropertyCard user="homeseeker" contract="rent"/>
+        </ExampleCardsContainer>
+      </ExamplesSection>
     </>
   )
 
