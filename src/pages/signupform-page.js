@@ -32,51 +32,74 @@ function Form({userType}) {
     ${typography.overline}
   `
 
+  const Sugerence = styled.p`
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.4px;
+    color: #8E8E8E;
+  `
+
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <Label>NAME</Label>
-        <Input 
-          id="name"
-          type="text"
-          name="name"
-          // label="Name"
-          // prop="name"
-          placeholder={"John Doe"}
-          value={name} 
-          onChange={handleChange}
-        />
-        <Input 
-          id="email"
-          type="email"
-          name="email"
-          // label="Name"
-          // prop="name"
-          placeholder={"user@mail.com"}
-          value={email} 
-          onChange={handleChange}
-        />
-        <Input 
-          id="phone"
-          type="text"
-          name="phone"
-          // label="Name"
-          // prop="name"
-          placeholder={"999-999-999"}
-          value={phone} 
-          onChange={handleChange}
-        />
-        <Input 
-          id="password"
-          type="text"
-          name="password"
-          // label="Name"
-          // prop="name"
-          placeholder={"******"}
-          value={password} 
-          onChange={handleChange}
-        />
-        <Button type="primary" size="sm" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
+      <form style={{display: "block", alignItems: "center", justifyContent: "center"}} onSubmit={handleSubmit}>
+        <div>
+          <Label>NAME</Label>
+          <Input 
+            id="name"
+            type="text"
+            name="name"
+            placeholder={"John Doe"}
+            value={name} 
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <Label>EMAIL</Label>
+          <Input 
+            id="email"
+            type="email"
+            name="email"
+            placeholder={"user@mail.com"}
+            value={email} 
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <Label>PHONE</Label>
+          <Input 
+            id="phone"
+            type="text"
+            name="phone"
+            placeholder={"999-999-999"}
+            value={phone} 
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <Label>PASSWORD</Label>
+          <Input 
+            id="password"
+            type="text"
+            name="password"
+            placeholder={"******"}
+            value={password} 
+            onChange={handleChange}
+          />
+          <Sugerence>At least 6 characteres</Sugerence>
+        </div>
+        <div>
+          <Label>PASSWORD CONFIRMATION</Label>
+          <Input 
+            id="password2"
+            type="text"
+            name="password"
+            placeholder={"******"}
+            value={password} 
+            onChange={handleChange}
+          />
+        </div>
+        <Button style={{justifyContent: "center"}} type="primary" size="sm" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
       </form>
     </>
   )
@@ -93,13 +116,14 @@ function SignupForm() {
     width: 388px;
     height: 468px;
     border-radius: 0.5rem;
-    padding: 15rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     background: white;
+    position: 50%;
   `
 
   const InputContainer = styled.div`
