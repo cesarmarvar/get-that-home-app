@@ -191,12 +191,12 @@ export function PropertyCard({user, contract}) {
             <RiCoinsLine size="22px"/>
             <text>For Rental</text>
           </RentalChip>
-        ) : (
+        ) : contract === "sale" ? (
           <SaleChip>
             <RiMoneyDollarCircleFill size="22px"/>
             <text>For Sale</text>
           </SaleChip>
-        )}
+        ) : null}
         <PropertyImg>photo</PropertyImg>
         <PropertyData>
           <PriceRow>
@@ -230,7 +230,8 @@ export function PropertyCard({user, contract}) {
           </AddressAndIcons>
         </PropertyData>
       </DefaultCard>
-      { user === "homeseeker" ? <DefaultBottom /> : (
+      { user === "homeseeker" ? <DefaultBottom /> : 
+      user === "landlord" ? (
         <LandlordButtons>
         <ButtonsContainer>
           <CardButton>
@@ -243,7 +244,7 @@ export function PropertyCard({user, contract}) {
           </CardButton>
         </ButtonsContainer>
       </LandlordButtons>
-      )}
+      ) : null}
     </div>
   )
 }
