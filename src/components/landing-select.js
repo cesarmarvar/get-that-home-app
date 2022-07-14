@@ -18,10 +18,10 @@ const Select = styled.select`
 export function LandingSelect({label, name, options = [], ...props}) {
 
 
-  /* Esta funcion solo es para formatear las opciones "house" a "A House" y "apartment" a "An Apartment". 
-   No es necesario usarla en otra situacion */
-  function formatPropertyOption(name) {
-    return name === "house" ? "A House" : name === "apartment" ? "An Apartment" : null
+  /* Esta funcion solo es para formatear las opciones "house" a "A House" y "apartment" a "An Apartment".
+  Las demas opciones solo seran capitalizadas.*/
+  function formatOption(name) {
+    return name === "house" ? "A House" : name === "apartment" ? "An Apartment" : name.charAt(0).toUpperCase() + name.slice(1)
   }
 
   return(
@@ -29,7 +29,7 @@ export function LandingSelect({label, name, options = [], ...props}) {
       <Label>{label}</Label>
       <Select name={name}>
         {options.map((option) => {
-          return <option value={`${option}`}>{formatPropertyOption(option)}</option>
+          return <option value={`${option}`}>{formatOption(option)}</option>
         })}
       </Select>
     </>
