@@ -45,6 +45,7 @@ function sizeButton(size) {
     case "lg":
       return `
         padding: 1rem 1.5rem;
+        max-width: 274px;
       `;
     default:
       break;

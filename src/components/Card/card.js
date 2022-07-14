@@ -181,56 +181,61 @@ const LandlordButtons = styled.div`
 
 // style={{border: "2px solid brown"}} ====> debug
 
-export function PropertyCard({user, contract}) {
+export function PropertyCard({user, data}) {
+
+  const { address, price, maintenance, property_type, pets, about, bedrooms, bathrooms, area, operation_type } = data
 
   return(
-    <>
-    { contract === "rent" ? (
-      <RentalChip>
-        <RiCoinsLine size="22px"/>
-        <text>For Rental</text>
-      </RentalChip>
-    ) : (
-      <SaleChip>
-        <RiMoneyDollarCircleFill size="22px"/>
-        <text>For Sale</text>
-      </SaleChip>
-    )}
+    <div>
       <DefaultCard>
+        { operation_type === "rent" ? (
+          <RentalChip>
+            <RiCoinsLine size="22px"/>
+            <text>For Rental</text>
+          </RentalChip>
+        ) : operation_type === "sale" ? (
+          <SaleChip>
+            <RiMoneyDollarCircleFill size="22px"/>
+            <text>For Sale</text>
+          </SaleChip>
+        ) : null}
+
         <PropertyImg>photo</PropertyImg>
         <PropertyData>
           <PriceRow>
             <Price style={{width: "161px"}}>
               <RiMoneyDollarCircleLine size="30px" color={`${colors.gray.dark}`}/>
-              <text>3,000</text>
+              <text>{price}</text>
             </Price>
             <PropertyType>
               <RiBuildingLine size="30px" color={`${colors.gray.light}`}/>
-              <text>Apartment</text>
+              <text>{property_type}</text>
             </PropertyType>
           </PriceRow>
           <AddressAndIcons>
-            <Adress>86872 Jacob Gateway, Durganport, WV 48044</Adress>
+            <Adress>{address}</Adress>
             <IconsRow>
               <SingleIcon>
                 <BiBed size="20px" color={`${colors.gray.regular}`}/>
-                <div>4</div>
+                <div>{bedrooms}</div>
               </SingleIcon>
               <SingleIcon>
                 <BiBath size="20px" color={`${colors.gray.regular}`}/>
-                <div>2</div>
+                <div>{bathrooms}</div>
               </SingleIcon>
               <SingleIcon>
                 <BiArea size="20px" color={`${colors.gray.regular}`}/>
-                <div>180 m2</div>
+                <div>{area} m2</div>
               </SingleIcon>
-              <FaPaw size="20px" color={`${colors.gray.regular}`}/>
+              { pets ? <FaPaw size="20px" color={`${colors.gray.regular}`}/> : null}
+
               <AiFillHeart size="20px" color={`${colors.gray.regular}`}/>
             </IconsRow>
           </AddressAndIcons>
         </PropertyData>
       </DefaultCard>
-      { user === "homeseeker" ? <DefaultBottom /> : (
+      { user === "homeseeker" ? <DefaultBottom /> : 
+      user === "landlord" ? (
         <LandlordButtons>
         <ButtonsContainer>
           <CardButton>
@@ -243,7 +248,7 @@ export function PropertyCard({user, contract}) {
           </CardButton>
         </ButtonsContainer>
       </LandlordButtons>
-      )}
-    </>
+      ) : null}
+    </div>
   )
 }
