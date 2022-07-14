@@ -199,6 +199,7 @@ export function PropertyCard({user, data}) {
             <text>For Sale</text>
           </SaleChip>
         ) : null}
+
         <PropertyImg>photo</PropertyImg>
         <PropertyData>
           <PriceRow>
@@ -227,6 +228,7 @@ export function PropertyCard({user, data}) {
                 <div>{area} m2</div>
               </SingleIcon>
               { pets ? <FaPaw size="20px" color={`${colors.gray.regular}`}/> : null}
+
               <AiFillHeart size="20px" color={`${colors.gray.regular}`}/>
             </IconsRow>
           </AddressAndIcons>
