@@ -9,10 +9,15 @@ function Form({userType}) {
 
   const [dataForm, setDataForm] = useState({
     name: "",
-    user_type: userType,
+    user_type: 0,
     email: "",
     password: "",
     phone: ""
+  })
+
+  const [passwordValid, setPasswordValid] = useState({
+    password: "",
+    isValid: null
   })
   
   const { name, email, password, phone } = dataForm;
@@ -21,9 +26,12 @@ function Form({userType}) {
     const { name, value } = e.target
     setDataForm({ ...dataForm, [name]: value})
   }
+
+  function validPassword(e) {
+    setPasswordValid({isValid: password === e.target.value, password: e.target.value })
+  }
   
   function handleSubmit(e) {
-    // setDataForm({ ...dataForm, [user_type]: 0})
     e.preventDefault();
     signup(dataForm)
   }
@@ -84,17 +92,18 @@ function Form({userType}) {
           />
           <Sugerence>At least 6 characteres</Sugerence>
         </div>
-        {/* <div>
+        <div>
           <Input 
             id="password2"
             type="password"
-            name="password"
+            name="password2"
             label="CONFIRM PASSWORD"
             placeholder={"******"}
-            value={password} 
-            onChange={handleChange}
+            value={passwordValid.password} 
+            onChange={validPassword}
           />
-        </div> */}
+          {password && !passwordValid.isValid && <Sugerence>NO COINCIDE</Sugerence>}
+        </div>
         <Button  type="primary" size="default" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
       </form>
     </>
@@ -115,7 +124,7 @@ function SignupForm() {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    // align-items: center;
+    align-items: center;
     gap: 1rem;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     background: white;
