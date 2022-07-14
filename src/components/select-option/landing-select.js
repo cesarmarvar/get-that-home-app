@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import { fonts, typography } from "../styles";
-
+import { fonts, typography } from "../../styles";
 const Label = styled.label`
   ${typography.overline};
 `
