@@ -44,44 +44,44 @@ function Form({userType}) {
     <>
       <form style={{display: "block", alignItems: "center", justifyContent: "center"}} onSubmit={handleSubmit}>
         <div>
-          <Label>NAME</Label>
           <Input 
             id="name"
             type="text"
             name="name"
+            label="NAME"
             placeholder={"John Doe"}
             value={name} 
             onChange={handleChange}
           />
         </div>
         <div>
-          <Label>EMAIL</Label>
           <Input 
             id="email"
             type="email"
             name="email"
+            label="EMAIL"
             placeholder={"user@mail.com"}
             value={email} 
             onChange={handleChange}
           />
         </div>
         <div>
-          <Label>PHONE</Label>
           <Input 
             id="phone"
             type="text"
             name="phone"
+            label="PHONE"
             placeholder={"999-999-999"}
             value={phone} 
             onChange={handleChange}
           />
         </div>
         <div>
-          <Label>PASSWORD</Label>
           <Input 
             id="password"
             type="text"
             name="password"
+            label="PASSWORD"
             placeholder={"******"}
             value={password} 
             onChange={handleChange}
@@ -89,11 +89,11 @@ function Form({userType}) {
           <Sugerence>At least 6 characteres</Sugerence>
         </div>
         <div>
-          <Label>PASSWORD CONFIRMATION</Label>
           <Input 
             id="password2"
             type="text"
             name="password"
+            label="CONFIRM PASSWORD"
             placeholder={"******"}
             value={password} 
             onChange={handleChange}
