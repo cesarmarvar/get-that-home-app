@@ -22,16 +22,17 @@ export function LandingSelect({label, name, options = [], ...props}) {
   Las demas opciones solo seran capitalizadas.*/
   function formatOption(name) {
     return name === "house" ? "A House" : name === "apartment" ? "An Apartment" : name.charAt(0).toUpperCase() + name.slice(1)
-  }
+  };
 
   return(
     <>
       <Label>{label}</Label>
-      <Select name={name}>
-        {options.map((option) => {
-          return <option value={`${option}`}>{formatOption(option)}</option>
+      <Select defaultValue={'default'} name={name}>
+        <option value='default' hidden disabled></option>
+        {options.map((option, index) => {
+          return <option key={index} value={`${option}`}>{formatOption(option)}</option>
         })}
       </Select>
     </>
-  )
-}
+  );
+};
