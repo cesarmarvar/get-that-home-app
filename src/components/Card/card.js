@@ -5,9 +5,9 @@ import { BiBed } from "react-icons/bi";
 import { BiBath } from "react-icons/bi";
 import { BiArea } from "react-icons/bi";
 import { FaPaw } from "react-icons/fa";
-import { colors } from "../styles/colors";
-import { typography } from "../styles/typography";
-import { fonts } from "../styles/fonts";
+import { colors } from "../../styles/colors";
+import { typography } from "../../styles/typography";
+import { fonts } from "../../styles/fonts";
 import { FaRegEdit } from "react-icons/fa";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
@@ -181,17 +181,19 @@ const LandlordButtons = styled.div`
 
 // style={{border: "2px solid brown"}} ====> debug
 
-export function PropertyCard({user, contract}) {
+export function PropertyCard({user, data}) {
+
+  const { address, price, maintenance, property_type, pets, about, bedrooms, bathrooms, area, operation_type } = data
 
   return(
     <div>
       <DefaultCard>
-        { contract === "rent" ? (
+        { operation_type === "rent" ? (
           <RentalChip>
             <RiCoinsLine size="22px"/>
             <text>For Rental</text>
           </RentalChip>
-        ) : contract === "sale" ? (
+        ) : operation_type === "sale" ? (
           <SaleChip>
             <RiMoneyDollarCircleFill size="22px"/>
             <text>For Sale</text>
@@ -202,29 +204,29 @@ export function PropertyCard({user, contract}) {
           <PriceRow>
             <Price style={{width: "161px"}}>
               <RiMoneyDollarCircleLine size="30px" color={`${colors.gray.dark}`}/>
-              <text>3,000</text>
+              <text>{price}</text>
             </Price>
             <PropertyType>
               <RiBuildingLine size="30px" color={`${colors.gray.light}`}/>
-              <text>Apartment</text>
+              <text>{property_type}</text>
             </PropertyType>
           </PriceRow>
           <AddressAndIcons>
-            <Adress>86872 Jacob Gateway, Durganport, WV 48044</Adress>
+            <Adress>{address}</Adress>
             <IconsRow>
               <SingleIcon>
                 <BiBed size="20px" color={`${colors.gray.regular}`}/>
-                <div>4</div>
+                <div>{bedrooms}</div>
               </SingleIcon>
               <SingleIcon>
                 <BiBath size="20px" color={`${colors.gray.regular}`}/>
-                <div>2</div>
+                <div>{bathrooms}</div>
               </SingleIcon>
               <SingleIcon>
                 <BiArea size="20px" color={`${colors.gray.regular}`}/>
-                <div>180 m2</div>
+                <div>{area} m2</div>
               </SingleIcon>
-              <FaPaw size="20px" color={`${colors.gray.regular}`}/>
+              { pets ? <FaPaw size="20px" color={`${colors.gray.regular}`}/> : null}
               <AiFillHeart size="20px" color={`${colors.gray.regular}`}/>
             </IconsRow>
           </AddressAndIcons>
