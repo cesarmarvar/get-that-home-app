@@ -15,6 +15,7 @@ function sizeInput(size) {
       return`
         width: 600px;
         min-height: 76px;
+        align-items: start;
       `;
     default:
       break;
@@ -45,7 +46,6 @@ const StyledInput = styled.input`
 const LabelInput = styled.label`
   ${typography.overline};
   color: ${colors.gray.dark};
-  text-transform: uppercase;
 `
 const IndividualInput = styled.div`
   display: flex;
