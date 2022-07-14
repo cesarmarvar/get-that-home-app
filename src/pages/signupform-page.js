@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { useState } from "react"
-import Input from "../components/input"
+import Input from "../components/Input"
 import { signup } from "../services/sessions-service"
 import { typography } from "../styles"
 
@@ -31,31 +31,43 @@ function Form({userType}) {
     <div>
       <form onSubmit={handleSubmit}>
         <Input 
-          label="Name"
-          prop="name"
+          id="name"
           type="text"
+          name="name"
+          // label="Name"
+          // prop="name"
+          placeholder={"John Doe"}
           value={name} 
           onChange={handleChange}
         />
         <Input 
-          label={"Email"}
-          prop={"email"}
-          type={"email"} 
-          value={email} 
+          id="name"
+          type="text"
+          name="name"
+          // label="Name"
+          // prop="name"
+          placeholder={"John Doe"}
+          value={name} 
           onChange={handleChange}
         />
         <Input 
-          label={"Phone"}
-          prop={"phone"}
-          type={"number"} 
-          value={phone} 
+          id="name"
+          type="text"
+          name="name"
+          // label="Name"
+          // prop="name"
+          placeholder={"John Doe"}
+          value={name} 
           onChange={handleChange}
         />
         <Input 
-          label={"Password"}
-          prop={"password"}
-          type={"password"} 
-          value={password} 
+          id="name"
+          type="text"
+          name="name"
+          // label="Name"
+          // prop="name"
+          placeholder={"John Doe"}
+          value={name} 
           onChange={handleChange}
         />
         <button>CREATE ACCOUNT</button>
