@@ -218,52 +218,52 @@ export function LandingPage() {
               <p style={{textAlign: "center"}}>Cesar Martinez</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://github.com/cesarmarvar">
                 <GithubIcon />
               </a>
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/cesarmartinezvargas/">
                 <LinkedinIcon />  
               </a>            
             </IconsContainer>
           </TeamMemberCard>
           <TeamMemberCard >
-            <MemberPic />
+            <MemberPic src="assets/member1.svg"/>
             <div>
               <p style={{textAlign: "center"}}>Enmanuel Chipana</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://github.com/emachipana">
                 <GithubIcon />
               </a>
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/enmanuel-chipana-araujo-44aa5a226/">
                 <LinkedinIcon />  
               </a>
             </IconsContainer>
           </TeamMemberCard>
           <TeamMemberCard >
-            <MemberPic />
+            <MemberPic src="assets/member2.svg"/>
             <div>
               <p style={{textAlign: "center"}}>Diego Manrique</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://github.com/Diego12996">
                 <GithubIcon />
               </a>              
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/diego-manrique-machaca/">
                 <LinkedinIcon />  
               </a>
             </IconsContainer>
           </TeamMemberCard>
           <TeamMemberCard >
-            <MemberPic />
+            <MemberPic src="assets/member3.svg"/>
             <div>
               <p style={{textAlign: "center"}}>Luis Zelada</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://github.com/luzelcas96">
                 <GithubIcon />
               </a>              
-              <a style={{cursor: "pointer"}}>
+              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/luis-zelada/">
                 <LinkedinIcon />  
               </a>
             </IconsContainer>
