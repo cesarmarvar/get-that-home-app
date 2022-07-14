@@ -1,4 +1,5 @@
 import styled from "@emotion/styled"
+import { useState } from "react"
 import { typography } from "../styles"
 
 function SignupForm({ typeUser }) {
@@ -46,6 +47,16 @@ function SignupForm({ typeUser }) {
     padding: 0;
     gap: 0.5rem;
   `
+
+  const [dataForm, setDataForm] = useState({
+    name: "",
+    user_type: typeUser,
+    email: "",
+    password: "",
+    phone: ""
+  })
+
+  const { name, user_type, email, password, phone } = dataForm
 
   const TitleForm = styled.h5`
     ${typography.headline["h5"]}

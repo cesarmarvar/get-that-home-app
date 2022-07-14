@@ -67,7 +67,7 @@ function Signup() {
   }
 
   function handleSubmitLandlord() {
-    <SignupForm typeUser={2} />
+    <SignupForm typeUser={0} />
   }
 
   return (
