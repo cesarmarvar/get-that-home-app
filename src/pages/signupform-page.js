@@ -1,23 +1,23 @@
 import styled from "@emotion/styled"
 import { typography } from "../styles"
 
-function Input({ prop, value, onChange, label, type}) {
+function SignupForm({ typeUser }) {
 
-  return (
-    <div>
-      {label && <label htmlFor={prop}>{label}</label>}
-        <input
-          id={prop}
-          name={prop}
-          type={type}
-          value={value}
-          onChange={onChange}
-        />
-    </div>
-  )
-}
+  function Input({ prop, value, onChange, label, type}) {
 
-function SignupForm() {
+    return (
+      <div>
+        {label && <label htmlFor={prop}>{label}</label>}
+          <input
+            id={prop}
+            name={prop}
+            type={type}
+            value={value}
+            onChange={onChange}
+          />
+      </div>
+    )
+  }
 
   const Fondo = styled.div`
     height: 100vh;
@@ -55,6 +55,12 @@ function SignupForm() {
       <SigunpContainer>
         <TitleForm>Create your Account</TitleForm>
       </SigunpContainer>
+      <InputContainer>
+        <form>
+          <Input prop={"name"} value={name} />
+
+        </form>
+      </InputContainer>
     </Fondo>
   )
 }

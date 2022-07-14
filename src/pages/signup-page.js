@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import Header from "../components/header";
 import { typography } from "../styles";
+import SignupForm from "./signupform-page";
 
 function Signup() {
 
@@ -62,6 +62,14 @@ function Signup() {
     height: 180px;
   `
 
+  function handleSubmitBuyer() {
+    <SignupForm typeUser={1} />
+  }
+
+  function handleSubmitLandlord() {
+    <SignupForm typeUser={2} />
+  }
+
   return (
     <Fondo>
       <ContainerText>
@@ -69,12 +77,12 @@ function Signup() {
         <Question>Que estas buscando?</Question>
       </ContainerText>
       <ContainerCards>
-        <Card>
+        <Card onClick={handleSubmitLandlord}>
           <LandlordImage src="assets/rafiki.svg" alt="Landlord reference"/>
           <TypeUser>Landlord</TypeUser>
           <DescriptionUser>You want to rent or sell a home</DescriptionUser>
         </Card>
-        <Card>
+        <Card onClick={handleSubmitBuyer}>
           <HomeseekerImage src="assets/pana.svg" alt="Home Seeker reference"/>
           <TypeUser>Home seeker</TypeUser>
           <DescriptionUser>You want to find a home</DescriptionUser>
