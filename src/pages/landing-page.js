@@ -213,7 +213,7 @@ export function LandingPage() {
         <H4heading>Meet the team</H4heading>
         <TeamContainer>
           <TeamMemberCard >
-            <MemberPic />
+              <MemberPic src="assets/member4.svg" />
             <div>
               <p style={{textAlign: "center"}}>Cesar Martinez</p>
             </div>
