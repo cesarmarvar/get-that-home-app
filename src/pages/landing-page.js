@@ -73,8 +73,9 @@ const TextsContainer = styled.div`
   ${typography.subtitle.s2};
   font-family: ${fonts.secundary};
 `
-const ExamplesHeading = styled.h4`
+const H4heading = styled.h4`
   ${typography.headline.h4};
+  font-family: ${fonts.secundary};
   color: ${colors.pink.dark}
 
 `
@@ -83,6 +84,20 @@ const ExampleCardsContainer = styled.div`
   flex-direction: row;
   gap: 3rem;
 `
+
+/* ===== Seccion rosada con link al SignUp =====*/
+
+const SignupSection = styled.section`
+  height: 312px;
+  width: 100%;
+  background: rgba(244, 143, 177, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  `
 
 
 // style={{border: "2px solid brown"}} ====> debug
@@ -120,7 +135,7 @@ export function LandingPage() {
       <ExamplesSection style={{border: "2px solid brown"}}>
         <TextsContainer>
           <p>Find an Apartment you Love</p>
-          <ExamplesHeading>Homes for rent at the best prices</ExamplesHeading>
+          <H4heading>Homes for rent at the best prices</H4heading>
         </TextsContainer>
         <ExampleCardsContainer>
           <PropertyCard user="homeseeker" contract="rent"/>
@@ -128,6 +143,10 @@ export function LandingPage() {
           <PropertyCard user="homeseeker" contract="rent"/>
         </ExampleCardsContainer>
       </ExamplesSection>
+      <SignupSection>
+        <H4heading style={{color: "black", width: "826px"}}>Getting someone to rent your apartment has never been this easy</H4heading>
+        <Button size="lg">Create an account now</Button>
+      </SignupSection>
     </>
   )
 
