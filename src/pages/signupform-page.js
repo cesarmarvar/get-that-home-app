@@ -1,25 +1,70 @@
 import styled from "@emotion/styled"
 import { useState } from "react"
+import Input from "../components/input"
 import { signup } from "../services/sessions-service"
 import { typography } from "../styles"
 
-function SignupForm({ typeUser }) {
+function Form() {
 
-  function Input({ prop, value, onChange, label, type}) {
-
-    return (
-      <div>
-        {label && <label htmlFor={prop}>{label}</label>}
-          <input
-            id={prop}
-            name={prop}
-            type={type}
-            value={value}
-            onChange={onChange}
-          />
-      </div>
-    )
+  const [dataForm, setDataForm] = useState({
+    name: "",
+    user_type: 0,
+    email: "",
+    password: "",
+    phone: ""
+  })
+  
+  const { name, email, password, phone } = dataForm;
+  
+  function handleChange(e) {
+    const { name, value } = e.target
+    setDataForm({ ...dataForm, [name]: value})
   }
+  
+  function handleSubmit(e) {
+    // setDataForm({ ...dataForm, [user_type]: 0})
+    e.preventDefault();
+    signup(dataForm)
+  }
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <Input 
+          label="Name"
+          prop="name"
+          type="text"
+          value={name} 
+          onChange={handleChange}
+        />
+        <Input 
+          label={"Email"}
+          prop={"email"}
+          type={"email"} 
+          value={email} 
+          onChange={handleChange}
+        />
+        <Input 
+          label={"Phone"}
+          prop={"phone"}
+          type={"number"} 
+          value={phone} 
+          onChange={handleChange}
+        />
+        <Input 
+          label={"Password"}
+          prop={"password"}
+          type={"password"} 
+          value={password} 
+          onChange={handleChange}
+        />
+        <button>CREATE ACCOUNT</button>
+      </form>
+    </div>
+  )
+}
+
+function SignupForm() {
 
   const Fondo = styled.div`
     height: 100vh;
@@ -48,67 +93,17 @@ function SignupForm({ typeUser }) {
     padding: 0;
     gap: 0.5rem;
   `
+
   const TitleForm = styled.h5`
     ${typography.headline["h5"]}
   `
-
-  const [dataForm, setDataForm] = useState({
-    name: "",
-    user_type: null,
-    email: "",
-    password: "",
-    phone: ""
-  });
-  
-  const { name, user_type, email, password, phone } = dataForm;
-
-  function handleChange(e) {
-    const { name, value } = e.target
-    setDataForm({ ...dataForm, [name]: value})
-  }
-
-  function handleSubmit(e) {
-    setDataForm({ ...dataForm, [user_type]: typeUser})
-    e.preventDefault();
-    signup(dataForm)
-  }
 
   return (
     <Fondo>
       <SigunpContainer>
         <TitleForm>Create your Account</TitleForm>
         <InputContainer>
-          <form onSubmit={handleSubmit}>
-            <Input 
-              label={"Name"}
-              prop={"name"}
-              type={"text"} 
-              value={name} 
-              onChange={handleChange}
-            />
-            <Input 
-              label={"Email"}
-              prop={"email"}
-              type={"email"} 
-              value={email} 
-              onChange={handleChange}
-            />
-            <Input 
-              label={"Phone"}
-              prop={"phone"}
-              type={"number"} 
-              value={phone} 
-              onChange={handleChange}
-            />
-            <Input 
-              label={"Password"}
-              prop={"password"}
-              type={"password"} 
-              value={password} 
-              onChange={handleChange}
-            />
-            <button>CREATE ACCOUNT</button>
-          </form>
+          <Form />
         </InputContainer>
       </SigunpContainer>
     </Fondo>
