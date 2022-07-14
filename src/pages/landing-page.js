@@ -200,9 +200,9 @@ export function LandingPage() {
           <H4heading>Homes for rent at the best prices</H4heading>
         </TextsContainer>
         <ExampleCardsContainer>
-          <PropertyCard user="homeseeker" contract="rent"/>
-          <PropertyCard user="homeseeker" contract="sale"/>
-          <PropertyCard user="homeseeker" contract="rent"/>
+          {properties.map((property, index) => {
+            return <PropertyCard key={index} user="homeseeker" data={property}/>
+          })}
         </ExampleCardsContainer>
       </ExamplesSection>
       <SignupSection>
