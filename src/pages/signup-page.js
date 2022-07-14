@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 import { typography } from "../styles";
 import SignupForm from "./signupform-page";
 
-function Signup() {
+function Signup({ setUser }) {
 
   const Fondo = styled.div`
     height: 100vh;
@@ -61,14 +62,18 @@ function Signup() {
     width: 240px;
     height: 180px;
   `
+  const navigate = useNavigate()
 
   function handleSubmitBuyer() {
-    <SignupForm typeUser={1} />
+    navigate("/register/form")
+    setUser(1)
   }
 
   function handleSubmitLandlord() {
-    <SignupForm typeUser={0} />
+    navigate("/register/form")
+    setUser(0)
   }
+
 
   return (
     <Fondo>

@@ -4,11 +4,11 @@ import Input from "../components/input"
 import { signup } from "../services/sessions-service"
 import { typography } from "../styles"
 
-function Form() {
+function Form({userType}) {
 
   const [dataForm, setDataForm] = useState({
     name: "",
-    user_type: 0,
+    user_type: userType,
     email: "",
     password: "",
     phone: ""
