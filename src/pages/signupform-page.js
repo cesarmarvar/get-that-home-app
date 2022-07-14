@@ -47,6 +47,9 @@ function SignupForm({ typeUser }) {
     padding: 0;
     gap: 0.5rem;
   `
+  const TitleForm = styled.h5`
+    ${typography.headline["h5"]}
+  `
 
   const [dataForm, setDataForm] = useState({
     name: "",
@@ -56,11 +59,13 @@ function SignupForm({ typeUser }) {
     phone: ""
   })
 
+  function handleChange(e) {
+    const { name, value } = e.target
+    setDataForm({ ...dataForm, [name]: value})
+  }
+
   const { name, user_type, email, password, phone } = dataForm
 
-  const TitleForm = styled.h5`
-    ${typography.headline["h5"]}
-  `
   return (
     <Fondo>
       <SigunpContainer>
@@ -68,7 +73,34 @@ function SignupForm({ typeUser }) {
       </SigunpContainer>
       <InputContainer>
         <form>
-          <Input prop={"name"} value={name} />
+          <Input 
+            label={"Name"}
+            prop={"name"}
+            type={"text"} 
+            value={name} 
+            onChange={handleChange}
+          />
+          <Input 
+            label={"Email"}
+            prop={"email"}
+            type={"email"} 
+            value={email} 
+            onChange={handleChange}
+          />
+          <Input 
+            label={"Phone"}
+            prop={"phone"}
+            type={"number"} 
+            value={phone} 
+            onChange={handleChange}
+          />
+          <Input 
+            label={"Password"}
+            prop={"password"}
+            type={"password"} 
+            value={password} 
+            onChange={handleChange}
+          />
 
         </form>
       </InputContainer>
