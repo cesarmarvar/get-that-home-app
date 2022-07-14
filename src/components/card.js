@@ -184,19 +184,19 @@ const LandlordButtons = styled.div`
 export function PropertyCard({user, contract}) {
 
   return(
-    <>
-    { contract === "rent" ? (
-      <RentalChip>
-        <RiCoinsLine size="22px"/>
-        <text>For Rental</text>
-      </RentalChip>
-    ) : (
-      <SaleChip>
-        <RiMoneyDollarCircleFill size="22px"/>
-        <text>For Sale</text>
-      </SaleChip>
-    )}
+    <div>
       <DefaultCard>
+        { contract === "rent" ? (
+          <RentalChip>
+            <RiCoinsLine size="22px"/>
+            <text>For Rental</text>
+          </RentalChip>
+        ) : (
+          <SaleChip>
+            <RiMoneyDollarCircleFill size="22px"/>
+            <text>For Sale</text>
+          </SaleChip>
+        )}
         <PropertyImg>photo</PropertyImg>
         <PropertyData>
           <PriceRow>
@@ -244,6 +244,6 @@ export function PropertyCard({user, contract}) {
         </ButtonsContainer>
       </LandlordButtons>
       )}
-    </>
+    </div>
   )
 }
