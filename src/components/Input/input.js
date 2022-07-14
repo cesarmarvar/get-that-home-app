@@ -13,6 +13,7 @@ function Input({id, placeholder, type, onChange, value, IconL, label,IconR,...pr
           placeholder={placeholder} 
           value={value}
           onChange={onChange}
+          min="0"
         />
         {IconR && <IconR size="16px"/>}
       </Wrapper>
