@@ -2,22 +2,20 @@ import styled from "@emotion/styled";
 import Header from "../components/header";
 import { colors, fonts, typography } from "../styles";
 import Button from "../components/Button/button";
-import { LandingSelect } from "../components/landing-select";
-import { PropertyCard } from "../components/card";
+import { PropertyCard } from "../components/Card/card";
 import { ReactComponent as GithubIcon } from "../assets/github.svg";
 import { ReactComponent as LinkedinIcon } from "../assets/linkedin.svg";
 import { ReactComponent as RubyIcon } from "../assets/ruby.svg";
 import { ReactComponent as ReactIcon } from "../assets/react.svg";
+import MultiSelect from "../components/MultiSelect";  
+import { LandingSelect } from "../components/select-option/landing-select";
+import { useEffect, useState } from "react";
+import { getProperties } from "../services/properties-service";
+
+
 
 
 /* ===== Main section que muestra la barra de busqueda de propiedades =====*/
-
-const Illustration = styled.div`
-// position: absolute;
-width: 1862.03px;
-height: 600px;
-z-index: 999;
-`
 
 const SearchSection = styled.main`
   display: flex;
@@ -27,6 +25,10 @@ const SearchSection = styled.main`
   height: 600px;
   gap: 60px;
   background-image: url("assets/illustration.svg");
+  // // background-position: top;
+  // background-repeat: no-repeat;
+  // background-size: contain;
+  background-attachment: fixed;
 `
 
 const Introduction = styled.div`
@@ -120,28 +122,27 @@ const TeamSection = styled.section`
 const TeamContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 32px;
+  gap: 40px;
 `
 
 const TeamMemberCard = styled.div`
-display: flex;
-flex-direction: column;
-gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `
 
-const MemberPic = styled.div`
-width: 180px;
-height: 180px;
-border: 2px solid black;
-border-radius: 100px
+const MemberPic = styled.img`
+  width: 180px;
+  height: 180px;
+  border-radius: 100px;
 `
 
 const IconsContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-gap: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 `
 
 /* ===== Seccion 'Meet the team' =====*/
@@ -158,9 +159,9 @@ const Footer = styled.div`
   background-color: ${colors.background.regular}
 `
 const RowFlex = styled.div`
-display: flex;
-flex-direction: row;
-gap: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
 `
 // style={{border: "2px solid brown"}} ====> debug
 
@@ -175,7 +176,7 @@ export function LandingPage() {
   return(
     <>
       <Header />
-      <SearchSection style={{border: "2px solid brown"}}>
+      <SearchSection>
         <Introduction>
           <Title>Meet your new Home</Title>
           <p>The easiest way to find where you belong</p>
