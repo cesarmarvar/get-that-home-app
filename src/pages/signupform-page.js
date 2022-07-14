@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { useState } from "react"
+import Button from "../components/Button/button"
 import Input from "../components/Input"
 import { signup } from "../services/sessions-service"
 import { typography } from "../styles"
@@ -27,9 +28,14 @@ function Form({userType}) {
     signup(dataForm)
   }
 
+  const Label = styled.label`
+    ${typography.overline}
+  `
+
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
+        <Label>NAME</Label>
         <Input 
           id="name"
           type="text"
@@ -41,38 +47,38 @@ function Form({userType}) {
           onChange={handleChange}
         />
         <Input 
-          id="name"
-          type="text"
-          name="name"
+          id="email"
+          type="email"
+          name="email"
           // label="Name"
           // prop="name"
-          placeholder={"John Doe"}
-          value={name} 
+          placeholder={"user@mail.com"}
+          value={email} 
           onChange={handleChange}
         />
         <Input 
-          id="name"
+          id="phone"
           type="text"
-          name="name"
+          name="phone"
           // label="Name"
           // prop="name"
-          placeholder={"John Doe"}
-          value={name} 
+          placeholder={"999-999-999"}
+          value={phone} 
           onChange={handleChange}
         />
         <Input 
-          id="name"
+          id="password"
           type="text"
-          name="name"
+          name="password"
           // label="Name"
           // prop="name"
-          placeholder={"John Doe"}
-          value={name} 
+          placeholder={"******"}
+          value={password} 
           onChange={handleChange}
         />
-        <button>CREATE ACCOUNT</button>
+        <Button type="primary" size="sm" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
       </form>
-    </div>
+    </>
   )
 }
 
