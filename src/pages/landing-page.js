@@ -4,7 +4,10 @@ import { ReactComponent as Ilustration } from "../assets/illustration.svg"
 import { colors, fonts, typography } from "../styles";
 import Button from "../components/Button/button";
 import { LandingSelect } from "../components/landing-select";
-import { PropertyCard } from "../components/card"
+import { PropertyCard } from "../components/card";
+import { ReactComponent as GithubIcon } from "../assets/github.svg";
+import { ReactComponent as LinkedinIcon } from "../assets/linkedin.svg";
+
 
 /* ===== Main section que muestra la barra de busqueda de propiedades =====*/
 
@@ -97,8 +100,45 @@ const SignupSection = styled.section`
   align-items: center;
   text-align: center;
   gap: 32px;
-  `
+`
 
+/* ===== Seccion 'Meet the team' =====*/
+
+const TeamSection = styled.section`
+  height: 486px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+`
+
+const TeamContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+`
+
+const TeamMemberCard = styled.div`
+display: flex;
+flex-direction: column;
+gap: 8px;
+`
+
+const MemberPic = styled.div`
+width: 180px;
+height: 180px;
+border: 2px solid black;
+border-radius: 100px
+`
+
+const IconsContainer = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 50px;
+`
 
 // style={{border: "2px solid brown"}} ====> debug
 
@@ -107,7 +147,7 @@ export function LandingPage() {
   return(
     <>
       <Header />
-      <SearchSection>
+      <SearchSection style={{border: "2px solid brown"}}>
         <Introduction>
           <Title>Meet your new Home</Title>
           <p>The easiest way to find where you belong</p>
@@ -132,7 +172,7 @@ export function LandingPage() {
           <Button>search</Button>
         </SearchBar>
       </SearchSection>
-      <ExamplesSection style={{border: "2px solid brown"}}>
+      <ExamplesSection>
         <TextsContainer>
           <p>Find an Apartment you Love</p>
           <H4heading>Homes for rent at the best prices</H4heading>
@@ -147,6 +187,51 @@ export function LandingPage() {
         <H4heading style={{color: "black", width: "826px"}}>Getting someone to rent your apartment has never been this easy</H4heading>
         <Button size="lg">Create an account now</Button>
       </SignupSection>
+      <TeamSection>
+        <H4heading>Meet the team</H4heading>
+        <TeamContainer>
+          <TeamMemberCard >
+            <MemberPic />
+            <div>
+              <p style={{textAlign: "center"}}>Cesar Martinez</p>
+            </div>
+            <IconsContainer>
+              <GithubIcon />
+              <LinkedinIcon />
+            </IconsContainer>
+          </TeamMemberCard>
+          <TeamMemberCard >
+            <MemberPic />
+            <div>
+              <p style={{textAlign: "center"}}>Enmanuel Chipana</p>
+            </div>
+            <IconsContainer>
+              <GithubIcon />
+              <LinkedinIcon />
+            </IconsContainer>
+          </TeamMemberCard>
+          <TeamMemberCard >
+            <MemberPic />
+            <div>
+              <p style={{textAlign: "center"}}>Diego Manrique</p>
+            </div>
+            <IconsContainer>
+              <GithubIcon />
+              <LinkedinIcon />
+            </IconsContainer>
+          </TeamMemberCard>
+          <TeamMemberCard >
+            <MemberPic />
+            <div>
+              <p style={{textAlign: "center"}}>Luis Zelada</p>
+            </div>
+            <IconsContainer>
+              <GithubIcon />
+              <LinkedinIcon />
+            </IconsContainer>
+          </TeamMemberCard>
+        </TeamContainer>
+      </TeamSection>
     </>
   )
 
