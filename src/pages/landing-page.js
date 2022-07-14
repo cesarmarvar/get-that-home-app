@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import Header from "../components/header";
 import { ReactComponent as Ilustration } from "../assets/illustration.svg"
 import { fonts, typography } from "../styles";
+import Button from "../components/Button/button";
+import { LandingSelect } from "../components/landing-select";
 
 
 const Illustration = styled.div`
@@ -31,6 +33,19 @@ const Title = styled.h2` // este podria reemplazarse por el typography.headline.
   line-height: 88px;
 `
 
+const SearchBar = styled.form`
+  display: flex;
+  flex-direction: row;
+  max-width: 800px;
+  max-height: 72px;
+  align-items: center;
+  padding: 8px 16px;
+  gap: 8px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+`
+
+
 export function LandingPage() {
 
   return(
@@ -41,9 +56,16 @@ export function LandingPage() {
           <Title>Meet your new Home</Title>
           <p>The easiest way to find where you belong</p>
         </Introduction>
-        <div>
-
-        </div>
+        <SearchBar>
+          <div>
+            <LandingSelect 
+            label="I'M LOOKING FOR"
+            name="property_type"
+            options={["house", "apartment"]}
+            />
+          </div>
+          <Button>search</Button>
+        </SearchBar>
       </SearchSection>
     </>
   )
