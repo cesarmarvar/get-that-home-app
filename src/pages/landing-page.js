@@ -166,6 +166,12 @@ gap: 12px;
 
 export function LandingPage() {
 
+  const [ properties, setProperties ] = useState([])
+
+  useEffect(() => {
+    getProperties().then(setProperties).catch(console.log)
+  }, [])
+
   return(
     <>
       <Header />
