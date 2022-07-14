@@ -191,6 +191,14 @@ export function LandingPage() {
             />
           </div>
           <Division />
+          <MultiSelect 
+          withBorder={false}
+          options={
+            properties.map((property) => {
+            return {label: property.address, value: property.address}
+          })}
+          />
+          <Division />
           <Button>search</Button>
         </SearchBar>
       </SearchSection>
