@@ -76,7 +76,7 @@ function Signup() {
         </Card>
         <Card>
           <HomeseekerImage src="assets/pana.svg" alt="Home Seeker reference"/>
-          <TypeUser>Homse seeker</TypeUser>
+          <TypeUser>Home seeker</TypeUser>
           <DescriptionUser>You want to find a home</DescriptionUser>
         </Card>
       </ContainerCards>

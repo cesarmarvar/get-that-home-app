@@ -1,10 +1,10 @@
-import Form from "./components/Form";
-import PhotosInput from "./components/Form/utils";
+import SignupForm from "./pages/signupform-page";
 
 function App() {
   return (
-    // <Form/>
-    <Form/>
+    <>
+      <SignupForm></SignupForm>
+    </>
   );
 }
 
