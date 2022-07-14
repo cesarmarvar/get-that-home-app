@@ -69,6 +69,14 @@ export function LandingPage() {
             />
           </div>
           <Division />
+          <div>
+            <LandingSelect
+            label="I WANT TO"
+            name="contract"
+            options={["rent", "buy"]}
+            />
+          </div>
+          <Division />
           <Button>search</Button>
         </SearchBar>
       </SearchSection>
