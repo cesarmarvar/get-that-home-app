@@ -25,18 +25,19 @@ function Footer() {
   `
 
   const ContainerMembers = styled.div`
-    dispaly: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   `
 
-  
+
 
   function LogoBox(){
     return (
-      <>
+      <div>
         <Logo />
         <Information>© 2022 - Get That Home</Information>
         <Information>Codeable - Cohort 6 Final Project</Information>
-      </>
+      </div>
     )
   }
 
@@ -44,10 +45,10 @@ function Footer() {
     
     function MemberComponent({ children }) {
       return (
-        <>
+        <div style={{ display: "flex", flexDirection: "grow", gap: "0.25rem"}}>
           <RiGithubFill />
           <Information>{ children }</Information>
-        </>
+        </div>
       )
     }
 
