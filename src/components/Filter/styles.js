@@ -3,6 +3,7 @@ import { colors, fonts } from "../../styles";
 
 export const Container = styled.div`
   position: relative;
+  z-index: 1;
 `;
 
 export const Button = styled.div`
