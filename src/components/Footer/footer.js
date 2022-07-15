@@ -6,6 +6,7 @@ const FooterContainer = styled.div`
   display: flex;
   flex-direction: grow;
   justify-content: space-around;
+  background: #F5F5F6;
 `
 
 function Footer() {
