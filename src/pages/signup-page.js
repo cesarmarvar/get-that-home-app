@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { typography } from "../styles";
-import SignupForm from "./signupform-page";
 
 function Signup({ setUser }) {
 
   const Fondo = styled.div`
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     background: linear-gradient(rgba(244, 143, 177, 0.15) 50%, white 50%)
   `
 
@@ -16,9 +18,8 @@ function Signup({ setUser }) {
 
   const ContainerCards = styled.div`
     display: flex;
-    flex-direction: grow;
     gap: 54px;
-    margin: 195px;
+    align-items: center;
     justify-content: center;
   `
 
@@ -42,7 +43,8 @@ function Signup({ setUser }) {
     padding: 1rem 1.25rem;
     gap: 0.5rem;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    background: white
+    background: white;
+    cursor: pointer;
   `
 
   const TypeUser = styled.h6`
