@@ -13,7 +13,7 @@ const FooterContainer = styled.div`
   background: #F5F5F6;
   position: absolute;
   bottom: 0;
-  border-top: 1px #BF5F82;
+  border-top: 1px solid #BF5F82;
 `
 
 function Footer() {
