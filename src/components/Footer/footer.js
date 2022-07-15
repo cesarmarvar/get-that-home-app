@@ -148,8 +148,12 @@ function Footer() {
     )  
   }
 
+  const pathname = window.location.pathname === "/"
+
   return (
-    {true ? <FooterLanding /> : <Footer2/>}
+    <>
+      {pathname? <FooterLanding /> : <Footer2/>}
+    </>
   )
 
 }

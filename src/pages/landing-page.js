@@ -336,23 +336,6 @@ export function LandingPage() {
           </TeamMemberCard>
         </TeamContainer>
       </TeamSection>
-      <Footer>
-        <p>© 2022 - Find That Home</p>
-        <div>
-          <p style={{textAlign: "center"}}>Source Code</p>
-          <RowFlex>
-            <RowFlex>
-              <RubyIcon />
-              <p>Ruby on Rails REST API</p>
-            </RowFlex>
-            <RowFlex>
-              <ReactIcon/>
-              <p>React Responsive SPA</p>
-            </RowFlex>
-          </RowFlex>
-        </div>
-        <p>Codeable - Cohort 6 Final Project</p>
-      </Footer>
     </>
   )
 
