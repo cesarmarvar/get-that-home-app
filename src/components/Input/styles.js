@@ -11,6 +11,10 @@ function sizeInput(size) {
       return`
         width: 356px;
       `;
+    case "x-sm":
+      return`
+        width: 120px;
+      `;
     case "other":
       return`
         width: 600px;
