@@ -11,6 +11,17 @@ function Footer() {
     letter: 0.25px;
   `
 
+  const LittleInfo = styled.p`
+    weight: 400;
+    size: 12px;
+    line-height: 1rem;
+    letter: 0.4px;
+  `
+
+  const ContainerMembers = styled.div`
+    dispaly: flex;
+  `
+
   function Members() {
     
     function MemberComponent({ children }) {
@@ -21,6 +32,18 @@ function Footer() {
         </>
       )
     }
+
+    return (
+      <div>
+        <LittleInfo>Build with ❤ by:</LittleInfo>
+        <ContainerMembers>
+          <MemberComponent>Enmanuel Chipana</MemberComponent>
+          <MemberComponent>Cesar Martinez</MemberComponent>
+          <MemberComponent>Diego Manrique</MemberComponent>
+          <MemberComponent>Luis Zelada</MemberComponent>
+        </ContainerMembers>
+      </div>
+    )
   }
 
   function LogoBox(){
@@ -30,13 +53,15 @@ function Footer() {
         <Information>© 2022 - Get That Home</Information>
         <Information>Codeable - Cohort 6 Final Project</Information>
       </>
-
     )
-
   }
 
   return (
     <>
+    <LogoBox></LogoBox>
+    <Members></Members>
     </>
   )  
 }
+
+export default Footer;
