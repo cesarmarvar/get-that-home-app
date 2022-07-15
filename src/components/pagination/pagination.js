@@ -15,7 +15,7 @@ function Pagination() {
 
   const { first, second, third, fourth, fifth, } = displayButtons
 
-  function handleNumbers() {
+  function handlerNext() {
     setDisplayButtons({
       first: first + 5,
       second: second + 5,
@@ -23,9 +23,6 @@ function Pagination() {
       fourth: fourth + 5,
       fifth: fifth + 5
     })
-    // return (
-      
-    // )
   }
 
   function Buttons() {
@@ -37,7 +34,7 @@ function Pagination() {
         <Button>{ third }</Button>
         <Button>{ fourth }</Button>
         <Button>{ fifth }</Button>
-        <Button onClick={handleNumbers}>{ next }</Button>
+        <Button onClick={handlerNext}>{ next }</Button>
       </div>
     )
   }
