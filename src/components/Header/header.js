@@ -3,6 +3,7 @@ import Button from "../Button/button";
 import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine, RiHeartFill, RiHome8Line, RiLogoutCircleLine } from "react-icons/ri"
 import { ReactComponent as Logo } from "./../../assets/logo.svg";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth-context";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -18,8 +19,9 @@ const NavContainer = styled.div`
   gap: 1rem;
 `
 
-function Header({ isAuth, typeUser }) {
+function Header({ isAuth, typeUser, handleOpen }) {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   function Search() {
     return (
@@ -35,7 +37,7 @@ function Header({ isAuth, typeUser }) {
 
   function Logout() {
     return (
-      <Button IconL={ RiLogoutCircleLine } type="secundary" size="sm" children="LOGOUT" />
+      <Button IconL={ RiLogoutCircleLine } onClick={() => logout()} type="secundary" size="sm" children="LOGOUT" />
     )
   }
 
@@ -48,7 +50,7 @@ function Header({ isAuth, typeUser }) {
 
     function Login() {
       return (
-        <Button IconL={ RiUserReceived2Fill } type="primary" size="sm" children="LOGIN" />
+        <Button IconL={ RiUserReceived2Fill } onClick={() => handleOpen(true)} type="primary" size="sm" children="LOGIN" />
       )
     }
 
