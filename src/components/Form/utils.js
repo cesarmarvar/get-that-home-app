@@ -83,7 +83,8 @@ const OneOption = styled.div`
   cursor: pointer;
 `
 
-function SwitchOperation() {
+function SwitchOperation({operationType, setOperationType}) {
+  
   return (
     <WrapperSwitch>
       <LikeLabel>Operation Type</LikeLabel>
@@ -92,11 +93,19 @@ function SwitchOperation() {
       }}>
         <OneOption style={{
             borderRight: "none",
-            borderRadius: "8px 0px 0px 8px"
-        }}>Rent</OneOption>
+            borderRadius: "8px 0px 0px 8px",
+            backgroundColor: operationType === "rent"? "pink": "white",
+            color: operationType=== "rent"? "white": "black"
+        }}
+        onClick={()=>setOperationType("rent")}
+        >Rent</OneOption>
         <OneOption style={{
-            borderRadius: "0px 8px 8px 0px"
-        }}>Sale</OneOption>
+            borderRadius: "0px 8px 8px 0px",
+            backgroundColor: operationType === "sale"? "pink": "white",
+            color: operationType=== "sale"? "white": "black"
+        }}
+        onClick={()=>setOperationType("sale")}
+        >Sale</OneOption>
       </div>
     </WrapperSwitch>
   );

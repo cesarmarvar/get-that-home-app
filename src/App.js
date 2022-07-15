@@ -1,3 +1,5 @@
+import Header from "./components/Header/header";
+import PropertyFormPage from "./pages/propery-form-page";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header/header";
@@ -8,6 +10,7 @@ import PropertiesPage from "./pages/properties-page";
 import Signup from "./pages/signup-page";
 import SignupForm from "./pages/signupform-page";
 import { Modal } from "./pages/ui";
+
 
 function App() {
   const { user } = useAuth();
@@ -20,6 +23,7 @@ function App() {
         typeUser={user?.user_type}
         handleOpen={setIsOpen}
       />
+      <PropertyFormPage/>
       {
         isOpen
         ?
