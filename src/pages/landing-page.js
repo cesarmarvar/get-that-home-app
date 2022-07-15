@@ -9,7 +9,7 @@ import { ReactComponent as ReactIcon } from "../assets/react.svg";
 import MultiSelect from "../components/MultiSelect";  
 import { LandingSelect } from "../components/select-option/landing-select";
 import { useEffect, useState } from "react";
-import { getProperties } from "../services/properties-service";
+import { getRandomProperties } from "../services/properties-service";
 import { useNavigate } from "react-router-dom";
 
 
@@ -171,7 +171,7 @@ export function LandingPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getProperties().then(setProperties).catch(console.log)
+    getRandomProperties().then(setProperties).catch(console.log)
   }, [])
 
   const photos = {
