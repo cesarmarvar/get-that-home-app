@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <Header 
+      {/* <Header 
         isAuth={!!user}
         typeUser={user?.user_type}
       />
@@ -20,7 +20,7 @@ function App() {
         <Route path="/properties" element={<PropertiesPage />}/>
         <Route path="/register" element={<Signup />}/>
         <Route path="/register/form" element={<SignupForm />}/>
-      </Routes>
+      </Routes> */}
     </>
   );
 }
