@@ -20,21 +20,25 @@ function PropertyProvider({ children }) {
   function paginate(array) {
     const data = {};
     let limit = 9;
-    for(let i = 1; i<=Math.ceil(array.length/9); i++){
-      properties[i] = array.filter((_prop, idx) => idx < limit && idx >= limit - 9);
+    let i = 1;
+    const size = Math.ceil(array.length/limit) + 1;
+    array.forEach(_val => {
+      if(i === size) return;
+      data[i] = array.filter((_prop, idx) => idx < limit && idx >= limit - 9);
       limit = limit + 9;
-    }
+      i++;
+    });
 
-    return data
+    return data;
   }
 
-  function searchByAddress(query, currentProperties) {
+  function searchByAddress(query) {
     const allProperties = [];
-    Object.values(currentProperties).forEach(prop => {
+    Object.values(properties).forEach(prop => {
       allProperties.push(...prop);
     })
 
-    return paginate(allProperties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase())));
+    return allProperties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase()));
   }
 
   return (
