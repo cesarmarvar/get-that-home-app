@@ -1,6 +1,6 @@
 import { IndividualInput, LabelInput, StyledInput, Wrapper } from "./styles";
 
-function Input({id, placeholder, type, onChange, value, IconL, label,IconR,...props }) {
+function Input({id, placeholder, onBlur, type, onChange, value, IconL, label,IconR,...props }) {
   return(
     <IndividualInput>
      { label && <LabelInput htmlFor={id}>{label}</LabelInput>}
@@ -13,6 +13,7 @@ function Input({id, placeholder, type, onChange, value, IconL, label,IconR,...pr
           placeholder={placeholder} 
           value={value}
           onChange={onChange}
+          onBlur={onBlur}
           min="0"
         />
         {IconR && <IconR size="16px"/>}
