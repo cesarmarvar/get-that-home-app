@@ -25,16 +25,26 @@ function Pagination() {
     })
   }
 
+  function handlerPrev() {
+    setDisplayButtons({
+      first: first - 5,
+      second: second - 5,
+      third: third - 5,
+      fourth: fourth - 5,
+      fifth: fifth - 5
+    })
+  }
+
   function Buttons() {
     return (
       <div style={{display: "flex"}}>
-        <Button>{ back }</Button>
+        <Button onClick={handlerPrev} >Prev</Button>
         <Button>{ first }</Button>
         <Button>{ second }</Button>
         <Button>{ third }</Button>
         <Button>{ fourth }</Button>
         <Button>{ fifth }</Button>
-        <Button onClick={handlerNext}>{ next }</Button>
+        <Button onClick={handlerNext} >Next</Button>
       </div>
     )
   }
