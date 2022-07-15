@@ -3,9 +3,9 @@ import styled from "@emotion/styled";
 const WrapperForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  width: 90vw;
+  margin: 2rem auto;
   gap: 1rem;
-  margin: 50px;
 `;
 
 export {
