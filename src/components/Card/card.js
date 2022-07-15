@@ -1,19 +1,11 @@
 import styled from "@emotion/styled";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { RiBuildingLine } from "react-icons/ri";
-import { BiBed } from "react-icons/bi";
-import { BiBath } from "react-icons/bi";
-import { BiArea } from "react-icons/bi";
-import { FaPaw } from "react-icons/fa";
+import { RiMoneyDollarCircleLine, RiBuildingLine, RiMoneyDollarCircleFill, RiCoinsLine } from "react-icons/ri";
+import { BiBed, BiBath, BiArea } from "react-icons/bi";
+import { FaPaw, FaRegEdit } from "react-icons/fa";
 import { colors } from "../../styles/colors";
 import { typography } from "../../styles/typography";
 import { fonts } from "../../styles/fonts";
-import { FaRegEdit } from "react-icons/fa";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import { AiFillHeart } from "react-icons/ai";
-import { RiCoinsLine } from "react-icons/ri";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
-
+import { AiOutlineCloseCircle, AiFillHeart } from "react-icons/ai";
 
 const RentalChip = styled.div`
   width: 110px;
