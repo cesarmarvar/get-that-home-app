@@ -155,11 +155,6 @@ function Footer() {
       { pathname ? <FooterLanding /> : <Footer2/> }
     </>
   )
-
 }
-
-
-
-
 
 export default Footer;
