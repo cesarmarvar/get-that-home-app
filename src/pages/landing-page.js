@@ -4,8 +4,6 @@ import Button from "../components/Button/button";
 import { PropertyCard } from "../components/Card/card";
 import { ReactComponent as GithubIcon } from "../assets/github.svg";
 import { ReactComponent as LinkedinIcon } from "../assets/linkedin.svg";
-import { ReactComponent as RubyIcon } from "../assets/ruby.svg";
-import { ReactComponent as ReactIcon } from "../assets/react.svg";
 import MultiSelect from "../components/MultiSelect";  
 import { LandingSelect } from "../components/select-option/landing-select";
 import { useEffect, useState } from "react";
@@ -145,24 +143,6 @@ const IconsContainer = styled.div`
   gap: 50px;
 `
 
-/* ===== Seccion 'Meet the team' =====*/
-
-const Footer = styled.div`
-  width: 100%;
-  height: 73px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 16px 120px;
-  gap: 16px;
-  font-family: ${fonts.secundary};
-  background-color: ${colors.background.regular}
-`
-const RowFlex = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-`
 // style={{border: "2px solid brown"}} ====> debug
 
 export function LandingPage() {
@@ -336,23 +316,6 @@ export function LandingPage() {
           </TeamMemberCard>
         </TeamContainer>
       </TeamSection>
-      <Footer>
-        <p>© 2022 - Find That Home</p>
-        <div>
-          <p style={{textAlign: "center"}}>Source Code</p>
-          <RowFlex>
-            <RowFlex>
-              <RubyIcon />
-              <p>Ruby on Rails REST API</p>
-            </RowFlex>
-            <RowFlex>
-              <ReactIcon/>
-              <p>React Responsive SPA</p>
-            </RowFlex>
-          </RowFlex>
-        </div>
-        <p>Codeable - Cohort 6 Final Project</p>
-      </Footer>
     </>
   )
 

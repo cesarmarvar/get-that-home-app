@@ -2,6 +2,7 @@ import Header from "./components/Header/header";
 import PropertyFormPage from "./pages/propery-form-page";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer/footer";
 import Header from "./components/Header/header";
 import LoginForm from "./components/LoginForm";
 import { useAuth } from "./context/auth-context";
