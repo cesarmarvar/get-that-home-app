@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import Button from "../Button/button";
 import { RiUserReceived2Fill, RiUserAddLine, RiSearchLine, RiUserLine, RiHeartFill, RiHome8Line, RiLogoutCircleLine } from "react-icons/ri"
 import { ReactComponent as Logo } from "./../../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -17,11 +18,12 @@ const NavContainer = styled.div`
   gap: 1rem;
 `
 
-function Header({ isAuth, typeUser }) { 
+function Header({ isAuth, typeUser }) {
+  const navigate = useNavigate();
 
   function Search() {
     return (
-      <Button IconL={ RiSearchLine } type="ghost" size="sm" children="FIND A HOME" />
+      <Button onClick={() => navigate("/properties")} IconL={ RiSearchLine } type="ghost" size="sm" children="FIND A HOME" />
     )
   }
 
@@ -40,7 +42,7 @@ function Header({ isAuth, typeUser }) {
   function UnauthenticateHeader() {
     function Signup() {
       return (
-        <Button IconL={ RiUserAddLine } type="secundary" size="sm" children="JOIN" />
+        <Button onClick={() => navigate("/register")} IconL={ RiUserAddLine } type="secundary" size="sm" children="JOIN" />
       )
     }
 
@@ -103,10 +105,16 @@ function Header({ isAuth, typeUser }) {
     } 
   }
 
+  
 
   return (
     <HeaderContainer>
-      <Logo />
+      <Logo 
+        onClick={() => navigate("/")}
+        style={{
+          cursor: "pointer"
+        }}
+      />
       { isAuth ? <AuthenticateHeader/> : <UnauthenticateHeader/> }
     </HeaderContainer>
   )
