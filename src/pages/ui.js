@@ -32,5 +32,14 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
   background-color: rgba(97, 97, 97, 0.5);
-  z-index: 1;
+  z-index: 2;
+`;
+
+export const CardsContainer = styled.div`
+  max-width: 1100px;
+  margin: 1rem auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
 `;
