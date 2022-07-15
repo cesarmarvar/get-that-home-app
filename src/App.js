@@ -1,25 +1,26 @@
-import Header from "./components/Header/header";
-import PropertyFormPage from "./pages/propery-form-page";
-import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer/footer";
-import Header from "./components/Header/header";
-import LoginForm from "./components/LoginForm";
-import { useAuth } from "./context/auth-context";
-import { LandingPage } from "./pages/landing-page";
-import PropertiesPage from "./pages/properties-page";
-import Signup from "./pages/signup-page";
-import SignupForm from "./pages/signupform-page";
-import { Modal } from "./pages/ui";
+// import Header from "./components/Header/header";
+// import PropertyFormPage from "./pages/propery-form-page";
+// import { useState } from "react";
+// import { Route, Routes } from "react-router-dom";
+// import Footer from "./components/Footer/footer";
+// import Header from "./components/Header/header";
+// import LoginForm from "./components/LoginForm";
+// import { useAuth } from "./context/auth-context";
+// import { LandingPage } from "./pages/landing-page";
+// import PropertiesPage from "./pages/properties-page";
+// import Signup from "./pages/signup-page";
+// import SignupForm from "./pages/signupform-page";
+// import { Modal } from "./pages/ui";
+import Pagination from "./components/pagination/pagination";
 
 
 function App() {
-  const { user } = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
+  // const { user } = useAuth();
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <Header 
+      {/* <Header 
         isAuth={!!user}
         typeUser={user?.user_type}
         handleOpen={setIsOpen}
@@ -39,7 +40,8 @@ function App() {
         <Route path="/properties" element={<PropertiesPage />}/>
         <Route path="/register" element={<Signup />}/>
         <Route path="/register/form" element={<SignupForm />}/>
-      </Routes>
+      </Routes> */}
+      <Pagination></Pagination>
     </>
   );
 }

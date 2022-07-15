@@ -1,16 +1,44 @@
+import { useState } from "react";
+import Button from "../Button/button";
+
 function Pagination() {
+
+  const [displayButtons, setDisplayButtons] = useState({
+    first: 1,
+    second: 2,
+    third: 3,
+    fourth: 4,
+    fifth: 5
+  })
+  const [back, setBack] = useState(null);
+  const [next, setNext] = useState(null);
+
+  const { first, second, third, fourth, fifth, } = displayButtons
+
+  function handleNumbers() {
+    setDisplayButtons({
+      first: first + 5,
+      second: second + 5,
+      third: third + 5,
+      fourth: fourth + 5,
+      fifth: fifth + 5
+    })
+    // return (
+      
+    // )
+  }
 
   function Buttons() {
     return (
-      <>
-        <button>Atras</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button>Adelante</button>
-      </>
+      <div style={{display: "flex"}}>
+        <Button>{ back }</Button>
+        <Button>{ first }</Button>
+        <Button>{ second }</Button>
+        <Button>{ third }</Button>
+        <Button>{ fourth }</Button>
+        <Button>{ fifth }</Button>
+        <Button onClick={handleNumbers}>{ next }</Button>
+      </div>
     )
   }
 
