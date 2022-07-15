@@ -152,7 +152,7 @@ function Footer() {
 
   return (
     <>
-      {pathname? <FooterLanding /> : <Footer2/>}
+      { pathname ? <FooterLanding /> : <Footer2/> }
     </>
   )
 
