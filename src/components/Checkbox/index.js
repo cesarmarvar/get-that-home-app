@@ -1,7 +1,7 @@
 import { Container, Label } from "./../Radio/styles"
 import { Button } from "./styles";
 
-function Checkbox({ children = "", value, name }) {
+function Checkbox({ children = "", value, name,...others }) {
   const downcase = children.toLowerCase();
   
   return (
@@ -11,6 +11,7 @@ function Checkbox({ children = "", value, name }) {
         id={downcase}
         value={value}
         name={name}
+        {...others}
       />
       <Label htmlFor={downcase}>{ children }</Label>
     </Container>
