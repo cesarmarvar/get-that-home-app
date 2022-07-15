@@ -2,6 +2,7 @@ import { ReactComponent as Logo } from "./../../assets/logo.svg";
 import { RiGithubFill } from "react-icons/ri"
 import { DiRuby, DiReact } from "react-icons/di"
 import styled from "@emotion/styled";
+import { colors, fonts } from "../../styles";
 
 const FooterContainer = styled.div`
   height: 124px;
@@ -16,7 +17,48 @@ const FooterContainer = styled.div`
   border-top: 1px solid #BF5F82;
 `
 
-function Footer() {
+const Footer1 = styled.div`
+  width: 100%;
+  height: 73px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px 120px;
+  gap: 16px;
+  font-family: ${fonts.secundary};
+  background-color: ${colors.background.regular}
+`
+
+
+function Footer(){
+  const RowFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+`
+
+  return (
+    <Footer1>
+        <p>© 2022 - Find That Home</p>
+        <div>
+          <p style={{textAlign: "center"}}>Source Code</p>
+          <RowFlex>
+            <RowFlex>
+              <Logo />
+              <p>Ruby on Rails REST API</p>
+            </RowFlex>
+            <RowFlex>
+              <Logo/>
+              <p>React Responsive SPA</p>
+            </RowFlex>
+          </RowFlex>
+        </div>
+        <p>Codeable - Cohort 6 Final Project</p>
+      </Footer1>
+  )
+}
+
+function Footer2() {
 
   const Information = styled.p`
     weight: 400;
