@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer/footer";
 import Header from "./components/Header/header";
 import { useAuth } from "./context/auth-context";
 import { LandingPage } from "./pages/landing-page";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/register" element={<Signup />}/>
         <Route path="/register/form" element={<SignupForm />}/>
       </Routes> */}
+      <Footer></Footer>
     </>
   );
 }
