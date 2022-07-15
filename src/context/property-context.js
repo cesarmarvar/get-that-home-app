@@ -32,13 +32,13 @@ function PropertyProvider({ children }) {
     return data;
   }
 
-  function searchByAddress(query, currentProperties) {
+  function searchByAddress(query) {
     const allProperties = [];
-    Object.values(currentProperties).forEach(prop => {
+    Object.values(properties).forEach(prop => {
       allProperties.push(...prop);
     })
 
-    return paginate(allProperties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase())));
+    return allProperties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase()));
   }
 
   return (
