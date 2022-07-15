@@ -2,6 +2,12 @@ import { ReactComponent as Logo } from "./../../assets/logo.svg";
 import { RiGithubFill } from "react-icons/ri"
 import styled from "@emotion/styled";
 
+const FooterContainer = styled.div`
+  display: flex;
+  flex-direction: grow;
+  justify-content: space-around;
+`
+
 function Footer() {
 
   const Information = styled.p`
@@ -21,6 +27,18 @@ function Footer() {
   const ContainerMembers = styled.div`
     dispaly: flex;
   `
+
+  
+
+  function LogoBox(){
+    return (
+      <>
+        <Logo />
+        <Information>© 2022 - Get That Home</Information>
+        <Information>Codeable - Cohort 6 Final Project</Information>
+      </>
+    )
+  }
 
   function Members() {
     
@@ -46,21 +64,12 @@ function Footer() {
     )
   }
 
-  function LogoBox(){
-    return (
-      <>
-        <Logo />
-        <Information>© 2022 - Get That Home</Information>
-        <Information>Codeable - Cohort 6 Final Project</Information>
-      </>
-    )
-  }
 
   return (
-    <>
-    <LogoBox></LogoBox>
-    <Members></Members>
-    </>
+    <FooterContainer>
+      <LogoBox></LogoBox>
+      <Members></Members>
+    </FooterContainer>
   )  
 }
 
