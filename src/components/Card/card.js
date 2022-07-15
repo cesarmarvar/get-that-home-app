@@ -183,7 +183,7 @@ const LandlordButtons = styled.div`
 
 export function PropertyCard({user, data}) {
 
-  const { address, price, maintenance, property_type, pets, about, bedrooms, bathrooms, area, operation_type } = data
+  const { address, price,property_type, pets, bedrooms, bathrooms, area, operation_type } = data
 
   return(
     <div>
