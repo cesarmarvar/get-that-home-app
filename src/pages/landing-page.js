@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Header from "../components/header";
 import { colors, fonts, typography } from "../styles";
 import Button from "../components/Button/button";
 import { PropertyCard } from "../components/Card/card";
@@ -11,6 +10,7 @@ import MultiSelect from "../components/MultiSelect";
 import { LandingSelect } from "../components/select-option/landing-select";
 import { useEffect, useState } from "react";
 import { getProperties } from "../services/properties-service";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -168,14 +168,21 @@ const RowFlex = styled.div`
 export function LandingPage() {
 
   const [ properties, setProperties ] = useState([])
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProperties().then(setProperties).catch(console.log)
   }, [])
 
+  const photos = {
+    cesar: "https://avatars.githubusercontent.com/u/95256297?v=4",
+    lucho: "https://avatars.githubusercontent.com/u/91627176?v=4",
+    diego: "https://avatars.githubusercontent.com/u/99460094?v=4",
+    enmanuel: "https://avatars.githubusercontent.com/u/94902863?v=4"
+  }
+
   return(
     <>
-      <Header />
       <SearchSection>
         <Introduction>
           <Title>Meet your new Home</Title>
@@ -222,63 +229,107 @@ export function LandingPage() {
       </ExamplesSection>
       <SignupSection>
         <H4heading style={{color: "black", width: "826px"}}>Getting someone to rent your apartment has never been this easy</H4heading>
-        <Button size="lg">Create an account now</Button>
+        <Button 
+          size="lg"
+          onClick={() => navigate("/register")}
+        >
+          Create an account now
+        </Button>
       </SignupSection>
       <TeamSection>
         <H4heading>Meet the team</H4heading>
         <TeamContainer>
           <TeamMemberCard >
-              <MemberPic src="assets/member4.svg" />
+              <MemberPic src={photos.cesar} />
             <div>
               <p style={{textAlign: "center"}}>Cesar Martinez</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}} href="https://github.com/cesarmarvar">
+              <a 
+                style={{cursor: "pointer"}} 
+                href="https://github.com/cesarmarvar"
+                target="_blank"
+                rel="noreferrer">
                 <GithubIcon />
               </a>
-              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/cesarmartinezvargas/">
+              <a 
+                style={{cursor: "pointer"}}
+                href="https://www.linkedin.com/in/cesarmartinezvargas/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <LinkedinIcon />  
               </a>            
             </IconsContainer>
           </TeamMemberCard>
           <TeamMemberCard >
-            <MemberPic src="assets/member1.svg"/>
+            <MemberPic src={photos.enmanuel}/>
             <div>
               <p style={{textAlign: "center"}}>Enmanuel Chipana</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}} href="https://github.com/emachipana">
+              <a 
+                style={{cursor: "pointer"}}
+                href="https://github.com/emachipana"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <GithubIcon />
               </a>
-              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/enmanuel-chipana-araujo-44aa5a226/">
+              <a 
+                style={{cursor: "pointer"}}
+                href="https://www.linkedin.com/in/enmanuel-chipana-araujo-44aa5a226/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <LinkedinIcon />  
               </a>
             </IconsContainer>
           </TeamMemberCard>
           <TeamMemberCard >
-            <MemberPic src="assets/member2.svg"/>
+            <MemberPic src={photos.diego} />
             <div>
               <p style={{textAlign: "center"}}>Diego Manrique</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}} href="https://github.com/Diego12996">
+              <a 
+                style={{cursor: "pointer"}}
+                href="https://github.com/Diego12996"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <GithubIcon />
               </a>              
-              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/diego-manrique-machaca/">
+              <a 
+                style={{cursor: "pointer"}}
+                href="https://www.linkedin.com/in/diego-manrique-machaca/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <LinkedinIcon />  
               </a>
             </IconsContainer>
           </TeamMemberCard>
           <TeamMemberCard >
-            <MemberPic src="assets/member3.svg"/>
+            <MemberPic src={photos.lucho} />
             <div>
               <p style={{textAlign: "center"}}>Luis Zelada</p>
             </div>
             <IconsContainer>
-              <a style={{cursor: "pointer"}} href="https://github.com/luzelcas96">
+              <a 
+                style={{cursor: "pointer"}}
+                href="https://github.com/luzelcas96"
+                target="_blank"
+                rel="noreferrer"  
+              >
                 <GithubIcon />
               </a>              
-              <a style={{cursor: "pointer"}} href="https://www.linkedin.com/in/luis-zelada/">
+              <a 
+                style={{cursor: "pointer"}}
+                href="https://www.linkedin.com/in/luis-zelada/"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <LinkedinIcon />  
               </a>
             </IconsContainer>
@@ -286,7 +337,7 @@ export function LandingPage() {
         </TeamContainer>
       </TeamSection>
       <Footer>
-        <p>© 2021 - Find That Home</p>
+        <p>© 2022 - Find That Home</p>
         <div>
           <p style={{textAlign: "center"}}>Source Code</p>
           <RowFlex>
@@ -300,7 +351,7 @@ export function LandingPage() {
             </RowFlex>
           </RowFlex>
         </div>
-        <p>Codeable - Cohort 3 Final Project</p>
+        <p>Codeable - Cohort 6 Final Project</p>
       </Footer>
     </>
   )
