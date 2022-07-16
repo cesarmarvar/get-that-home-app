@@ -11,8 +11,8 @@ import SignupForm from "./pages/signupform-page";
 import { Modal } from "./pages/ui";
 
 function App() {
-  // const { user } = useAuth();
-  // const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -37,7 +37,7 @@ function App() {
         <Route path="/register/form" element={<SignupForm />}/>
       </Routes>
         <Route path="/new-property" element={<PropertyFormPage/>} />
-      </Routes>
+      {/* </Routes> */}
     </>
   );
 }
