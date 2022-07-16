@@ -6,7 +6,7 @@ import {PhotosInput, LikeLabel, TextP, SwitchOperation} from "./utils";
 import styled from "@emotion/styled";
 import { typography } from "../../styles";
 import Button from "../Button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Radio from "../Radio";
 import Checkbox from "../Checkbox";
 
@@ -19,7 +19,23 @@ const ContainerRadio = styled.div`
   gap: 1rem;
 `;
 
+function loadAsyncScript(src) {
+  return new Promise(resolve => {
+    const script = document.createElement("script");
+    Object.assign(script, {
+      type: "text/javascript",
+      async: true,
+      src
+    });
+    script.addEventListener("load", () => resolve(script));
+    document.head.appendChild(script);
+  });
+}
+
+const apiURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAxa_u3oAHJONA2Apski6IfIjhy0_kdbfg"
+
 function Form({title="Create a property listing"}) {
+
   const [operationType, setOperationType] = useState("rent");
   const [formData, setFormData] = useState({
     address: "",
@@ -44,6 +60,28 @@ function Form({title="Create a property listing"}) {
     bathrooms,
     area
   } = formData;
+  
+  const addressInput = useRef(null);
+
+  function initMapScript() {
+    if(window.google) return Promise.resolve();
+
+    const src = `${apiURL}&libraries=places&v=weekly`;
+    return loadAsyncScript(src);
+  }
+
+  function initAutocomplete() {
+    if(!addressInput.current) return;
+    const autocomplete = new window.google.maps.places.Autocomplete(addressInput.current);
+    autocomplete.setFields(["address_component", "geometry"]);
+    autocomplete.addListener("place_changed", () => {
+      setFormData(data => ({...data, address: addressInput.current.value}));
+    });
+  }
+
+  useEffect(() => {
+    initMapScript().then(() => initAutocomplete());
+  }, []);
 
   function handleChange(event) {
     let { name, value } = event.target;
@@ -74,13 +112,14 @@ function Form({title="Create a property listing"}) {
       <TitlePage>{title}</TitlePage>
       <SwitchOperation operationType= {operationType} setOperationType={setOperationType} />
       <Input
+        handleRef={addressInput}
         label="address"
         id="address"
         size="lg"
         IconL={BiSearch}
-        placeholder="start typing to autocomplete"
         value={address}
         onChange={handleChange}
+        placeholder="start typing to autocomplete"
         required
       />
       {operationType=== "rent"?  <>
@@ -102,7 +141,7 @@ function Form({title="Create a property listing"}) {
         size="sm"
         IconL={RiMoneyDollarCircleLine}
         placeholder="100"
-        value={maintanance}
+        value={maintanance || undefined}
         onChange={handleChange}
         required
       />  </> :
