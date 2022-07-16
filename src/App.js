@@ -9,6 +9,7 @@ import PropertiesPage from "./pages/properties-page";
 import Signup from "./pages/signup-page";
 import SignupForm from "./pages/signupform-page";
 import { Modal } from "./pages/ui";
+import SavedProperties from "./pages/saved-properties-page";
 
 function App() {
   const { user } = useAuth();
@@ -35,9 +36,11 @@ function App() {
         <Route path="/properties" element={<PropertiesPage />}/>
         <Route path="/register" element={<Signup />}/>
         <Route path="/register/form" element={<SignupForm />}/>
-      </Routes>
-        <Route path="/new-property" element={<PropertyFormPage/>} />
       {/* </Routes> */}
+        <Route path="/new-property" element={<PropertyFormPage/>} />
+        <Route path="/saved_properties" element={<SavedProperties />} />
+      </Routes>
+      
     </>
   );
 }
