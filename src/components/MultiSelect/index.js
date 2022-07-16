@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { customStyles, StyleSelect } from "./styles";
+import { Container, customStyles, Label, StyleSelect } from "./styles";
 
-function MultiSelect({ options, placeholder, withBorder = true, ...other}) {
+function MultiSelect({ isMulti=true, label="", options, placeholder, withBorder = true, ...other}) {
   const [selectOptions, setSelectOptions] = useState([]);
 
   function handleChange(item) {
@@ -11,16 +11,19 @@ function MultiSelect({ options, placeholder, withBorder = true, ...other}) {
   console.log(selectOptions);
   
   return (
-    <StyleSelect
-      placeholder={placeholder}
-      styles={customStyles}
-      isMulti
-      options={options}
-      isSearchable
-      onChange={(item) => handleChange(item)}
-      border={withBorder}
-      {...other}
-    />
+    <Container>
+      <Label>{ label }</Label>
+      <StyleSelect
+        placeholder={placeholder}
+        styles={customStyles}
+        isMulti={isMulti}
+        options={options}
+        isSearchable
+        onChange={(item) => handleChange(item)}
+        border={withBorder}
+        {...other}
+      />
+    </Container>
   )
 }
 
