@@ -3,7 +3,7 @@ import Button from "../Button/button";
 
 function Pagination(array) {
 
-  const pages = array.size;
+  const pages = 6;
 
   const [displayButtons, setDisplayButtons] = useState({
     first: 1,
@@ -42,11 +42,12 @@ function Pagination(array) {
       <div style={{display: "flex"}}>
         { first !== 1 ? <Button onClick={handlerPrev} >Prev</Button> : null }
         <Button>{ first }</Button>
-        <Button>{ second }</Button>
-        <Button>{ third }</Button>
-        <Button>{ fourth }</Button>
-        <Button>{ fifth }</Button>
-        <Button onClick={handlerNext} >Next</Button>
+        { pages <= first ? null : <Button>{ second }</Button> }
+        { pages <= second ? null : <Button>{ third }</Button> }
+        { pages <= third ? null : <Button>{ fourth }</Button> }
+        { pages <= fourth ? null : <Button>{ fifth }</Button> }
+        { fifth < pages ? <Button onClick={handlerNext} >Next</Button> : null }
+        {/* <Button onClick={handlerNext} >Next</Button> */}
       </div>
     )
   }
