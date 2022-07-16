@@ -144,11 +144,27 @@ const IconsContainer = styled.div`
 
 export function LandingPage() {
   const { properties } = useProperties();
-  const address = [];
+  const allProperties = [];
   Object.values(properties).forEach(prop => {
-    address.push(...prop);
+    allProperties.push(...prop);
   });
   const [currentProps, setCurrentProps] = useState([]);
+  const [filters, setFilters] = useState({
+    type: null,
+    contract: null,
+    where: []
+  });
+
+  function handleSubmit(e){
+    e.preventDefault();
+    if(!filters.type && !filters.contract && !filters.where.length) return;
+    let newProperties = filters.type ? allProperties.filter(prop => prop.property_type === filters.type) : allProperties;
+    newProperties = filters.contract ? newProperties.filter(prop => prop.operation_type === filters.contract) : newProperties;
+    newProperties = filters.where.length > 0 ? newProperties.filter(prop => filters.where.includes(prop.address)) : newProperties;
+    setCurrentProps(newProperties);
+    console.log(filters.where)
+  }
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -169,8 +185,10 @@ export function LandingPage() {
           <Title>Meet your new Home</Title>
           <p>The easiest way to find where you belong</p>
         </Introduction>
-        <SearchBar>
-          <MultiSelect 
+        <SearchBar onSubmit={handleSubmit}>
+          <MultiSelect
+            setFilters={setFilters}
+            type="type"
             withBorder={false}
             label="I'M LOOKING FOR"
             isMulti={false}
@@ -180,7 +198,9 @@ export function LandingPage() {
             ]}
           />
           <Division />
-          <MultiSelect 
+          <MultiSelect
+            setFilters={setFilters}
+            type="contract"
             withBorder={false}
             label="I WANT TO"
             isMulti={false}
@@ -191,10 +211,12 @@ export function LandingPage() {
           />
           <Division />
           <MultiSelect
+            setFilters={setFilters}
+            type="where"
             label="WHERE"
             withBorder={false}
             options={
-              address.map((property) => {
+              allProperties.map((property) => {
               return {label: property.address, value: property.address}
             })}
           />
@@ -208,7 +230,7 @@ export function LandingPage() {
           <H4heading>Homes for rent at the best prices</H4heading>
         </TextsContainer>
         <ExampleCardsContainer>
-          {currentProps.map((property, index) => {
+          {currentProps.slice(0, 3).map((property, index) => {
             return <PropertyCard key={index} user="homeseeker" data={property}/>
           })}
         </ExampleCardsContainer>
