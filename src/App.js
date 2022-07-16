@@ -40,7 +40,7 @@ function App() {
         <Route path="/register" element={<Signup setUserType={setUserType}/>}/>
         <Route path="/register/form" element={<SignupForm userType={userType}/>}/>
         <Route path="/new-property/form" element={<PropertyFormPage />}/>
-        <Route path="/property" element={<PropertyDetail />}/>
+        <Route path="/property" element={<PropertyDetail userType={userType} handleOpen={setIsOpen}/>}/>
       </Routes>
       <Footer />
     </>

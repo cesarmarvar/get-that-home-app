@@ -98,6 +98,15 @@ export function PropertyDetail() {
         <p>{address}</p>
 
       </FlexColumn>
-    </>
+      {/* Not logged in: */}
+      <FlexColumn style={{width: "290px", height: "248px", padding: "32px"}}>
+        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+          <p style={{textAlign: "center"}}>Log in or Join to contact the advertiser</p>
+          <Button IconL={ RiUserReceived2Fill } onClick={() => handleOpen(true)} type="primary" size="sm" children="LOGIN" />
+        </FlexColumn>
+      </FlexColumn>
+
+
+    </Container>
   )
 }
