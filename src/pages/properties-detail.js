@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getProperty } from "../services/properties-service";
 import { colors, fonts, typography } from "../styles";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
-import { FaPaw, FaRegEdit } from "react-icons/fa";
+import { FaPaw } from "react-icons/fa";
 
 
 const FlexRow = styled.div`
@@ -19,7 +19,7 @@ const Container = styled.div`
   width: 1200px;
   height: 100%;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   gap: 1rem;
   margin: 0 120px;
 `
@@ -37,7 +37,7 @@ const Subtitle = styled.p`
 // style={{border: "2px solid brown"}} ====> debug
 
 
-export function PropertiesDetail() {
+export function PropertyDetail() {
 
   const [ property, setProperty ] = useState({});
 
@@ -54,13 +54,13 @@ export function PropertiesDetail() {
    } = property
 
   useEffect(() => {
-    getProperty(3)
+    getProperty(2)
     .then(setProperty)
     .catch(console.log)
   }, []);
 
   return (
-    <Container style={{border: "2px solid brown"}}>
+    < >
       <FlexColumn style={{maxWidth: "830px"}}>
         <FlexRow style={{width: "100%", justifyContent: "space-between"}}>
           <FlexColumn>
@@ -98,6 +98,6 @@ export function PropertiesDetail() {
         <p>{address}</p>
 
       </FlexColumn>
-    </Container>
+    </>
   )
 }

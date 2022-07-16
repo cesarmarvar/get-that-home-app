@@ -12,8 +12,6 @@ const FooterContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   background: #F5F5F6;
-  position: absolute;
-  bottom: 0;
   border-top: 1px solid #BF5F82;
 `
 
