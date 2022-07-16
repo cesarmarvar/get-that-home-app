@@ -3,6 +3,7 @@ import { RiGithubFill } from "react-icons/ri"
 import { DiRuby, DiReact } from "react-icons/di"
 import styled from "@emotion/styled";
 import { colors, fonts } from "../../styles";
+import { useLocation } from "react-router-dom";
 
 const FooterContainer = styled.div`
   height: 124px;
@@ -12,8 +13,6 @@ const FooterContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   background: #F5F5F6;
-  position: absolute;
-  bottom: 0;
   border-top: 1px solid #BF5F82;
 `
 
@@ -148,11 +147,11 @@ function Footer() {
     )  
   }
 
-  const pathname = window.location.pathname === "/"
+  const location = useLocation();
 
   return (
     <>
-      { pathname ? <FooterLanding /> : <Footer2/> }
+      { location.pathname === "/" ? <FooterLanding /> : <Footer2/> }
     </>
   )
 }
