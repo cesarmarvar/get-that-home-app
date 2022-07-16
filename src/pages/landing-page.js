@@ -5,10 +5,10 @@ import { PropertyCard } from "../components/Card/card";
 import { ReactComponent as GithubIcon } from "../assets/github.svg";
 import { ReactComponent as LinkedinIcon } from "../assets/linkedin.svg";
 import MultiSelect from "../components/MultiSelect";  
-import { LandingSelect } from "../components/select-option/landing-select";
 import { useEffect, useState } from "react";
 import { getRandomProperties } from "../services/properties-service";
 import { useNavigate } from "react-router-dom";
+import { useProperties } from "../context/property-context";
 
 
 
@@ -48,7 +48,6 @@ const Title = styled.h2` // este podria reemplazarse por el typography.headline.
 const SearchBar = styled.form`
   display: flex;
   flex-direction: row;
-  max-width: 800px;
   max-height: 72px;
   align-items: center;
   padding: 8px 16px;
@@ -143,16 +142,18 @@ const IconsContainer = styled.div`
   gap: 50px;
 `
 
-// style={{border: "2px solid brown"}} ====> debug
-
 export function LandingPage() {
-
-  const [ properties, setProperties ] = useState([])
+  const { properties } = useProperties();
+  const address = [];
+  Object.values(properties).forEach(prop => {
+    address.push(...prop);
+  });
+  const [currentProps, setCurrentProps] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getRandomProperties().then(setProperties).catch(console.log)
-  }, [])
+    getRandomProperties().then(setCurrentProps).catch(console.log)
+  }, []);
 
   const photos = {
     cesar: "https://avatars.githubusercontent.com/u/95256297?v=4",
@@ -169,28 +170,33 @@ export function LandingPage() {
           <p>The easiest way to find where you belong</p>
         </Introduction>
         <SearchBar>
-          <div>
-            <LandingSelect 
+          <MultiSelect 
+            withBorder={false}
             label="I'M LOOKING FOR"
-            name="property_type"
-            options={["house", "apartment"]}
-            />
-          </div>
-          <Division />
-          <div>
-            <LandingSelect
-            label="I WANT TO"
-            name="contract"
-            options={["rent", "buy"]}
-            />
-          </div>
+            isMulti={false}
+            options={[
+              {value: "house", label: "A House"},
+              {value: "apartment", label: "An Apartment"}
+            ]}
+          />
           <Division />
           <MultiSelect 
-          withBorder={false}
-          options={
-            properties.map((property) => {
-            return {label: property.address, value: property.address}
-          })}
+            withBorder={false}
+            label="I WANT TO"
+            isMulti={false}
+            options={[
+              {value: "rent", label: "Rent"},
+              {value: "sale", label: "Sale"}
+            ]}
+          />
+          <Division />
+          <MultiSelect
+            label="WHERE"
+            withBorder={false}
+            options={
+              address.map((property) => {
+              return {label: property.address, value: property.address}
+            })}
           />
           <Division />
           <Button>search</Button>
@@ -202,7 +208,7 @@ export function LandingPage() {
           <H4heading>Homes for rent at the best prices</H4heading>
         </TextsContainer>
         <ExampleCardsContainer>
-          {properties.map((property, index) => {
+          {currentProps.map((property, index) => {
             return <PropertyCard key={index} user="homeseeker" data={property}/>
           })}
         </ExampleCardsContainer>
