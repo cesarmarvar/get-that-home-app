@@ -2,8 +2,6 @@ import Header from "./components/Header/header";
 import PropertyFormPage from "./pages/propery-form-page";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Footer from "./components/Footer/footer";
-import Header from "./components/Header/header";
 import LoginForm from "./components/LoginForm";
 import { useAuth } from "./context/auth-context";
 import { LandingPage } from "./pages/landing-page";
@@ -24,7 +22,6 @@ function App() {
         typeUser={user?.user_type}
         handleOpen={setIsOpen}
       />
-      <PropertyFormPage/>
       {
         isOpen
         ?
@@ -39,6 +36,7 @@ function App() {
         <Route path="/properties" element={<PropertiesPage />}/>
         <Route path="/register" element={<Signup />}/>
         <Route path="/register/form" element={<SignupForm />}/>
+        <Route path="/new-property" element={<PropertyFormPage/>} />
       </Routes>
     </>
   );
