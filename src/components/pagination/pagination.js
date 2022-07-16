@@ -1,7 +1,9 @@
 import { useState } from "react";
 import Button from "../Button/button";
 
-function Pagination() {
+function Pagination(array) {
+
+  const pages = array.size;
 
   const [displayButtons, setDisplayButtons] = useState({
     first: 1,
@@ -10,8 +12,8 @@ function Pagination() {
     fourth: 4,
     fifth: 5
   })
-  const [back, setBack] = useState(null);
-  const [next, setNext] = useState(null);
+  // const [back, setBack] = useState(null);
+  // const [next, setNext] = useState(null);
 
   const { first, second, third, fourth, fifth, } = displayButtons
 
@@ -38,7 +40,7 @@ function Pagination() {
   function Buttons() {
     return (
       <div style={{display: "flex"}}>
-        <Button onClick={handlerPrev} >Prev</Button>
+        { first !== 1 ? <Button onClick={handlerPrev} >Prev</Button> : null }
         <Button>{ first }</Button>
         <Button>{ second }</Button>
         <Button>{ third }</Button>
@@ -50,7 +52,7 @@ function Pagination() {
   }
 
   return (
-    <Buttons></Buttons>
+    <Buttons />
   )
 }
 
