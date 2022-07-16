@@ -1,14 +1,17 @@
-import { useState } from "react";
 import { Container, customStyles, Label, StyleSelect } from "./styles";
 
-function MultiSelect({ isMulti=true, label="", options, placeholder, withBorder = true, ...other}) {
-  const [selectOptions, setSelectOptions] = useState([]);
-
+function MultiSelect({ isMulti=true, label="", setFilters, type, options, placeholder, withBorder = true, ...other}) {
+  
   function handleChange(item) {
-    setSelectOptions(item);
+    if(type === "type") {
+      setFilters(filters => ({...filters, type: item.value}));
+    }else if(type === "contract"){
+      setFilters(filters => ({...filters, contract: item.value}));
+    }else {
+      const items = item.map(i => (i.value));
+      setFilters(filters => ({...filters, where: items}))
+    }
   }
-
-  console.log(selectOptions);
   
   return (
     <Container>
