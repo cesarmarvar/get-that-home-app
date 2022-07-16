@@ -33,6 +33,15 @@ function SavedProperties() {
     console.log(properties)
   }
 
+  function ButtonsLandlord() {
+    return (
+      <div>
+        <button>ACTIVE</button>
+        <button>CLOSED</button>
+      </div>
+    )
+  }
+
   function ActiveProperties() {
     const active = properties.filter(property => property.is_active)
     return (
@@ -56,11 +65,13 @@ function SavedProperties() {
   }
 
   return (
-    <div style={{display: "flex", justifyContent: "center"}}>
-      {/* <PropertiesContainer> */}
+    <>
+      {}
+      <div style={{display: "flex", justifyContent: "center"}}>
+
         <ActiveProperties></ActiveProperties>
-      {/* </PropertiesContainer> */}
-    </div>
+      </div>
+    </>
   )
 
 }
