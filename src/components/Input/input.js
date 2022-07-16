@@ -1,5 +1,5 @@
 import { IndividualInput, LabelInput, StyledInput, Wrapper } from "./styles";
-function Input({id, placeholder,required,onBlur, type, onChange, value, IconL, label,IconR,...props }) {
+function Input({id, handleRef, placeholder,required,onBlur, type, onChange, value, IconL, label,IconR,...props }) {
 
   return(
     <IndividualInput>
@@ -16,6 +16,7 @@ function Input({id, placeholder,required,onBlur, type, onChange, value, IconL, l
           required={required}
           onBlur={onBlur}
           min="0"
+          ref={handleRef}
         />
         {IconR && <IconR size="16px"/>}
       </Wrapper>
