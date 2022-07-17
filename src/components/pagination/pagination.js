@@ -12,8 +12,6 @@ function Pagination({ array, setCurrentPage }) {
     fourth: 4,
     fifth: 5
   })
-  // const [back, setBack] = useState(null);
-  // const [next, setNext] = useState(null);
 
   const { first, second, third, fourth, fifth, } = displayButtons
 

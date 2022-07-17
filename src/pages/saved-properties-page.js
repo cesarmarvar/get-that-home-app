@@ -12,9 +12,37 @@ const PropertiesContainer = styled.div`
   gap: 32px 86px;
 `
 
+const Boton = styled.button`
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5rem;
+  letter-spacing: 1.25px;
+  color: #373737;
+  border-bottom: 2px solid #BDBDBD;
+  background: white;
+  margin-top: 2rem;
+  &:focus {
+    border-bottom: 2px solid #F48FB1;
+    color: #8E8E8E;
+  }
+`
+
+const Info = styled.p`
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;´
+  color: #616161;
+  margin-top: 1rem;
+  margin-left: 156px;
+`
+
 function SavedProperties() {
   const [properties, setProperties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [buyerProperties, setBuyerProperties] = useState(0);
+  const [landlordProperties, setLandlordProperties] = useState(2);
   const {user} = useAuth();
 
   useEffect(() => {
@@ -27,26 +55,26 @@ function SavedProperties() {
         })
         .catch(console.log);
   }, [])
-  if(isLoading) {
-    console.log("Loading")
-  } else {
-    console.log(properties)
-  }
+  // if(isLoading) {
+  //   console.log("Loading")
+  // } else {
+  //   console.log(properties)
+  // }
 
   function LandlordButtons() {
     return (
-      <div>
-        <button onClick={() => ActiveProperties}>ACTIVE</button>
-        <button onClick={ClosedProperties}>CLOSED</button>
+      <div style={{display: "flex", gap: "1.5rem", marginLeft: "156px"}}>
+        <Boton onClick={() => setLandlordProperties(2)}>ACTIVE</Boton>
+        <Boton onClick={() => setLandlordProperties(3)}>CLOSED</Boton>
       </div>
     )
   }
 
   function BuyerButtons() {
     return (
-      <div>
-        <button onClick={() => ActiveProperties}>FAVORITES</button>
-        <button onClick={ClosedProperties}>CONTACTED</button>
+      <div style={{display: "flex", gap: "1.5rem", marginLeft: "156px"}}>
+        <Boton onClick={() => setBuyerProperties(0)}>FAVORITES</Boton>
+        <Boton onClick={() => setBuyerProperties(1)}>CONTACTED</Boton>
       </div>
     )
   }
@@ -54,65 +82,74 @@ function SavedProperties() {
   function ActiveProperties() {
     const active = properties.filter(property => property.is_active)
     return (
-      <div style={{display: "flex", justifyContent: "center"}}>
-        <PropertiesContainer style={{display: "flex"}}>
-          {active.map(casa => (
-            <PropertyCard key={casa.id} data={casa} />
-          ))}
-        </PropertiesContainer>
-      </div>
+      <>
+        <Info>{active.length} Properties found</Info>
+        <div style={{display: "flex", justifyContent: "center"}}>
+          <PropertiesContainer style={{display: "flex"}}>
+            {active.map(casa => (
+              <PropertyCard key={casa.id} data={casa} />
+            ))}
+          </PropertiesContainer>
+        </div>
+      </>
     )
   }
 
   function ClosedProperties() {
     const closed = properties.filter(property => !property.is_active)
     return (
-      <div style={{display: "flex", justifyContent: "center"}}>
-        <PropertiesContainer style={{display: "flex"}}>
-          {closed.map(casa => (
-            <PropertyCard key={casa.id} data={casa} />
-          ))}
-        </PropertiesContainer>
-      </div>
+      <>
+        <Info>{closed.length} Properties found</Info>
+        <div style={{display: "flex", justifyContent: "center"}}>
+          <PropertiesContainer style={{display: "flex"}}>
+            {closed.map(casa => (
+              <PropertyCard key={casa.id} data={casa} />
+            ))}
+          </PropertiesContainer>
+        </div>
+      </>
     )
   }
 
   function FavoritesProperties() {
     const favorites = properties.filter(property => property.property_status === "favorite")
     return (
-      <div style={{display: "flex", justifyContent: "center"}}>
-        <PropertiesContainer style={{display: "flex"}}>
-          {favorites.map(casa => (
-            <PropertyCard key={casa.id} data={casa} />
-          ))}
-        </PropertiesContainer>
-      </div>
+      <>
+        <Info>{favorites.length} Properties found</Info>
+        <div style={{display: "flex", justifyContent: "center"}}>
+          <PropertiesContainer style={{display: "flex"}}>
+            {favorites.map(casa => (
+              <PropertyCard key={casa.id} data={casa.property} />
+            ))}
+          </PropertiesContainer>
+        </div>
+      </>
     )
   }
 
   function ContactedProperties() {
     const contacted = properties.filter(property => property.property_status === "contacted")
     return (
-      <div style={{display: "flex", justifyContent: "center"}}>
-        <PropertiesContainer>
-          {contacted.map(casa => (
-            <PropertyCard key={casa.id} data={casa} />
-          ))}
-        </PropertiesContainer>
-      </div>
+      <>
+        <Info>{contacted.length} Properties found</Info>
+        <div style={{display: "flex", justifyContent: "center"}}>
+          <PropertiesContainer>
+            {contacted.map(casa => (
+              <PropertyCard key={casa.id} data={casa.property} />
+            ))}
+          </PropertiesContainer>
+        </div>
+      </>
     )
   }
 
-  console.log(user)
+  console.log(landlordProperties)
 
   return (
     <>
-      { user.user_type === "buyer" ? <LandlordButtons /> : <BuyerButtons />}
-      <p>{properties.length} Properties found</p>
-      <div style={{display: "flex", justifyContent: "center"}}>
-
-        {/* <ActiveProperties></ActiveProperties> */}
-      </div>
+      { user?.user_type === "landlord" ? <LandlordButtons /> : <BuyerButtons />}
+      { landlordProperties === 2 ? <ActiveProperties /> : <ClosedProperties /> }
+      { buyerProperties === 0 ? <FavoritesProperties /> : <ContactedProperties /> }
     </>
   )
 
