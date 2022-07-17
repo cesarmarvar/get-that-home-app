@@ -5,16 +5,12 @@ const PropertyContext = createContext();
 
 function PropertyProvider({ children }) {
   const [properties, setProperties] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getProperties().then(data => {
       const properties = paginate(data);
       setProperties(properties);
-      setTimeout(() => { setIsLoading(false) }, 500);
-    }).catch(_e => {
-      setIsLoading(false);
-    });
+    }).catch(console.error);
   }, []);
 
   function paginate(array) {
@@ -45,7 +41,6 @@ function PropertyProvider({ children }) {
     <PropertyContext.Provider
       value={{
         properties,
-        isLoading,
         searchByAddress
       }}
     >
