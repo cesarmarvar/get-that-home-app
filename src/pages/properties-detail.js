@@ -1,9 +1,16 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getProperty } from "../services/properties-service";
 import { colors, fonts, typography } from "../styles";
+import { RiMoneyDollarCircleLine, RiUserReceived2Fill } from "react-icons/ri";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { FaPaw } from "react-icons/fa";
+import GoogleMaps from "simple-react-google-maps";
+import Button from "../components/Button/button";
+import { AiOutlineHeart } from "react-icons/ai";
+import { TiEdit } from "react-icons/ti";
 
 
 const FlexRow = styled.div`
@@ -19,9 +26,9 @@ const Container = styled.div`
   width: 1200px;
   height: 100%;
   display: flex;
-  // justify-content: center;
+  justify-content: center;
   gap: 1rem;
-  margin: 0 120px;
+  margin: 32px 120px;
 `
 const Division = styled.div`
   background-color: ${colors.pink.dark};
@@ -37,7 +44,7 @@ const Subtitle = styled.p`
 // style={{border: "2px solid brown"}} ====> debug
 
 
-export function PropertyDetail() {
+export function PropertyDetail({userType, handleOpen}) {
 
   const [ property, setProperty ] = useState({});
   const [ owner, setOwner ] = useState("");
@@ -52,7 +59,7 @@ export function PropertyDetail() {
     bedrooms, 
     bathrooms,
     area,
-    operation_type,
+    user_id,
    } = property
 
    function handleShowContact(e) {
@@ -61,21 +68,24 @@ export function PropertyDetail() {
    }
 
   useEffect(() => {
-    getProperty(2)
+    getProperty(5)
     .then(setProperty)
     .catch(console.log)
   }, []);
 
   return (
-    < >
+    <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
-        <FlexRow style={{width: "100%", justifyContent: "space-between"}}>
+        <FlexRow style={{width: "100%", justifyContent: "space-between", fontFamily: `${fonts.secundary}`}}>
           <FlexColumn>
-            <h3>{address}</h3>
+            <h3 css={css`${typography.headline.h4}`}>{address}</h3>
           </FlexColumn>
-          <FlexColumn>
-            <h4>{price}</h4>
-            <p>+ {maintenance}</p>
+          <FlexColumn style={{alignItems: "end"}}>
+            <FlexRow style={{alignItems: "center", gap: "12px"}}>
+              <RiMoneyDollarCircleLine size="30px" color={`${colors.gray.dark}`}/>
+              <p css={css`${typography.headline.h4}`}>{price}</p>
+            </FlexRow>
+            {maintenance ? <p css={css`${typography.headline.h6}`}>+ {maintenance}</p>: null}
           </FlexColumn>
         </FlexRow>
         <Division />
@@ -103,10 +113,15 @@ export function PropertyDetail() {
         </FlexColumn>
         <Subtitle style={{margin: "1rem 0"}}>Location</Subtitle>
         <p>{address}</p>
-
+        <GoogleMaps
+          apiKey={"AIzaSyBba0fHGfvFZT1rT4cnQ_9BOLh7UOQkf3M"}
+          style={{height: "760px", width: "760px"}}
+          zoom={18}
+          center={{lat: -12.123380, lng: -77.021240}}
+          />
       </FlexColumn>
       {/* Not logged in: */}
-      <FlexColumn style={{width: "290px", height: "248px", padding: "32px"}}>
+      {/* <FlexColumn style={{width: "290px", height: "248px", padding: "32px"}}>
         <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
           <p style={{textAlign: "center"}}>Log in or Join to contact the advertiser</p>
           <Button IconL={ RiUserReceived2Fill } onClick={() => handleOpen(true)} type="primary" size="sm" children="LOGIN" />
@@ -114,9 +129,9 @@ export function PropertyDetail() {
       </FlexColumn> */}
 
       {/* logged in (first): */}
-      { !showContact ? (
+      {/* { !showContact ? (
         <>
-          <FlexColumn style={{width: "290px", height: "248px", padding: "32px"}}>
+          <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
             <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
               <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
               <AiOutlineHeart size="100px"/>
@@ -124,12 +139,12 @@ export function PropertyDetail() {
             </FlexColumn>
           </FlexColumn>
         </>
-      ) : null}
+      ) : null} */}
 
       {/* logged in (second): */}
-      { showContact ? (
+      {/* { showContact ? (
         <>
-          <FlexColumn style={{width: "290px", height: "236px", padding: "32px 16px"}}>
+          <FlexColumn style={{width: "340px", height: "248px", padding: "32px 16px"}}>
             <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "16px", gap: "16px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
               <p css={css`${typography.headline.h6}`}>Contact information</p>
               <div>
@@ -143,8 +158,12 @@ export function PropertyDetail() {
             </FlexColumn>
           </FlexColumn>
         </>
-      ) : null}
+      ) : null} */}
 
+      {/* When landlord: */}
+      <FlexColumn cssstyle={{width: "290px", height: "104px", padding: "32px 16px", alignItems: "center", justifyContent: "center"}}>
+        <Button IconL={ TiEdit } type={"primary"} size={"sm"} children={"EDIT PROPERTY"}/>
+      </FlexColumn>
 
     </Container>
   )
