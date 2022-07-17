@@ -18,40 +18,40 @@ const Boton = styled.button`
   font-size: 14px;
   line-height: 1.5rem;
   letter-spacing: 1.25px;
-  color: #373737;
-  border-bottom: 2px solid #BDBDBD;
+  // color: #8E8E8E;
+  // border-bottom: 2px solid #BDBDBD;
   background: white;
   margin-top: 2rem;
-  &:focus {
-    border-bottom: 2px solid #F48FB1;
-    color: #8E8E8E;
-  }
+  // &:focus {
+  //   border-bottom: 2px solid #F48FB1;
+  //   color: #373737;
+  // }
 `
 
 const Info = styled.p`
+  width: 1136px;
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
   letter-spacing: 0.15px;´
   color: #616161;
-  margin-top: 1rem;
-  margin-left: 156px;
+  margin: 1rem auto;
 `
 
 function SavedProperties() {
   const [properties, setProperties] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [buyerProperties, setBuyerProperties] = useState(0);
   const [landlordProperties, setLandlordProperties] = useState(2);
   const {user} = useAuth();
+  const [currentSelect, setCurrentSelect] = useState(0);
+  // 0 favorites & active 
+  // 1 closed & contacted
 
   useEffect(() => {
       getSavedProperties()
         .then((data) => {
           setProperties(data);
-          setTimeout(() => {
-            setIsLoading(false)
-          }, 500);
         })
         .catch(console.log);
   }, [])
@@ -63,18 +63,52 @@ function SavedProperties() {
 
   function LandlordButtons() {
     return (
-      <div style={{display: "flex", gap: "1.5rem", marginLeft: "156px"}}>
-        <Boton onClick={() => setLandlordProperties(2)}>ACTIVE</Boton>
-        <Boton onClick={() => setLandlordProperties(3)}>CLOSED</Boton>
+      <div style={{display: "flex", gap: "1.5rem", width: "1136px", margin: "0 auto"}}>
+        <Boton 
+          style={{  
+            borderBottom: currentSelect === 0 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+            color: "#373737"
+          }} 
+          onClick={() => {
+            setLandlordProperties(2);
+            setCurrentSelect(0)
+          }}>ACTIVE
+        </Boton>
+        <Boton
+          style={{  
+            borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+            color: "#373737"
+          }}
+          onClick={() => {
+            setLandlordProperties(3);
+            setCurrentSelect(1);
+            }}>CLOSED
+          </Boton>
       </div>
     )
   }
 
   function BuyerButtons() {
     return (
-      <div style={{display: "flex", gap: "1.5rem", marginLeft: "156px"}}>
-        <Boton onClick={() => setBuyerProperties(0)}>FAVORITES</Boton>
-        <Boton onClick={() => setBuyerProperties(1)}>CONTACTED</Boton>
+      <div style={{display: "flex", gap: "1.5rem"}}>
+        <Boton
+          style={{  
+            borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+            color: "#373737"
+          }}
+          onClick={() => {
+            setBuyerProperties(0);
+            setCurrentSelect(0);
+          }}>FAVORITES</Boton>
+        <Boton
+          style={{  
+            borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+            color: "#373737"
+          }}
+          onClick={() => {
+            setBuyerProperties(1);
+            setCurrentSelect(1);
+          }}>CONTACTED</Boton>
       </div>
     )
   }
@@ -146,11 +180,12 @@ function SavedProperties() {
   console.log(landlordProperties)
 
   return (
-    <>
+    <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
       { user?.user_type === "landlord" ? <LandlordButtons /> : <BuyerButtons />}
-      { landlordProperties === 2 ? <ActiveProperties /> : <ClosedProperties /> }
-      { buyerProperties === 0 ? <FavoritesProperties /> : <ContactedProperties /> }
-    </>
+      { user?.user_type === "landlord" ? (landlordProperties === 2 ? 
+      <ActiveProperties /> : <ClosedProperties />) : (buyerProperties === 0 ? 
+      <FavoritesProperties /> : <ContactedProperties />) }
+    </div>
   )
 
 }
