@@ -18,8 +18,8 @@ const Boton = styled.button`
   font-size: 14px;
   line-height: 1.5rem;
   letter-spacing: 1.25px;
-  // color: #8E8E8E;
-  // border-bottom: 2px solid #BDBDBD;
+  color: #373737;
+  border-bottom: 2px solid #BDBDBD;
   background: white;
   margin-top: 2rem;
   // &:focus {
@@ -67,7 +67,7 @@ function SavedProperties() {
         <Boton 
           style={{  
             borderBottom: currentSelect === 0 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: "#373737"
+            color: currentSelect === 0 ? "#373737" : "#8E8E8E"
           }} 
           onClick={() => {
             setLandlordProperties(2);
@@ -77,7 +77,7 @@ function SavedProperties() {
         <Boton
           style={{  
             borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: "#373737"
+            color: currentSelect === 1 ? "#373737" : "#8E8E8E"
           }}
           onClick={() => {
             setLandlordProperties(3);
@@ -93,8 +93,8 @@ function SavedProperties() {
       <div style={{display: "flex", gap: "1.5rem"}}>
         <Boton
           style={{  
-            borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: "#373737"
+            borderBottom: currentSelect === 0 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+            color: currentSelect === 0 ? "#373737" : "#8E8E8E"
           }}
           onClick={() => {
             setBuyerProperties(0);
@@ -103,7 +103,7 @@ function SavedProperties() {
         <Boton
           style={{  
             borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: "#373737"
+            color: currentSelect === 1 ? "#373737" : "#8E8E8E"
           }}
           onClick={() => {
             setBuyerProperties(1);
