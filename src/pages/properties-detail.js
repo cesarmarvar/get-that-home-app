@@ -58,11 +58,14 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     bedrooms, 
     bathrooms,
     area,
+    user_info,
+    lat,
+    long,
   } = property
 
   function handleShowContact(e) {
   e.preventDefault();
-  setShowContact(true)
+  setShowContact(!showContact)
   }
 
   useEffect(() => {
@@ -71,12 +74,17 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     .catch(console.log)
   }, []);
 
+  function handleSetFavorite(e) {
+    e.preventDefault();
+
+  }
+
   /*=============== Funciones para renderear el card del costado =============*/
   
   /* 1) Cuando no hay usuario loggeado */
   function NotLogged() {
     return(
-      <FlexColumn style={{width: "290px", height: "248px", padding: "32px"}}>
+      <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
         <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
           <p style={{textAlign: "center"}}>Log in or Join to contact the advertiser</p>
           <Button IconL={ RiUserReceived2Fill } onClick={() => handleOpen(true)} type="primary" size="sm" children="LOGIN" />
@@ -87,8 +95,8 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   /* 2) Cuando un landlord esta loggeado */
   function LandlordButton() {
     return(
-      <FlexColumn style={{width: "290px", height: "104px", padding: "32px", alignItems: "center", justifyContent: "center"}}>
-        <Button IconL={ TiEdit } type={"primary"} size={"sm"} children={"EDIT PROPERTY"}/>
+      <FlexColumn style={{width: "340px", height: "104px", padding: "32px", alignItems: "center", justifyContent: "center"}}>
+        <Button IconL={ TiEdit } type={"primary"} size={"l"} children={"EDIT PROPERTY"}/>
       </FlexColumn>
     )
   }
@@ -99,9 +107,11 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   function LoggedBuyerButton() {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
-        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "15px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
           <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
-          <AiOutlineHeart size="100px"/>
+          <a>
+            <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px"/>
+          </a>
           <p>Add to favorites</p>
         </FlexColumn>
       </FlexColumn>
@@ -112,16 +122,17 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   function LoggedBuyerContactDetail() {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
-        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "16px", gap: "16px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "16px", gap: "10px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
           <p css={css`${typography.headline.h6}`}>Contact information</p>
           <div>
             <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Email</p>
-            <p style={{textAlign: "center"}}>Email</p>
+            <p style={{textAlign: "center"}}>{user_info.email}</p>
           </div>
           <div>
             <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Phone</p>
-            <p style={{textAlign: "center"}}>number</p>
+            <p style={{textAlign: "center"}}>{user_info.phone}</p>
           </div>
+          <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"Back"}/>
         </FlexColumn>
       </FlexColumn>
     )
@@ -166,14 +177,14 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
           <p>{about}</p>
         </FlexColumn>
         <Subtitle style={{margin: "1rem 0"}}>Location</Subtitle>
-        <p>{address}</p>
+        <p style={{marginBottom: "20px"}}>{address}</p>
         <GoogleMaps
           apiKey={"AIzaSyBba0fHGfvFZT1rT4cnQ_9BOLh7UOQkf3M"}
           style={{height: "760px", width: "760px"}}
           zoom={18}
-          center={{lat: -12.123380, lng: -77.021240}}
+          center={{lat: lat, lng: long}} // =============================================================================== pendiente
           />
-      </FlexColumn>
+        </FlexColumn>
       { !isAuth ? <NotLogged /> :
 
       isAuth && typeUser === "buyer" ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
