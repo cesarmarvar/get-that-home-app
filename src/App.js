@@ -12,39 +12,57 @@ import SignupForm from "./pages/signupform-page";
 import { Modal } from "./pages/ui";
 import SavedProperties from "./pages/saved-properties-page";
 import { PropertyDetail } from "./pages/property-detail";
+import Loader from "./components/Loader";
 
 function App() {
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [ userType, setUserType ] = useState(0);
 
 
   return (
     <>
-      <Header 
-        isAuth={!!user}
-        typeUser={user?.user_type}
-        handleOpen={setIsOpen}
-      />
       {
-        isOpen
+        isLoading
         ?
-        <Modal>
-          <LoginForm handleOpen={setIsOpen}/>
-        </Modal>
+        <Loader />
         :
-        null
+        <>
+        
+          <Header 
+            isAuth={!!user}
+            typeUser={user?.user_type}
+            handleOpen={setIsOpen}
+          />
+          {
+            isOpen
+            ?
+            <Modal>
+              <LoginForm handleOpen={setIsOpen}/>
+            </Modal>
+            :
+            null
+          }
+          <Routes>
+            <Route index path="/" element={<LandingPage />} />
+            <Route path="/properties" element={<PropertiesPage />}/>
+            <Route path="/register" element={<Signup setUserType={setUserType}/>}/>
+            <Route path="/register/form" element={<SignupForm userType={userType}/>}/>
+            <Route path="/property" element={<PropertyDetail isAuth={!!user} typeUser={user?.user_type} handleOpen={setIsOpen}/>}/>
+            {
+              user
+              ?
+              <>
+                <Route path="/new-property/form" element={<PropertyFormPage />}/>
+                <Route path="/saved_properties" element={<SavedProperties />} />
+              </>
+              :
+              null
+            }
+          </Routes>
+          <Footer />
+        </>
       }
-      <Routes>
-        <Route index path="/" element={<LandingPage />} />
-        <Route path="/properties" element={<PropertiesPage />}/>
-        <Route path="/register" element={<Signup setUserType={setUserType}/>}/>
-        <Route path="/register/form" element={<SignupForm userType={userType}/>}/>
-        <Route path="/new-property/form" element={<PropertyFormPage />}/>
-        <Route path="/property" element={<PropertyDetail isAuth={!!user} typeUser={user?.user_type} handleOpen={setIsOpen}/>}/>
-        <Route path="/saved_properties" element={<SavedProperties />} />
-      </Routes>
-      <Footer />
     </>
   );
 }
