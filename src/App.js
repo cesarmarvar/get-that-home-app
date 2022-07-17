@@ -10,7 +10,7 @@ import PropertiesPage from "./pages/properties-page";
 import Signup from "./pages/signup-page";
 import SignupForm from "./pages/signupform-page";
 import { Modal } from "./pages/ui";
-import { PropertyDetail } from "./pages/properties-detail";
+import { PropertyDetail } from "./pages/property-detail";
 
 
 function App() {

@@ -1,15 +1,20 @@
 import styled from "@emotion/styled"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Button from "../components/Button/button"
 import Input from "../components/Input"
-import { signup } from "../services/sessions-service"
+import { useAuth } from "../context/auth-context"
 import { typography } from "../styles"
 
 function Form({userType}) {
 
+  const { signup } = useAuth();
+
+  const navigate = useNavigate();
+
   const [dataForm, setDataForm] = useState({
     name: "",
-    user_type: 0,
+    user_type: userType,
     email: "",
     password: "",
     phone: ""
@@ -34,6 +39,7 @@ function Form({userType}) {
   function handleSubmit(e) {
     e.preventDefault();
     signup(dataForm)
+    navigate("/");
   }
 
   const Sugerence = styled.p`
@@ -115,7 +121,7 @@ function Form({userType}) {
   )
 }
 
-function SignupForm() {
+function SignupForm({userType}) {
 
   const Fondo = styled.div`
     height: 100vh;
@@ -157,7 +163,7 @@ function SignupForm() {
       <SigunpContainer>
         <TitleForm>Create your Account</TitleForm>
         <InputContainer>
-          <Form />
+          <Form userType={userType}/>
         </InputContainer>
       </SigunpContainer>
     </Fondo>
