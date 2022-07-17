@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getProperty } from "../services/properties-service";
+import Button from "../components/Button/button";
 import { colors, fonts, typography } from "../styles";
 import { RiMoneyDollarCircleLine, RiUserReceived2Fill } from "react-icons/ri";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { FaPaw } from "react-icons/fa";
-import GoogleMaps from "simple-react-google-maps";
-import Button from "../components/Button/button";
 import { AiOutlineHeart } from "react-icons/ai";
 import { TiEdit } from "react-icons/ti";
+import GoogleMaps from "simple-react-google-maps";
 
 
 const FlexRow = styled.div`
@@ -43,6 +43,17 @@ const Subtitle = styled.p`
 `
 // style={{border: "2px solid brown"}} ====> debug
 
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  gap: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px
+`
+
 
 export function PropertyDetail({isAuth, typeUser, handleOpen}) {
 
@@ -74,7 +85,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     .catch(console.log)
   }, []);
 
-  function handleSetFavorite(e) {
+  function handleSetFavorite(e) { // ============================================= pendiente
     e.preventDefault();
 
   }
@@ -85,10 +96,10 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   function NotLogged() {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
-        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+        <CardContainer >
           <p style={{textAlign: "center"}}>Log in or Join to contact the advertiser</p>
           <Button IconL={ RiUserReceived2Fill } onClick={() => handleOpen(true)} type="primary" size="sm" children="LOGIN" />
-        </FlexColumn>
+        </CardContainer>
       </FlexColumn>
     )
   }
@@ -107,13 +118,13 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   function LoggedBuyerButton() {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
-        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "15px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+        <CardContainer >
           <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
           <a>
             <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px"/>
           </a>
           <p>Add to favorites</p>
-        </FlexColumn>
+        </CardContainer>
       </FlexColumn>
     )
   }
@@ -122,7 +133,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   function LoggedBuyerContactDetail() {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
-        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "16px", gap: "10px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+        <CardContainer >
           <p css={css`${typography.headline.h6}`}>Contact information</p>
           <div>
             <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Email</p>
@@ -133,7 +144,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
             <p style={{textAlign: "center"}}>{user_info.phone}</p>
           </div>
           <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"Back"}/>
-        </FlexColumn>
+        </CardContainer>
       </FlexColumn>
     )
   }
