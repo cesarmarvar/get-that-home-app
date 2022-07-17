@@ -197,9 +197,9 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
           center={{lat: lat, lng: long}} 
           /> : null}
         </FlexColumn>
-        {!isAuth ? <NotLogged /> :
-          isAuth && typeUser === "buyer" ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
-          isAuth && typeUser === "landlord" ? <LandlordButton /> : null}
+        { !isAuth ? <NotLogged /> :
+          isAuth ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
+          isAuth && typeUser === "landlord"  ? <LandlordButton /> : null }
 
     </Container>
   )
