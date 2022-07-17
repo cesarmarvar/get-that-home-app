@@ -68,7 +68,7 @@ function Header({ isAuth, typeUser, handleOpen }) {
 
     function Favorites() {
       return (
-        <Button IconL={ RiHeartFill } type={"primary"} size={"sm"} children={"SAVED PROPERTIES"}/>
+        <Button IconL={ RiHeartFill } onClick={() => navigate("/saved_properties")} type={"primary"} size={"sm"} children={"SAVED PROPERTIES"}/>
       )
     }
 
@@ -85,7 +85,7 @@ function Header({ isAuth, typeUser, handleOpen }) {
   function AuthenticateLandlordHeader() {
     function Properties() {
       return (
-        <Button IconL={ RiHome8Line } type={"primary"} size={"sm"} children={"MY PROPERTIES"} />
+        <Button IconL={ RiHome8Line } onClick={() => navigate("/saved_properties")} type={"primary"} size={"sm"} children={"MY PROPERTIES"} />
       )
     }
 
