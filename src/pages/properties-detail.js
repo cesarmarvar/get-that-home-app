@@ -93,6 +93,36 @@ export function PropertyDetail({userType, handleOpen}) {
     )
   }
 
+  function LoggedBuyerButton() {
+    return(
+      <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
+        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+          <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
+          <AiOutlineHeart size="100px"/>
+          <p>Add to favorites</p>
+        </FlexColumn>
+      </FlexColumn>
+    )
+  }
+
+  function LoggedBuyerContactDetail() {
+    return(
+      <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
+        <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "16px", gap: "16px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+          <p css={css`${typography.headline.h6}`}>Contact information</p>
+          <div>
+            <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Email</p>
+            <p style={{textAlign: "center"}}>Email</p>
+          </div>
+          <div>
+            <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Phone</p>
+            <p style={{textAlign: "center"}}>number</p>
+          </div>
+        </FlexColumn>
+      </FlexColumn>
+    )
+  }
+
   return (
     <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
@@ -140,43 +170,11 @@ export function PropertyDetail({userType, handleOpen}) {
           center={{lat: -12.123380, lng: -77.021240}}
           />
       </FlexColumn>
-      {/* Not logged in: */}
-      { !isAuth ? <NotLogged /> : null}
+      { !isAuth ? <NotLogged /> :
 
-      {/* logged in (first): */}
-      {/* { !showContact ? (
-        <>
-          <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
-            <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
-              <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
-              <AiOutlineHeart size="100px"/>
-              <p>Add to favorites</p>
-            </FlexColumn>
-          </FlexColumn>
-        </>
-      ) : null} */}
+      isAuth && typeUser === "buyer" ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
 
-      {/* logged in (second): */}
-      {/* { showContact ? (
-        <>
-          <FlexColumn style={{width: "340px", height: "248px", padding: "32px 16px"}}>
-            <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "16px", gap: "16px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
-              <p css={css`${typography.headline.h6}`}>Contact information</p>
-              <div>
-                <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Email</p>
-                <p style={{textAlign: "center"}}>Email</p>
-              </div>
-              <div>
-                <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Phone</p>
-                <p style={{textAlign: "center"}}>number</p>
-              </div>
-            </FlexColumn>
-          </FlexColumn>
-        </>
-      ) : null} */}
-
-      {/* When landlord: */}
-      <LandlordButton />
+      isAuth && typeUser === "landlord" ? <LandlordButton /> : null}
 
     </Container>
   )
