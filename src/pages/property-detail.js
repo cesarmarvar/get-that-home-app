@@ -120,10 +120,12 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
         <CardContainer >
           <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
-          <a href="#">
-            <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px" />
-          </a>
-          <p>Add to favorites</p>
+          <FlexColumn style={{gap: "8px"}}>
+            <button style={{border: "none", backgroundColor: "white"}}>
+              <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px" />
+            </button>
+            <p>Add to favorites</p>
+          </FlexColumn>
         </CardContainer>
       </FlexColumn>
     )
