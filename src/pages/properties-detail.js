@@ -40,6 +40,8 @@ const Subtitle = styled.p`
 export function PropertyDetail() {
 
   const [ property, setProperty ] = useState({});
+  const [ owner, setOwner ] = useState("");
+  const [ showContact, setShowContact ] = useState(false);
 
   const { 
     address,
@@ -52,6 +54,11 @@ export function PropertyDetail() {
     area,
     operation_type,
    } = property
+
+   function handleShowContact(e) {
+    e.preventDefault();
+    setShowContact(true)
+   }
 
   useEffect(() => {
     getProperty(2)
@@ -104,7 +111,39 @@ export function PropertyDetail() {
           <p style={{textAlign: "center"}}>Log in or Join to contact the advertiser</p>
           <Button IconL={ RiUserReceived2Fill } onClick={() => handleOpen(true)} type="primary" size="sm" children="LOGIN" />
         </FlexColumn>
-      </FlexColumn>
+      </FlexColumn> */}
+
+      {/* logged in (first): */}
+      { !showContact ? (
+        <>
+          <FlexColumn style={{width: "290px", height: "248px", padding: "32px"}}>
+            <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "32px", gap: "20px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+              <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
+              <AiOutlineHeart size="100px"/>
+              <p>Add to favorites</p>
+            </FlexColumn>
+          </FlexColumn>
+        </>
+      ) : null}
+
+      {/* logged in (second): */}
+      { showContact ? (
+        <>
+          <FlexColumn style={{width: "290px", height: "236px", padding: "32px 16px"}}>
+            <FlexColumn style={{alignItems: "center", justifyContent: "center", height: "100%", padding: "16px", gap: "16px", boxShadow: "0px 5px 10px rgba(0, 0, 0, 0.2)", borderRadius: "8px"}}>
+              <p css={css`${typography.headline.h6}`}>Contact information</p>
+              <div>
+                <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Email</p>
+                <p style={{textAlign: "center"}}>Email</p>
+              </div>
+              <div>
+                <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Phone</p>
+                <p style={{textAlign: "center"}}>number</p>
+              </div>
+            </FlexColumn>
+          </FlexColumn>
+        </>
+      ) : null}
 
 
     </Container>
