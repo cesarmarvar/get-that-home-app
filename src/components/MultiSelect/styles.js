@@ -1,4 +1,4 @@
-import { colors } from "../../styles";
+import { colors, typography } from "../../styles";
 import Select from "react-select";
 import styled from "@emotion/styled";
 
@@ -39,7 +39,19 @@ export const customStyles = {
 }
 
 export const StyleSelect = styled(Select)`
-  width: 280px;
+  max-width: 280px;
+  min-width: 190px;
   border: ${({ border }) => border ? `1px solid ${colors.pink.regular}` : "none"};
   border-radius: 4px;
+  font-size: 14px;
+`;
+
+export const Label = styled.label`
+  ${typography.overline};
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 `;

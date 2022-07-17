@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import { colors, typography } from "../../styles";
+import { HiOutlineUpload } from "react-icons/hi";
+import { useEffect, useState } from "react";
 
 const WrapperPhotos = styled.div`
   display: flex;
@@ -8,15 +10,36 @@ const WrapperPhotos = styled.div`
 `;
 
 const InputFile = styled.input`
-  
+  appereance: none;
+  position: absolute;
+  opacity: 0;
 `
+
+const File = styled.div`
+  position: relative;
+  background-color: ${colors.pink.regular};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  max-width: 134px;
+  gap: 0.5rem;
+  border-radius: 8px;
+  padding: 0.5rem;
+`;
+
+const FlexRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
 
 const ContainerInput = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 `
-const LikeLabel = styled.p`
+const LikeLabel = styled.label`
   ${typography.overline};
 `
 const TextP = styled.p`
@@ -27,19 +50,36 @@ const Title = styled.h2`
   ${typography.headline.h6};
 ` 
 const ContainerPhotos = styled.div`
-  width: 600px;
+  max-width: 670px;
   height: 136px;
   background-color: ${colors.background.regular};
   display: flex;
   align-items: center;
   padding: 0.5rem;
+  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 `
 const NonPhoto = styled.div`
   width: 120px;
   height: 120px;
   background-color: ${colors.background.dark};
   border-radius: 0.5rem;
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  font-size: 14px;
+  justify-content: center;
 `
+const Photo = styled.img`
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+`;
+
 const WrapperTop = styled.div`
   display: flex;
   flex-direction: column;
@@ -47,25 +87,69 @@ const WrapperTop = styled.div`
 `
 
 function PhotosInput() {
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [images, setImages] = useState([]);
+
+  function onSelectFile(e) {
+    const selectedFiles = e.target.files;
+    setSelectedFiles(files => ([...files, ...selectedFiles]));
+  }
+
+  useEffect(() => {
+    setImages(() => (
+      selectedFiles.map(file => (URL.createObjectURL(file)))
+    ));
+  }, [selectedFiles]);
+
   return(
     <WrapperPhotos>
       <WrapperTop>
         <Title>Photos</Title>
         <ContainerInput>
           <LikeLabel>Upload as many photos as you wish</LikeLabel>
-          <InputFile  type="file"/>
+          <FlexRow>
+            <File htmlFor="photos">
+              <HiOutlineUpload />
+              <InputFile
+                type="file"
+                name="photos"
+                onChange={onSelectFile}
+                multiple
+                accept="image/png , image/jpeg , image/jpg"
+              />
+              <p>Choose File</p>
+            </File>
+            {
+              selectedFiles.length <= 0
+              ?
+              <LikeLabel htmlFor="photos">No File Chosen</LikeLabel>
+              :
+              <LikeLabel htmlFor="photos">{selectedFiles.length} selected</LikeLabel>
+            }
+          </FlexRow>
           <TextP>Only images, max 5MB</TextP>
         </ContainerInput>
       </WrapperTop>
       <ContainerPhotos>
-        <NonPhoto>
-          <p>No photos yet</p>
-        </NonPhoto>
+        {
+          selectedFiles.length <= 0
+          ?
+          <NonPhoto>
+            <p>No photos yet</p>
+          </NonPhoto>
+          :
+          images.map((img, index) => (
+            <Photo
+              src={img}
+              alt="preview-image"
+              key={index}
+            />
+          ))
+        }
       </ContainerPhotos>
     </WrapperPhotos>
   );
 };
-
 
 const WrapperSwitch = styled.div`
   display: flex;
