@@ -44,10 +44,9 @@ const Subtitle = styled.p`
 // style={{border: "2px solid brown"}} ====> debug
 
 
-export function PropertyDetail({userType, handleOpen}) {
+export function PropertyDetail({isAuth, typeUser, handleOpen}) {
 
   const [ property, setProperty ] = useState({});
-  const [ owner, setOwner ] = useState("");
   const [ showContact, setShowContact ] = useState(false);
 
   const { 
@@ -59,13 +58,12 @@ export function PropertyDetail({userType, handleOpen}) {
     bedrooms, 
     bathrooms,
     area,
-    user_id,
-   } = property
+  } = property
 
-   function handleShowContact(e) {
-    e.preventDefault();
-    setShowContact(true)
-   }
+  function handleShowContact(e) {
+  e.preventDefault();
+  setShowContact(true)
+  }
 
   useEffect(() => {
     getProperty(5)
@@ -73,7 +71,9 @@ export function PropertyDetail({userType, handleOpen}) {
     .catch(console.log)
   }, []);
 
-
+  /*=============== Funciones para renderear el card del costado =============*/
+  
+  /* 1) Cuando no hay usuario loggeado */
   function NotLogged() {
     return(
       <FlexColumn style={{width: "290px", height: "248px", padding: "32px"}}>
@@ -84,15 +84,18 @@ export function PropertyDetail({userType, handleOpen}) {
       </FlexColumn>
     )
   }
-
+  /* 2) Cuando un landlord esta loggeado */
   function LandlordButton() {
     return(
-      <FlexColumn cssstyle={{width: "290px", height: "104px", padding: "32px 16px", alignItems: "center", justifyContent: "center"}}>
+      <FlexColumn style={{width: "290px", height: "104px", padding: "32px", alignItems: "center", justifyContent: "center"}}>
         <Button IconL={ TiEdit } type={"primary"} size={"sm"} children={"EDIT PROPERTY"}/>
       </FlexColumn>
     )
   }
 
+
+  /* 3) Cuando un buyer esta loggeado: */
+  /* 3.1) El card que muestra el boton para revelar la info del landlord */
   function LoggedBuyerButton() {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
@@ -104,7 +107,8 @@ export function PropertyDetail({userType, handleOpen}) {
       </FlexColumn>
     )
   }
-
+  
+  /* 3.1) El card que muestra la info del landlord */
   function LoggedBuyerContactDetail() {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
