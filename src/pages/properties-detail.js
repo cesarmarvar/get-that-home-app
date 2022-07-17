@@ -152,7 +152,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   return (
     <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
-        <FlexRow style={{width: "100%", justifyContent: "space-between", fontFamily: `${fonts.secundary}`}}>
+        <FlexRow style={{width: "100%", padding: "1rem 0", justifyContent: "space-between", fontFamily: `${fonts.secundary}`}}>
           <FlexColumn>
             <h3 css={css`${typography.headline.h4}`}>{address}</h3>
           </FlexColumn>
@@ -165,7 +165,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
           </FlexColumn>
         </FlexRow>
         <Division />
-        <FlexRow style={{gap: "30px", paddingTop: "1rem", paddingBottom: "1rem", fontFamily: `${fonts.secundary}`}}>
+        <FlexRow style={{gap: "30px", padding: "1rem 0", fontFamily: `${fonts.secundary}`}}>
           <FlexRow style={{gap: "6px"}}>
             <BiBed size="20px" color={`${colors.gray.regular}`}/>
             <div>{bedrooms} bedrooms</div>
@@ -189,18 +189,17 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
         </FlexColumn>
         <Subtitle style={{margin: "1rem 0"}}>Location</Subtitle>
         <p style={{marginBottom: "20px"}}>{address}</p>
+        { lat ? 
         <GoogleMaps
           apiKey={"AIzaSyBba0fHGfvFZT1rT4cnQ_9BOLh7UOQkf3M"}
           style={{height: "760px", width: "760px"}}
           zoom={18}
-          center={{lat: lat, lng: long}} // =============================================================================== pendiente
-          />
+          center={{lat: lat, lng: long}} 
+          /> : null}
         </FlexColumn>
-      { !isAuth ? <NotLogged /> :
-
-      isAuth && typeUser === "buyer" ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
-
-      isAuth && typeUser === "landlord" ? <LandlordButton /> : null}
+        {!isAuth ? <NotLogged /> :
+          isAuth && typeUser === "buyer" ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
+          isAuth && typeUser === "landlord" ? <LandlordButton /> : null}
 
     </Container>
   )
