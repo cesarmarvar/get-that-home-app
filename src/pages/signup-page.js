@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { typography } from "../styles";
 
-function Signup({ setUser }) {
+function Signup({ setUserType }) {
 
   const Fondo = styled.div`
     height: 100vh;
@@ -68,12 +68,12 @@ function Signup({ setUser }) {
 
   function handleSubmitBuyer() {
     navigate("/register/form")
-    setUser(1)
+    setUserType(1)
   }
 
   function handleSubmitLandlord() {
     navigate("/register/form")
-    setUser(0)
+    setUserType(0)
   }
 
 
