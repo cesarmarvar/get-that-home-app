@@ -38,8 +38,8 @@ function App() {
       <Routes>
         <Route index path="/" element={<LandingPage />} />
         <Route path="/properties" element={<PropertiesPage />}/>
-        <Route path="/register" element={<Signup />}/>
-        <Route path="/register/form" element={<SignupForm />}/>
+        <Route path="/register" element={<Signup setUserType={setUserType}/>}/>
+        <Route path="/register/form" element={<SignupForm userType={userType}/>}/>
         <Route path="/new-property/form" element={<PropertyFormPage />}/>
         <Route path="/property" element={<PropertyDetail isAuth={!!user} typeUser={user?.user_type} handleOpen={setIsOpen}/>}/>
         <Route path="/saved_properties" element={<SavedProperties />} />
