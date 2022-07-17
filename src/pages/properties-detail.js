@@ -85,6 +85,14 @@ export function PropertyDetail({userType, handleOpen}) {
     )
   }
 
+  function LandlordButton() {
+    return(
+      <FlexColumn cssstyle={{width: "290px", height: "104px", padding: "32px 16px", alignItems: "center", justifyContent: "center"}}>
+        <Button IconL={ TiEdit } type={"primary"} size={"sm"} children={"EDIT PROPERTY"}/>
+      </FlexColumn>
+    )
+  }
+
   return (
     <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
@@ -168,9 +176,7 @@ export function PropertyDetail({userType, handleOpen}) {
       ) : null} */}
 
       {/* When landlord: */}
-      <FlexColumn cssstyle={{width: "290px", height: "104px", padding: "32px 16px", alignItems: "center", justifyContent: "center"}}>
-        <Button IconL={ TiEdit } type={"primary"} size={"sm"} children={"EDIT PROPERTY"}/>
-      </FlexColumn>
+      <LandlordButton />
 
     </Container>
   )
