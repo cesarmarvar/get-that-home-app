@@ -27,10 +27,7 @@ import Button from "../Button/button";
 // }
 
 function Pagination({ array, setCurrentPage }) {
-  const {paginate} = useProperties();
-  const ObjectProperties = paginate(array);
-  const keys = Object.values(ObjectProperties);
-  const pages = array.length;
+  const pages = array?.length;
 
   const [displayButtons, setDisplayButtons] = useState({
     first: 1,

@@ -226,7 +226,7 @@ export function PropertyCard({user, data}) {
           </AddressAndIcons>
         </PropertyData>
       </DefaultCard>
-      { user === "homeseeker" ? <DefaultBottom /> : 
+      { user === "buyer" ? <DefaultBottom /> : 
       user === "landlord" ? (
         <LandlordButtons>
         <ButtonsContainer>

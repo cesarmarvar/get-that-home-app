@@ -54,6 +54,7 @@ function SavedProperties() {
   useEffect(() => {
       getSavedProperties()
         .then((data) => {
+          console.log(data);
           const properties = paginate(data);
           setProperties(properties);
         })
@@ -119,9 +120,13 @@ function SavedProperties() {
 
   function ActiveProperties() {
     const active = properties[currentPage]?.filter(property => property.is_active)
+    const size = [];
+    Object.values(properties).forEach(prop => {
+      size.push(...prop);
+    })
     return (
       <>
-        <Info>{active?.length} Properties found</Info>
+        <Info>{size.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
             {active?.map(casa => (
@@ -129,7 +134,7 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination array={active} setCurrentPage={setCurrentPage}/>
+        <Pagination array={Object.keys(properties)} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
