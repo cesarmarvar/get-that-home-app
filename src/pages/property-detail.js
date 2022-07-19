@@ -11,7 +11,7 @@ import { FaPaw } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import { TiEdit } from "react-icons/ti";
 import GoogleMaps from "simple-react-google-maps";
-
+import { useParams } from "react-router-dom";
 
 const FlexRow = styled.div`
   display: flex;
@@ -62,6 +62,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
 
   const [ property, setProperty ] = useState({});
   const [ showContact, setShowContact ] = useState(false);
+  const params = useParams();
 
   const { 
     address,
@@ -84,7 +85,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   }
 
   useEffect(() => {
-    getProperty(5)
+    getProperty(params.id)
     .then(setProperty)
     .catch(console.log)
   }, []);
