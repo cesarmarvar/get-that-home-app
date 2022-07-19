@@ -130,7 +130,7 @@ function SavedProperties() {
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
             {active?.map(casa => (
-              <PropertyCard key={casa.id} data={casa} />
+              <PropertyCard key={casa.id} data={casa} user={user?.user_type} />
             ))}
           </PropertiesContainer>
         </div>
