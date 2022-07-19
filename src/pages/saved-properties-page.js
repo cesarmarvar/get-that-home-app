@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { PropertyCard } from "../components/Card/card";
+import Pagination from "../components/pagination/pagination";
 import { useAuth } from "../context/auth-context";
+import { useProperties } from "../context/property-context";
 import { getSavedProperties } from "../services/saved-properties-service";
 
 const PropertiesContainer = styled.div`
@@ -39,8 +41,9 @@ const Info = styled.p`
 `
 
 function SavedProperties() {
-  const [properties, setProperties] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
+  const {paginate} = useProperties()
+  const [properties, setProperties] = useState({});
+  const [currentPage, setCurrentPage] = useState(1)
   const [buyerProperties, setBuyerProperties] = useState(0);
   const [landlordProperties, setLandlordProperties] = useState(2);
   const {user} = useAuth();
@@ -51,7 +54,8 @@ function SavedProperties() {
   useEffect(() => {
       getSavedProperties()
         .then((data) => {
-          setProperties(data);
+          const properties = paginate(data);
+          setProperties(properties);
         })
         .catch(console.log);
   }, [])
@@ -114,7 +118,8 @@ function SavedProperties() {
   }
 
   function ActiveProperties() {
-    const active = properties.filter(property => property.is_active)
+    const active = properties[currentPage].filter(property => property.is_active)
+    // console.log(ObjectProperties)
     return (
       <>
         <Info>{active.length} Properties found</Info>
@@ -125,6 +130,7 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination array={active} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
@@ -177,15 +183,15 @@ function SavedProperties() {
     )
   }
 
-  console.log(landlordProperties)
-
   return (
-    <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-      { user?.user_type === "landlord" ? <LandlordButtons /> : <BuyerButtons />}
-      { user?.user_type === "landlord" ? (landlordProperties === 2 ? 
-      <ActiveProperties /> : <ClosedProperties />) : (buyerProperties === 0 ? 
-      <FavoritesProperties /> : <ContactedProperties />) }
-    </div>
+    <>
+      <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+        { user?.user_type === "landlord" ? <LandlordButtons /> : <BuyerButtons />}
+        { user?.user_type === "landlord" ? (landlordProperties === 2 ? 
+        <ActiveProperties /> : <ClosedProperties />) : (buyerProperties === 0 ? 
+        <FavoritesProperties /> : <ContactedProperties />) }
+      </div>
+    </>
   )
 
 }

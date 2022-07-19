@@ -2,9 +2,34 @@ import { useState } from "react";
 import { useProperties } from "../../context/property-context";
 import Button from "../Button/button";
 
+// const PropertiesContainer = styled.div`
+//   width: 1136px;
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   gap: 32px 86px;
+// `
+
+// function FavoritesProperties() {
+//   const favorites = properties.filter(property => property.property_status === "favorite")
+//   return (
+//     <>
+//       <Info>{favorites.length} Properties found</Info>
+//       <div style={{display: "flex", justifyContent: "center"}}>
+//         <PropertiesContainer style={{display: "flex"}}>
+//           {favorites.map(casa => (
+//             <PropertyCard key={casa.id} data={casa.property} />
+//           ))}
+//         </PropertiesContainer>
+//       </div>
+//     </>
+//   )
+// }
+
 function Pagination({ array, setCurrentPage }) {
-  const {paginate} = useProperties()
-  const properties = paginate(array)
+  const {paginate} = useProperties();
+  const ObjectProperties = paginate(array);
+  const keys = Object.values(ObjectProperties);
   const pages = array.length;
 
   const [displayButtons, setDisplayButtons] = useState({
