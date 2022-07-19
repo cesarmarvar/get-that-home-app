@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useProperties } from "../../context/property-context";
 import Button from "../Button/button";
 
 function Pagination({ array, setCurrentPage }) {
-
+  const {paginate} = useProperties()
+  const properties = paginate(array)
   const pages = array.length;
 
   const [displayButtons, setDisplayButtons] = useState({

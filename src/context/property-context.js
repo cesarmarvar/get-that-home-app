@@ -41,6 +41,7 @@ function PropertyProvider({ children }) {
     <PropertyContext.Provider
       value={{
         properties,
+        paginate,
         searchByAddress
       }}
     >
