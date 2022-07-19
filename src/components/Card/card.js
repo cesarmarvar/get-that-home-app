@@ -181,7 +181,7 @@ export function PropertyCard({user, data}) {
 
   return(
     <>
-    <Link to={`show-property/${id}`}>
+    <Link to={`/properties/${id}`}>
       <div style={{cursor: "pointer"}}>
         <DefaultCard>
           { operation_type === "rent" ? (

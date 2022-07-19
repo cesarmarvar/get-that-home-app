@@ -48,7 +48,7 @@ function App() {
             <Route path="/properties" element={<PropertiesPage />}/>
             <Route path="/register" element={<Signup setUserType={setUserType}/>}/>
             <Route path="/register/form" element={<SignupForm userType={userType}/>}/>
-            <Route path="/show-property/:id" element={<PropertyDetail isAuth={!!user} typeUser={user?.user_type} handleOpen={setIsOpen}/>}/>
+            <Route path="/properties/:id" element={<PropertyDetail isAuth={!!user} typeUser={user?.user_type} handleOpen={setIsOpen}/>}/>
             {
               user
               ?
