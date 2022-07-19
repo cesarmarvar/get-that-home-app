@@ -86,8 +86,7 @@ const WrapperTop = styled.div`
   gap: 0.5rem;
 `
 
-function PhotosInput() {
-  const [selectedFiles, setSelectedFiles] = useState([]);
+function PhotosInput({ selectedFiles, setSelectedFiles}) {
   const [images, setImages] = useState([]);
 
   function onSelectFile(e) {

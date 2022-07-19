@@ -19,6 +19,21 @@ const ContainerRadio = styled.div`
   gap: 1rem;
 `;
 
+async function uploadImage(image) {
+  const data = new FormData();
+  data.append("file", image);
+  data.append("upload_preset", "get-that-home-images");
+  const response = await fetch(
+    "https://api.cloudinary.com/v1_1/enmanuel/image/upload",
+    { 
+      method: "POST",
+      body: data
+    }
+  );
+
+  return await response.json();
+}
+
 function loadAsyncScript(src) {
   return new Promise(resolve => {
     const script = document.createElement("script");
@@ -37,6 +52,9 @@ const apiURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAxa_u3oAHJONA2
 function Form({title="Create a property listing"}) {
 
   const [operationType, setOperationType] = useState("rent");
+  const [images, setImages] = useState([]);
+  const [isUploading, setIsUploading] = useState(true);
+
   const [formData, setFormData] = useState({
     address: "",
     price: "",
@@ -103,8 +121,18 @@ function Form({title="Create a property listing"}) {
     formData.price = parseInt(formData.price);
     formData.maintanance = !!formData.maintanance ? parseInt(formData.maintanance): null;
     formData.operation_type = operationType ==="rent" ? 0: 1;
-    console.log(formData);
-    // login(formData)
+    let image_urls = [];
+    images.forEach(img => {
+      uploadImage(img).then(data => {
+          image_urls.push(data.secure_url);
+          setIsUploading(false);
+          return data;
+      });
+    });
+    if(!isUploading) {
+      formData.image_urls = image_urls;
+      console.log(formData);
+    }
   }
 
   return(
@@ -225,7 +253,10 @@ It also makes you a better person.</TextP>
         required
       />
       <TextP>Renters will read this first, so highlight any features or important information the apartment has.</TextP>
-      <PhotosInput/>
+      <PhotosInput
+       setSelectedFiles={setImages}
+       selectedFiles={images}
+      />
       <Button type="primary" size="lg" >Publish property listing </Button>
     </WrapperForm>
   );
