@@ -118,8 +118,7 @@ function SavedProperties() {
   }
 
   function ActiveProperties() {
-    const active = properties[currentPage].filter(property => property.is_active)
-    // console.log(ObjectProperties)
+    const active = properties[currentPage]?.filter(property => property.is_active)
     return (
       <>
         <Info>{active.length} Properties found</Info>
@@ -136,7 +135,7 @@ function SavedProperties() {
   }
 
   function ClosedProperties() {
-    const closed = properties.filter(property => !property.is_active)
+    const closed = properties[currentPage]?.filter(property => !property.is_active)
     return (
       <>
         <Info>{closed.length} Properties found</Info>
@@ -147,12 +146,13 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination array={closed} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   function FavoritesProperties() {
-    const favorites = properties.filter(property => property.property_status === "favorite")
+    const favorites = properties[currentPage]?.filter(property => property.property_status === "favorite")
     return (
       <>
         <Info>{favorites.length} Properties found</Info>
@@ -163,12 +163,13 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination array={favorites} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   function ContactedProperties() {
-    const contacted = properties.filter(property => property.property_status === "contacted")
+    const contacted = properties[currentPage]?.filter(property => property.property_status === "contacted")
     return (
       <>
         <Info>{contacted.length} Properties found</Info>
@@ -179,6 +180,7 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination array={contacted} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
