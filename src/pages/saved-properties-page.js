@@ -121,10 +121,10 @@ function SavedProperties() {
     const active = properties[currentPage]?.filter(property => property.is_active)
     return (
       <>
-        <Info>{active.length} Properties found</Info>
+        <Info>{active?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {active.map(casa => (
+            {active?.map(casa => (
               <PropertyCard key={casa.id} data={casa} />
             ))}
           </PropertiesContainer>
@@ -138,10 +138,10 @@ function SavedProperties() {
     const closed = properties[currentPage]?.filter(property => !property.is_active)
     return (
       <>
-        <Info>{closed.length} Properties found</Info>
+        <Info>{closed?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {closed.map(casa => (
+            {closed?.map(casa => (
               <PropertyCard key={casa.id} data={casa} />
             ))}
           </PropertiesContainer>
@@ -155,10 +155,10 @@ function SavedProperties() {
     const favorites = properties[currentPage]?.filter(property => property.property_status === "favorite")
     return (
       <>
-        <Info>{favorites.length} Properties found</Info>
+        <Info>{favorites?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {favorites.map(casa => (
+            {favorites?.map(casa => (
               <PropertyCard key={casa.id} data={casa.property} />
             ))}
           </PropertiesContainer>
@@ -172,10 +172,10 @@ function SavedProperties() {
     const contacted = properties[currentPage]?.filter(property => property.property_status === "contacted")
     return (
       <>
-        <Info>{contacted.length} Properties found</Info>
+        <Info>{contacted?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer>
-            {contacted.map(casa => (
+            {contacted?.map(casa => (
               <PropertyCard key={casa.id} data={casa.property} />
             ))}
           </PropertiesContainer>
