@@ -53,7 +53,10 @@ const CardContainer = styled.div`
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px
 `
-
+const PropertyImage = styled.img`
+  width: 512;
+  height: 384;
+`
 
 export function PropertyDetail({isAuth, typeUser, handleOpen}) {
 
@@ -72,6 +75,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     user_info,
     lat,
     long,
+    image_urls,
   } = property
 
   function handleShowContact(e) {
@@ -103,6 +107,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
       </FlexColumn>
     )
   }
+
   /* 2) Cuando un landlord esta loggeado */
   function LandlordButton() {
     return(
@@ -111,7 +116,6 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
       </FlexColumn>
     )
   }
-
 
   /* 3) Cuando un buyer esta loggeado: */
   /* 3.1) El card que muestra el boton para revelar la info del landlord */
@@ -154,6 +158,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   return (
     <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
+      { image_urls ? <PropertyImage src={JSON.parse(image_urls)[0]} /> : null}
         <FlexRow style={{width: "100%", padding: "1rem 0", justifyContent: "space-between", fontFamily: `${fonts.secundary}`}}>
           <FlexColumn>
             <h3 css={css`${typography.headline.h4}`}>{address}</h3>

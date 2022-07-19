@@ -52,7 +52,7 @@ const DefaultCard = styled.div`
   border-top-left-radius: 8px;
 `
 
-const PropertyImg = styled.div`
+const PropertyImg = styled.img`
   width: 300;
   height: 200px;
 `
@@ -62,6 +62,7 @@ const PropertyData = styled.div`
   flex-direction: column;
   height: 160px;
   padding: 8px;
+  
 `
 
 const PriceRow = styled.div`
@@ -175,7 +176,7 @@ const LandlordButtons = styled.div`
 
 export function PropertyCard({user, data}) {
 
-  const { address, price,property_type, pets, bedrooms, bathrooms, area, operation_type } = data
+  const { address, price,property_type, pets, bedrooms, bathrooms, area, operation_type, image_urls } = data
 
   return(
     <div>
@@ -191,8 +192,9 @@ export function PropertyCard({user, data}) {
             <text>For Sale</text>
           </SaleChip>
         ) : null}
-
-        <PropertyImg>photo</PropertyImg>
+        <div style={{overflow: "hidden", borderTopLeftRadius: "8px", borderTopRightRadius: "8px",}}>
+          <PropertyImg src={JSON.parse(image_urls)[0]} />
+        </div>
         <PropertyData>
           <PriceRow>
             <Price style={{width: "161px"}}>
