@@ -8,10 +8,12 @@ import { colors, fonts, typography } from "../styles";
 import { RiMoneyDollarCircleLine, RiUserReceived2Fill } from "react-icons/ri";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { FaPaw } from "react-icons/fa";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TiEdit } from "react-icons/ti";
 import GoogleMaps from "simple-react-google-maps";
-
+import { useParams } from "react-router-dom";
+import { useAuth } from "../context/auth-context";
+import { createSavedProperty, destroySavedProperty, getSavedProperties } from "../services/saved-properties-service";
 
 const FlexRow = styled.div`
   display: flex;
@@ -53,13 +55,20 @@ const CardContainer = styled.div`
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px
 `
+const PropertyImage = styled.img`
+  width: 512;
+  height: 384;
+`
 
-
-export function PropertyDetail({isAuth, typeUser, handleOpen}) {
+export function PropertyDetail({isAuth, handleOpen}) {
 
   const [ property, setProperty ] = useState({});
   const [ showContact, setShowContact ] = useState(false);
-
+  const params = useParams();
+  const { user } = useAuth();
+  
+  const [ favorite, setFavorite ] = useState(false)
+  
   const { 
     address,
     price, 
@@ -72,22 +81,42 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     user_info,
     lat,
     long,
+    image_urls,
+    savedPropertyId
   } = property
-
+  console.log(property)
   function handleShowContact(e) {
   e.preventDefault();
   setShowContact(!showContact)
   }
 
   useEffect(() => {
-    getProperty(5)
+    getProperty(params.id)
     .then(setProperty)
     .catch(console.log)
+
+    getSavedProperties()
+      .then(data => {
+        const savedProperty = data.find(prop => prop.property.id === property?.id)
+        setFavorite(savedProperty.property_status === "favorite")
+        setProperty(property => {
+          return { ...property, savedPropertyId: savedProperty.id }
+        })
+      }).catch(console.log)
   }, []);
 
-  function handleSetFavorite(e) { // ============================================= pendiente
+  function handleSetFavorite(e) { 
     e.preventDefault();
+    createSavedProperty({
+      property_id: params.id,
+      property_status: 0,
+    }).then(setFavorite(true)).catch(console.log)
+  }
 
+  function handleDeleteFavorite(e) { 
+    e.preventDefault();
+    console.log(property.savedPropertyId)
+    destroySavedProperty(property.savedPropertyId).then(setFavorite(false)).catch(console.log)
   }
 
   /*=============== Funciones para renderear el card del costado =============*/
@@ -103,6 +132,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
       </FlexColumn>
     )
   }
+
   /* 2) Cuando un landlord esta loggeado */
   function LandlordButton() {
     return(
@@ -112,7 +142,6 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     )
   }
 
-
   /* 3) Cuando un buyer esta loggeado: */
   /* 3.1) El card que muestra el boton para revelar la info del landlord */
   function LoggedBuyerButton() {
@@ -120,10 +149,13 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
         <CardContainer >
           <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
-          <a href="#">
-            <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px" />
-          </a>
-          <p>Add to favorites</p>
+          <FlexColumn style={{gap: "8px"}}>
+            <button style={{border: "none", backgroundColor: "white"}}>
+              { favorite ? <AiFillHeart style={{cursor: "pointer"}} onClick={handleDeleteFavorite} size="40px" color="pink"/> 
+                           : <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px"/> }
+            </button>
+            { favorite ? <p>Remove favorite</p> : <p>Add to favorites</p> }
+          </FlexColumn>
         </CardContainer>
       </FlexColumn>
     )
@@ -152,6 +184,7 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
   return (
     <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
+      { image_urls ? <PropertyImage src={JSON.parse(image_urls)[0]} /> : null}
         <FlexRow style={{width: "100%", padding: "1rem 0", justifyContent: "space-between", fontFamily: `${fonts.secundary}`}}>
           <FlexColumn>
             <h3 css={css`${typography.headline.h4}`}>{address}</h3>
@@ -197,9 +230,9 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
           center={{lat: lat, lng: long}} 
           /> : null}
         </FlexColumn>
-        {!isAuth ? <NotLogged /> :
-          isAuth && typeUser === "buyer" ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
-          isAuth && typeUser === "landlord" ? <LandlordButton /> : null}
+        { !isAuth ? <NotLogged /> :
+          isAuth && user_info?.email != user?.email ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
+          isAuth && user_info?.email === user?.email ? <LandlordButton /> : null }
 
     </Container>
   )
