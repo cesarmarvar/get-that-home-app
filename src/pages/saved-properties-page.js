@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { PropertyCard } from "../components/Card/card";
+import Pagination from "../components/pagination/pagination";
 import { useAuth } from "../context/auth-context";
+import { useProperties } from "../context/property-context";
 import { getSavedProperties } from "../services/saved-properties-service";
 
 const PropertiesContainer = styled.div`
@@ -39,27 +41,22 @@ const Info = styled.p`
 `
 
 function SavedProperties() {
-  const [properties, setProperties] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
+  const {paginate} = useProperties()
+  const [properties, setProperties] = useState({});
+  const [currentPage, setCurrentPage] = useState(1)
   const [buyerProperties, setBuyerProperties] = useState(0);
   const [landlordProperties, setLandlordProperties] = useState(2);
   const {user} = useAuth();
   const [currentSelect, setCurrentSelect] = useState(0);
-  // 0 favorites & active 
-  // 1 closed & contacted
 
   useEffect(() => {
       getSavedProperties()
         .then((data) => {
-          setProperties(data);
+          const properties = paginate(data);
+          setProperties(properties);
         })
         .catch(console.log);
   }, [])
-  // if(isLoading) {
-  //   console.log("Loading")
-  // } else {
-  //   console.log(properties)
-  // }
 
   function LandlordButtons() {
     return (
@@ -114,78 +111,86 @@ function SavedProperties() {
   }
 
   function ActiveProperties() {
-    const active = properties.filter(property => property.is_active)
+    const active = properties[currentPage]?.filter(property => property.is_active)
+    const size = [];
+    Object.values(properties).forEach(prop => {
+      size.push(...prop);
+    })
     return (
       <>
-        <Info>{active.length} Properties found</Info>
+        <Info>{size.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {active.map(casa => (
-              <PropertyCard key={casa.id} data={casa} />
+            {active?.map(casa => (
+              <PropertyCard key={casa.id} data={casa} user={user?.user_type} />
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination currentPage={currentPage} array={Object.keys(properties)} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   function ClosedProperties() {
-    const closed = properties.filter(property => !property.is_active)
+    const closed = properties[currentPage]?.filter(property => !property.is_active)
     return (
       <>
-        <Info>{closed.length} Properties found</Info>
+        <Info>{closed?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {closed.map(casa => (
+            {closed?.map(casa => (
               <PropertyCard key={casa.id} data={casa} />
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination currentPage={currentPage} array={closed} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   function FavoritesProperties() {
-    const favorites = properties.filter(property => property.property_status === "favorite")
+    const favorites = properties[currentPage]?.filter(property => property.property_status === "favorite")
     return (
       <>
-        <Info>{favorites.length} Properties found</Info>
+        <Info>{favorites?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {favorites.map(casa => (
+            {favorites?.map(casa => (
               <PropertyCard key={casa.id} data={casa.property} />
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination currentPage={currentPage} array={favorites} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   function ContactedProperties() {
-    const contacted = properties.filter(property => property.property_status === "contacted")
+    const contacted = properties[currentPage]?.filter(property => property.property_status === "contacted")
     return (
       <>
-        <Info>{contacted.length} Properties found</Info>
+        <Info>{contacted?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer>
-            {contacted.map(casa => (
+            {contacted?.map(casa => (
               <PropertyCard key={casa.id} data={casa.property} />
             ))}
           </PropertiesContainer>
         </div>
+        <Pagination currentPage={currentPage} array={contacted} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
-  console.log(landlordProperties)
-
   return (
-    <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
-      { user?.user_type === "landlord" ? <LandlordButtons /> : <BuyerButtons />}
-      { user?.user_type === "landlord" ? (landlordProperties === 2 ? 
-      <ActiveProperties /> : <ClosedProperties />) : (buyerProperties === 0 ? 
-      <FavoritesProperties /> : <ContactedProperties />) }
-    </div>
+    <>
+      <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
+        { user?.user_type === "landlord" ? <LandlordButtons /> : <BuyerButtons />}
+        { user?.user_type === "landlord" ? (landlordProperties === 2 ? 
+        <ActiveProperties /> : <ClosedProperties />) : (buyerProperties === 0 ? 
+        <FavoritesProperties /> : <ContactedProperties />) }
+      </div>
+    </>
   )
 
 }
