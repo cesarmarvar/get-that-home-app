@@ -230,7 +230,7 @@ export function LandingPage() {
           <H4heading>Homes for rent at the best prices</H4heading>
         </TextsContainer>
         <ExampleCardsContainer>
-          {currentProps.slice(0, 3).map((property, index) => {
+          {currentProps.slice(0, 3)?.map((property, index) => {
             return <PropertyCard key={index} user="homeseeker" data={property}/>
           })}
         </ExampleCardsContainer>

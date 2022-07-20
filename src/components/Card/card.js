@@ -6,6 +6,7 @@ import { colors } from "../../styles/colors";
 import { typography } from "../../styles/typography";
 import { fonts } from "../../styles/fonts";
 import { AiOutlineCloseCircle, AiFillHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const RentalChip = styled.div`
   width: 110px;
@@ -52,7 +53,7 @@ const DefaultCard = styled.div`
   border-top-left-radius: 8px;
 `
 
-const PropertyImg = styled.div`
+const PropertyImg = styled.img`
   width: 300;
   height: 200px;
 `
@@ -62,6 +63,7 @@ const PropertyData = styled.div`
   flex-direction: column;
   height: 160px;
   padding: 8px;
+  
 `
 
 const PriceRow = styled.div`
@@ -175,72 +177,77 @@ const LandlordButtons = styled.div`
 
 export function PropertyCard({user, data}) {
 
-  const { address, price,property_type, pets, bedrooms, bathrooms, area, operation_type } = data
+  const { id, address, price,property_type, pets, bedrooms, bathrooms, area, operation_type, image_urls } = data
 
   return(
-    <div>
-      <DefaultCard>
-        { operation_type === "rent" ? (
-          <RentalChip>
-            <RiCoinsLine size="22px"/>
-            <text>For Rental</text>
-          </RentalChip>
-        ) : operation_type === "sale" ? (
-          <SaleChip>
-            <RiMoneyDollarCircleFill size="22px"/>
-            <text>For Sale</text>
-          </SaleChip>
+    <>
+    <Link to={`/properties/${id}`}>
+      <div style={{cursor: "pointer"}}>
+        <DefaultCard>
+          { operation_type === "rent" ? (
+            <RentalChip>
+              <RiCoinsLine size="22px"/>
+              <p>For Rental</p>
+            </RentalChip>
+          ) : operation_type === "sale" ? (
+            <SaleChip>
+              <RiMoneyDollarCircleFill size="22px"/>
+              <p>For Sale</p>
+            </SaleChip>
+          ) : null}
+          <div style={{overflow: "hidden", borderTopLeftRadius: "8px", borderTopRightRadius: "8px",}}>
+            {image_urls ? <PropertyImg src={JSON.parse(image_urls)[0]}/> : null}
+          </div>
+          <PropertyData>
+            <PriceRow>
+              <Price style={{width: "161px"}}>
+                <RiMoneyDollarCircleLine size="30px" color={`${colors.gray.dark}`}/>
+                <p style={{color: `${colors.gray.dark}`}}>{price}</p>
+              </Price>
+              <PropertyType>
+                <RiBuildingLine size="30px" color={`${colors.gray.light}`}/>
+                <p>{property_type}</p>
+              </PropertyType>
+            </PriceRow>
+            <AddressAndIcons>
+              <Adress>{address}</Adress>
+              <IconsRow>
+                <SingleIcon>
+                  <BiBed size="20px" color={`${colors.gray.regular}`}/>
+                  <div>{bedrooms}</div>
+                </SingleIcon>
+                <SingleIcon>
+                  <BiBath size="20px" color={`${colors.gray.regular}`}/>
+                  <div>{bathrooms}</div>
+                </SingleIcon>
+                <SingleIcon>
+                  <BiArea size="20px" color={`${colors.gray.regular}`}/>
+                  <div>{area} m2</div>
+                </SingleIcon>
+                { pets ? <FaPaw size="20px" color={`${colors.gray.regular}`}/> : null}
+
+                <AiFillHeart size="20px" color={`${colors.gray.regular}`}/>
+              </IconsRow>
+            </AddressAndIcons>
+          </PropertyData>
+        </DefaultCard>
+        { user === "homeseeker" ? <DefaultBottom /> : 
+        user === "landlord" ? (
+          <LandlordButtons>
+          <ButtonsContainer>
+            <CardButton>
+              <FaRegEdit size="18px"/>
+              <p>EDIT</p>
+            </CardButton>
+            <CardButton>
+              <AiOutlineCloseCircle size="20px"/>
+              <p>CLOSE</p>
+            </CardButton>
+          </ButtonsContainer>
+        </LandlordButtons>
         ) : null}
-
-        <PropertyImg>photo</PropertyImg>
-        <PropertyData>
-          <PriceRow>
-            <Price style={{width: "161px"}}>
-              <RiMoneyDollarCircleLine size="30px" color={`${colors.gray.dark}`}/>
-              <text>{price}</text>
-            </Price>
-            <PropertyType>
-              <RiBuildingLine size="30px" color={`${colors.gray.light}`}/>
-              <text>{property_type}</text>
-            </PropertyType>
-          </PriceRow>
-          <AddressAndIcons>
-            <Adress>{address}</Adress>
-            <IconsRow>
-              <SingleIcon>
-                <BiBed size="20px" color={`${colors.gray.regular}`}/>
-                <div>{bedrooms}</div>
-              </SingleIcon>
-              <SingleIcon>
-                <BiBath size="20px" color={`${colors.gray.regular}`}/>
-                <div>{bathrooms}</div>
-              </SingleIcon>
-              <SingleIcon>
-                <BiArea size="20px" color={`${colors.gray.regular}`}/>
-                <div>{area} m2</div>
-              </SingleIcon>
-              { pets ? <FaPaw size="20px" color={`${colors.gray.regular}`}/> : null}
-
-              <AiFillHeart size="20px" color={`${colors.gray.regular}`}/>
-            </IconsRow>
-          </AddressAndIcons>
-        </PropertyData>
-      </DefaultCard>
-      { user === "buyer" ? <DefaultBottom /> : 
-      user === "landlord" ? (
-        <LandlordButtons>
-        <ButtonsContainer>
-          <CardButton>
-            <FaRegEdit size="18px"/>
-            <text>EDIT</text>
-          </CardButton>
-          <CardButton>
-            <AiOutlineCloseCircle size="20px"/>
-            <text>CLOSE</text>
-          </CardButton>
-        </ButtonsContainer>
-      </LandlordButtons>
-      ) : null}
-    </div>
+      </div>
+    </Link>
+    </>
   )
 }
