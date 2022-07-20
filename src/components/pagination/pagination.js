@@ -1,30 +1,15 @@
+import styled from "@emotion/styled";
 import { useState } from "react";
-import { useProperties } from "../../context/property-context";
-import Button from "../Button/button";
+// import { useProperties } from "../../context/property-context";
+// import Button from "../Button/button";
 
-// const PropertiesContainer = styled.div`
-//   width: 1136px;
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: wrap;
-//   gap: 32px 86px;
-// `
-
-// function FavoritesProperties() {
-//   const favorites = properties.filter(property => property.property_status === "favorite")
-//   return (
-//     <>
-//       <Info>{favorites.length} Properties found</Info>
-//       <div style={{display: "flex", justifyContent: "center"}}>
-//         <PropertiesContainer style={{display: "flex"}}>
-//           {favorites.map(casa => (
-//             <PropertyCard key={casa.id} data={casa.property} />
-//           ))}
-//         </PropertiesContainer>
-//       </div>
-//     </>
-//   )
-// }
+const Button = styled.button`
+  border: 1px solid rgba(97, 97, 97, 0.15);
+  border-radius: 0.25rem;
+  background: #FFFFFF;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+`
 
 function Pagination({ array, setCurrentPage }) {
   const pages = array?.length;
@@ -61,7 +46,7 @@ function Pagination({ array, setCurrentPage }) {
 
   function Buttons() {
     return (
-      <div style={{display: "flex"}}>
+      <div style={{display: "flex", gap: "0.5rem", margin: "2rem auto"}}>
         { first !== 1 ? <Button onClick={handlerPrev} >Prev</Button> : null }
         <Button onClick={() => setCurrentPage(first)}>{ first }</Button>
         { pages <= first ? null : <Button onClick={() => setCurrentPage(second)}>{ second }</Button> }

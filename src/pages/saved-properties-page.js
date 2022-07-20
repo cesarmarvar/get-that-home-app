@@ -48,8 +48,6 @@ function SavedProperties() {
   const [landlordProperties, setLandlordProperties] = useState(2);
   const {user} = useAuth();
   const [currentSelect, setCurrentSelect] = useState(0);
-  // 0 favorites & active 
-  // 1 closed & contacted
 
   useEffect(() => {
       getSavedProperties()
@@ -60,11 +58,6 @@ function SavedProperties() {
         })
         .catch(console.log);
   }, [])
-  // if(isLoading) {
-  //   console.log("Loading")
-  // } else {
-  //   console.log(properties)
-  // }
 
   function LandlordButtons() {
     return (
