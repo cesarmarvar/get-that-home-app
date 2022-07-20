@@ -11,9 +11,7 @@ function Pagination({ array, setCurrentPage }) {
   const Button = styled.button`
     background: ${ styleButtonnClick ? "rgba(244, 143, 177, 0.15);" : "#FFFFFF;" }
     border: ${ styleButtonnClick ? "1px solid #BF5F82;" : "1px solid rgba(97, 97, 97, 0.15);" }
-    // border: 1px solid #BF5F82;
-    // border: 1px solid rgba(97, 97, 97, 0.15);
-    // background: #FFFFFF;
+
     border-radius: 0.25rem;
     padding: 0.5rem 0.75rem;
     cursor: pointer;
@@ -57,7 +55,6 @@ function Pagination({ array, setCurrentPage }) {
         { pages <= first ? null : <Button onClick={() => {
           setCurrentPage(second);
           setStyleButtonClick(true);
-          console.log("click en 2")
         }}>{ second }</Button> }
         { pages <= second ? null : <Button  onClick={() => setCurrentPage(third)}>{ third }</Button> }
         { pages <= third ? null : <Button onClick={() => setCurrentPage(fourth)}>{ fourth }</Button> }
