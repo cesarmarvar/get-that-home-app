@@ -8,10 +8,12 @@ import { colors, fonts, typography } from "../styles";
 import { RiMoneyDollarCircleLine, RiUserReceived2Fill } from "react-icons/ri";
 import { BiBed, BiBath, BiArea } from "react-icons/bi";
 import { FaPaw } from "react-icons/fa";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { TiEdit } from "react-icons/ti";
 import GoogleMaps from "simple-react-google-maps";
 import { useParams } from "react-router-dom";
+import { useAuth } from "../context/auth-context";
+import { createSavedProperty, destroySavedProperty, getSavedProperties } from "../services/saved-properties-service";
 
 const FlexRow = styled.div`
   display: flex;
@@ -58,12 +60,15 @@ const PropertyImage = styled.img`
   height: 384;
 `
 
-export function PropertyDetail({isAuth, typeUser, handleOpen}) {
+export function PropertyDetail({isAuth, handleOpen}) {
 
   const [ property, setProperty ] = useState({});
   const [ showContact, setShowContact ] = useState(false);
   const params = useParams();
-
+  const { user } = useAuth();
+  
+  const [ favorite, setFavorite ] = useState(false)
+  
   const { 
     address,
     price, 
@@ -77,8 +82,9 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     lat,
     long,
     image_urls,
+    savedPropertyId
   } = property
-
+  console.log(property)
   function handleShowContact(e) {
   e.preventDefault();
   setShowContact(!showContact)
@@ -88,11 +94,29 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
     getProperty(params.id)
     .then(setProperty)
     .catch(console.log)
+
+    getSavedProperties()
+      .then(data => {
+        const savedProperty = data.find(prop => prop.property.id === property?.id)
+        setFavorite(savedProperty.property_status === "favorite")
+        setProperty(property => {
+          return { ...property, savedPropertyId: savedProperty.id }
+        })
+      }).catch(console.log)
   }, []);
 
-  function handleSetFavorite(e) { // ============================================= pendiente
+  function handleSetFavorite(e) { 
     e.preventDefault();
+    createSavedProperty({
+      property_id: params.id,
+      property_status: 0,
+    }).then(setFavorite(true)).catch(console.log)
+  }
 
+  function handleDeleteFavorite(e) { 
+    e.preventDefault();
+    console.log(property.savedPropertyId)
+    destroySavedProperty(property.savedPropertyId).then(setFavorite(false)).catch(console.log)
   }
 
   /*=============== Funciones para renderear el card del costado =============*/
@@ -127,9 +151,10 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
           <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
           <FlexColumn style={{gap: "8px"}}>
             <button style={{border: "none", backgroundColor: "white"}}>
-              <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px" />
+              { favorite ? <AiFillHeart style={{cursor: "pointer"}} onClick={handleDeleteFavorite} size="40px" color="pink"/> 
+                           : <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px"/> }
             </button>
-            <p>Add to favorites</p>
+            { favorite ? <p>Remove favorite</p> : <p>Add to favorites</p> }
           </FlexColumn>
         </CardContainer>
       </FlexColumn>
@@ -206,8 +231,8 @@ export function PropertyDetail({isAuth, typeUser, handleOpen}) {
           /> : null}
         </FlexColumn>
         { !isAuth ? <NotLogged /> :
-          isAuth ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
-          isAuth && typeUser === "landlord"  ? <LandlordButton /> : null }
+          isAuth && user_info?.email != user?.email ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
+          isAuth && user_info?.email === user?.email ? <LandlordButton /> : null }
 
     </Container>
   )
