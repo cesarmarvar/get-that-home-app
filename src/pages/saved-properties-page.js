@@ -126,7 +126,7 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination array={Object.keys(properties)} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={Object.keys(properties)} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
@@ -143,7 +143,7 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination array={closed} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={closed} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
@@ -160,7 +160,7 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination array={favorites} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={favorites} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
@@ -177,14 +177,14 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination array={contacted} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={contacted} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   return (
     <>
-      <div style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+      <div style={{display: "flex", flexDirection: "column", minHeight: "100vh"}}>
         { user?.user_type === "landlord" ? <LandlordButtons /> : <BuyerButtons />}
         { user?.user_type === "landlord" ? (landlordProperties === 2 ? 
         <ActiveProperties /> : <ClosedProperties />) : (buyerProperties === 0 ? 
