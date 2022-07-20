@@ -52,7 +52,6 @@ function SavedProperties() {
   useEffect(() => {
       getSavedProperties()
         .then((data) => {
-          console.log(data);
           const properties = paginate(data);
           setProperties(properties);
         })
