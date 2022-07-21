@@ -4,6 +4,15 @@ export const Container = styled.div`
   margin: 0 1rem;
 `;
 
+export const Main = styled.div`
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const Filters = styled.div`
   max-width: 1100px;
   display: flex;
