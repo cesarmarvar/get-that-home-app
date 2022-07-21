@@ -13,7 +13,7 @@ export async function getProperty(id) {
 }
 
 export async function createProperty(data) {
-  return await getHomeClient("properties", { body: data });
+  return await getHomeClient("properties", { body: {...data, image_urls: JSON.stringify(data.image_urls)} });
 }
 
 export async function updateProperty(data, id) {
