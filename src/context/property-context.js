@@ -6,6 +6,7 @@ const PropertyContext = createContext();
 
 function PropertyProvider({ children }) {
   const [properties, setProperties] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function PropertyProvider({ children }) {
       setProperties(props => {
         return [...props, prop];
       })
-    });
+    }).catch((e) => setError(e.message));
   }
 
   function searchByAddress(query) {
@@ -46,6 +47,7 @@ function PropertyProvider({ children }) {
     <PropertyContext.Provider
       value={{
         properties: paginate(properties),
+        error,
         paginate,
         searchByAddress,
         newProperty
