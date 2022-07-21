@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login, logout, signup } from "../services/sessions-service";
 import { getUser } from "../services/users-service";
 
@@ -8,6 +9,7 @@ function AuthProvider({ children }){
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUser().then(data => {
@@ -37,6 +39,7 @@ function AuthProvider({ children }){
   function handleLogout() {
     return logout().finally(() => {
       setUser(null);
+      navigate("/")
     });
   }
 

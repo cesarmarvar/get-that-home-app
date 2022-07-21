@@ -100,7 +100,7 @@ const AddressAndIcons = styled.div`
   align-items: flex-start;
 `
 
-const Adress = styled.text`
+const Adress = styled.p`
   color: ${colors.gray.dark};
   font-family: ${fonts.secundary};
   ${typography.subtitle.s1}; // Pendiente corregir el line height: debe ser 24.
