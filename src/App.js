@@ -13,18 +13,13 @@ import { Modal } from "./pages/ui";
 import SavedProperties from "./pages/saved-properties-page";
 import { PropertyDetail } from "./pages/property-detail";
 import Loader from "./components/Loader";
-<<<<<<< HEAD
 import NotFound from "./pages/not-found";
-=======
 import { getSavedProperties } from "./services/saved-properties-service";
->>>>>>> d71a49e (Brought saved properties state to app and prop drilled it to Property Detail page)
 
 function App() {
   const { user, isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [ userType, setUserType ] = useState(0);
-<<<<<<< HEAD
-=======
   const [ savedProperties, setSavedProperties ] = useState([])
   
   useEffect(() => {
@@ -32,7 +27,6 @@ function App() {
       .then(setSavedProperties)
       .catch(console.log)
   }, []);
->>>>>>> d71a49e (Brought saved properties state to app and prop drilled it to Property Detail page)
 
   return (
     <>
