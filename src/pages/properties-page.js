@@ -5,6 +5,8 @@ import Filter from "../components/Filter";
 import { useEffect, useState } from "react";
 import { useProperties } from "../context/property-context";
 import { PropertyCard } from "../components/Card/card";
+import Pagination from "../components/pagination/pagination";
+import MultiSelect from "../components/MultiSelect";
 
 function PropertiesPage() {
   const { properties, searchByAddress } = useProperties();
@@ -19,14 +21,12 @@ function PropertiesPage() {
     price: [],
     type: [],
     nums: [],
-    more: []
+    more: [],
+    contract: null,
+    isFiltering: false
   });
 
   const { query } = search;
-
-  function handleChangePage(value){
-    setCurrentPage(value);
-  }
 
   function handleQuery(e) {
     setSearch({...search, query: e.target.value});
@@ -41,6 +41,26 @@ function PropertiesPage() {
       setCurrentProps(properties[currentPage]);
     }
   }, [properties, query, currentPage, searchByAddress]);
+
+  function handleFilters(){
+    const allProperties = []
+    console.log("here!")
+    Object.values(properties).forEach(prop => {
+      allProperties.push(...prop);
+    });
+    if(!filters.contract) {
+      setFilters(filters => {
+        return {...filters, isFiltering: false}
+      });
+      setCurrentProps(properties[1]);
+      return;
+    }
+    const newProps = filters.contract ? allProperties.filter(prop => prop.operation_type === filters.contract) : allProperties;
+    setCurrentProps(newProps);
+    setFilters(filters => {
+      return {...filters, isFiltering: true}
+    });
+  }
 
   return (
     <Container>
@@ -75,7 +95,17 @@ function PropertiesPage() {
             type="more"
           />
         </FilterSection>
-        <Input />
+        <MultiSelect
+          setFilters={setFilters}
+          handleChangeFilters={handleFilters}
+          type="contract"
+          withBorder
+          isMulti={false}
+          options={[
+            {value: "sale", label: "Buying"},
+            {value: "rent", label: "Renting"}
+          ]}
+        />
       </Filters>
       <CardsContainer>
         { currentProps?.map((prop, index) => (
@@ -85,6 +115,17 @@ function PropertiesPage() {
               data={prop}
             />
         )) }
+      {
+        !filters.isFiltering
+        ?
+        <Pagination 
+          array={Object.keys(properties)}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+        :
+        null
+      }
       </CardsContainer>
     </Container>
   );

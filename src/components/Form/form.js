@@ -9,6 +9,7 @@ import Button from "../Button";
 import { useEffect, useRef, useState } from "react";
 import Radio from "../Radio";
 import Checkbox from "../Checkbox";
+import { useProperties } from "../../context/property-context";
 
 const TitlePage = styled.h2`
   ${typography.headline.h4};
@@ -51,9 +52,11 @@ const apiURL = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAxa_u3oAHJONA2
 
 function Form({title="Create a property listing"}) {
 
+  const { newProperty } = useProperties();
   const [operationType, setOperationType] = useState("rent");
   const [images, setImages] = useState([]);
   const [isUploading, setIsUploading] = useState(true);
+  const [urls, setUrls] = useState([]);
 
   const [formData, setFormData] = useState({
     address: "",
@@ -127,17 +130,17 @@ function Form({title="Create a property listing"}) {
     formData.price = parseInt(formData.price);
     formData.maintanance = !!formData.maintanance ? parseInt(formData.maintanance): null;
     formData.operation_type = operationType ==="rent" ? 0: 1;
-    let image_urls = [];
     images.forEach(img => {
       uploadImage(img).then(data => {
-          image_urls.push(data.secure_url);
           setIsUploading(false);
-          return data;
+          setUrls(urls => {
+            return [...urls, data.secure_url]
+          });
       });
     });
     if(!isUploading) {
-      formData.image_urls = image_urls;
-      console.log(formData);
+      formData.image_urls = urls;
+      newProperty(formData);
     }
   }
 

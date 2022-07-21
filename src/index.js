@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/auth-context';
 import { PropertyProvider } from './context/property-context';
+import { SavedPropertyProvider } from './context/saved_property-context';
 import { reset, global } from './styles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,7 +16,9 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <PropertyProvider>
-          <App />
+          <SavedPropertyProvider>
+            <App />
+          </SavedPropertyProvider>
         </PropertyProvider>
       </AuthProvider>
     </BrowserRouter>

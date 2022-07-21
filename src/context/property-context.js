@@ -1,15 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getProperties } from "../services/properties-service";
+import { useNavigate } from "react-router-dom";
+import { createProperty, getProperties } from "../services/properties-service";
 
 const PropertyContext = createContext();
 
 function PropertyProvider({ children }) {
   const [properties, setProperties] = useState([]);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProperties().then(data => {
-      const properties = paginate(data);
-      setProperties(properties);
+      setProperties(data);
     }).catch(console.error);
   }, []);
 
@@ -28,21 +30,27 @@ function PropertyProvider({ children }) {
     return data;
   }
 
-  function searchByAddress(query) {
-    const allProperties = [];
-    Object.values(properties).forEach(prop => {
-      allProperties.push(...prop);
-    })
+  function newProperty(data) {
+    createProperty(data).then(prop => {
+      navigate("/saved_properties");
+      setProperties(props => {
+        return [...props, prop];
+      })
+    }).catch((e) => setError(e.message));
+  }
 
-    return allProperties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase()));
+  function searchByAddress(query) {
+    return properties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase()));
   }
 
   return (
     <PropertyContext.Provider
       value={{
-        properties,
+        properties: paginate(properties),
+        error,
         paginate,
-        searchByAddress
+        searchByAddress,
+        newProperty
       }}
     >
       { children }
