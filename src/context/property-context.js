@@ -39,12 +39,7 @@ function PropertyProvider({ children }) {
   }
 
   function searchByAddress(query) {
-    const allProperties = [];
-    Object.values(properties).forEach(prop => {
-      allProperties.push(...prop);
-    })
-
-    return allProperties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase()));
+    return properties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase()));
   }
 
   return (
