@@ -13,12 +13,12 @@ import { Modal } from "./pages/ui";
 import SavedProperties from "./pages/saved-properties-page";
 import { PropertyDetail } from "./pages/property-detail";
 import Loader from "./components/Loader";
+import NotFound from "./pages/not-found";
 
 function App() {
   const { user, isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [ userType, setUserType ] = useState(0);
-
 
   return (
     <>
@@ -28,7 +28,6 @@ function App() {
         <Loader />
         :
         <>
-        
           <Header 
             isAuth={!!user}
             typeUser={user?.user_type}
@@ -36,12 +35,10 @@ function App() {
           />
           {
             isOpen
-            ?
+            && 
             <Modal>
               <LoginForm handleOpen={setIsOpen}/>
             </Modal>
-            :
-            null
           }
           <Routes>
             <Route index path="/" element={<LandingPage />} />
@@ -51,14 +48,13 @@ function App() {
             <Route path="/properties/:id" element={<PropertyDetail isAuth={!!user} handleOpen={setIsOpen}/>}/>
             {
               user
-              ?
+              &&
               <>
-                <Route path="/new-property/form" element={<PropertyFormPage />}/>
+                {user.user_type === "landlord" && <Route path="/new-property" element={<PropertyFormPage />}/>}
                 <Route path="/saved_properties" element={<SavedProperties />} />
               </>
-              :
-              null
             }
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </>
