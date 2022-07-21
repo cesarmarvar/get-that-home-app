@@ -1,12 +1,12 @@
 import { Container, customStyles, Label, StyleSelect } from "./styles";
 
-function MultiSelect({ isMulti=true, label="", setFilters, type, options, placeholder, withBorder = true, ...other}) {
+function MultiSelect({ isMulti=true, label="", handleChangeFilters, setFilters, type, options, placeholder, withBorder = true, ...other}) {
   
   function handleChange(item) {
     if(type === "type") {
       setFilters(filters => ({...filters, type: item.value}));
     }else if(type === "contract"){
-      setFilters(filters => ({...filters, contract: item.value}));
+      setFilters(filters => ({...filters, contract: item ? item.value : null}));
     }else {
       const items = item.map(i => (i.value));
       setFilters(filters => ({...filters, where: items}))
@@ -22,9 +22,13 @@ function MultiSelect({ isMulti=true, label="", setFilters, type, options, placeh
         isMulti={isMulti}
         options={options}
         isSearchable
-        onChange={(item) => handleChange(item)}
+        onChange={(item) => {
+          handleChange(item);
+          handleChangeFilters();
+        }}
         border={withBorder}
         {...other}
+        isClearable={true}
       />
     </Container>
   )
