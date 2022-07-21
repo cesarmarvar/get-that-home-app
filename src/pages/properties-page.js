@@ -5,6 +5,7 @@ import Filter from "../components/Filter";
 import { useEffect, useState } from "react";
 import { useProperties } from "../context/property-context";
 import { PropertyCard } from "../components/Card/card";
+import Pagination from "../components/pagination/pagination";
 
 function PropertiesPage() {
   const { properties, searchByAddress } = useProperties();
@@ -23,10 +24,6 @@ function PropertiesPage() {
   });
 
   const { query } = search;
-
-  function handleChangePage(value){
-    setCurrentPage(value);
-  }
 
   function handleQuery(e) {
     setSearch({...search, query: e.target.value});
@@ -85,6 +82,11 @@ function PropertiesPage() {
               data={prop}
             />
         )) }
+      <Pagination 
+        array={Object.keys(properties)}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
       </CardsContainer>
     </Container>
   );
