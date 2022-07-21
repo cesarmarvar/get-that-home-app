@@ -93,7 +93,13 @@ function Form({title="Create a property listing"}) {
     const autocomplete = new window.google.maps.places.Autocomplete(addressInput.current);
     autocomplete.setFields(["address_component", "geometry"]);
     autocomplete.addListener("place_changed", () => {
-      setFormData(data => ({...data, address: addressInput.current.value}));
+      const place = autocomplete.getPlace();
+      setFormData(data => ({
+        ...data,
+        address: addressInput.current.value,
+        lat: place.geometry.location.lat(),
+        long: place.geometry.location.lng()
+      }));
     });
   }
 
