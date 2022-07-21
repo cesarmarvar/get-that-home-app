@@ -7,7 +7,9 @@ function SavedPropertyProvider({ children }) {
   const [savedProperties, setSavedProperties] = useState([]);
   
   useEffect(() => {
-    getSavedProperties().then(setSavedProperties);
+    getSavedProperties().then(data => {
+      setSavedProperties(data);
+    });
   }, []);
 
   function newSavedProperty(id) {
