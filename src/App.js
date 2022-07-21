@@ -1,6 +1,6 @@
 import Header from "./components/Header/header";
 import PropertyFormPage from "./pages/propery-form-page";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer/footer";
 import LoginForm from "./components/LoginForm";
@@ -14,11 +14,19 @@ import SavedProperties from "./pages/saved-properties-page";
 import { PropertyDetail } from "./pages/property-detail";
 import Loader from "./components/Loader";
 import NotFound from "./pages/not-found";
+import { getSavedProperties } from "./services/saved-properties-service";
 
 function App() {
   const { user, isLoading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [ userType, setUserType ] = useState(0);
+  const [ savedProperties, setSavedProperties ] = useState([])
+  
+  useEffect(() => {
+    getSavedProperties()
+      .then(setSavedProperties)
+      .catch(console.log)
+  }, []);
 
   return (
     <>
@@ -45,7 +53,7 @@ function App() {
             <Route path="/properties" element={<PropertiesPage />}/>
             <Route path="/register" element={<Signup setUserType={setUserType}/>}/>
             <Route path="/register/form" element={<SignupForm userType={userType}/>}/>
-            <Route path="/properties/:id" element={<PropertyDetail isAuth={!!user} handleOpen={setIsOpen}/>}/>
+            <Route path="/properties/:id" element={<PropertyDetail savedProperties={savedProperties} isAuth={!!user} handleOpen={setIsOpen}/>}/>
             {
               user
               &&

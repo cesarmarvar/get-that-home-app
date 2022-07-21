@@ -60,15 +60,26 @@ const PropertyImage = styled.img`
   height: 384;
 `
 
-export function PropertyDetail({isAuth, handleOpen}) {
+export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
 
+  const params = useParams();
+
+  const savedProperty = savedProperties.find(prop => prop.property.id === parseInt(params.id))
+  
   const [ property, setProperty ] = useState({});
   const [ showContact, setShowContact ] = useState(false);
-  const params = useParams();
   const { user } = useAuth();
   
-  const [ favorite, setFavorite ] = useState(false)
+  const [ favorite, setFavorite ] = useState({
+    isFavorite: savedProperty && savedProperty.property_status === "favorite",
+    id: savedProperty ? savedProperty.id : null
+  })
   
+  const [ contacted, setContacted ] = useState({
+    isContacted: savedProperty && savedProperty.property_status === "contacted",
+    id: savedProperty ? savedProperty.id : null                                                                                                                             
+  })
+
   const { 
     address,
     price, 
@@ -82,11 +93,14 @@ export function PropertyDetail({isAuth, handleOpen}) {
     lat,
     long,
     image_urls,
-    savedPropertyId
   } = property
-  console.log(property)
+
   function handleShowContact(e) {
   e.preventDefault();
+  createSavedProperty({
+    property_id: params.id,
+    property_status: 1
+  }).then(console.log).catch(console.log)
   setShowContact(!showContact)
   }
 
@@ -94,30 +108,25 @@ export function PropertyDetail({isAuth, handleOpen}) {
     getProperty(params.id)
     .then(setProperty)
     .catch(console.log)
-
-    getSavedProperties()
-      .then(data => {
-        const savedProperty = data.find(prop => prop.property.id === property?.id)
-        setFavorite(savedProperty.property_status === "favorite")
-        setProperty(property => {
-          return { ...property, savedPropertyId: savedProperty.id }
-        })
-      }).catch(console.log)
   }, []);
+  
+  // console.log(favorite)
 
   function handleSetFavorite(e) { 
     e.preventDefault();
     createSavedProperty({
       property_id: params.id,
       property_status: 0,
-    }).then(setFavorite(true)).catch(console.log)
-  }
+    }).then(response => {
+      setFavorite({isFavorite: true, id: response.id})})
+      .catch(console.log)
+    }
 
+  
   function handleDeleteFavorite(e) { 
     e.preventDefault();
-    console.log(property.savedPropertyId)
-    destroySavedProperty(property.savedPropertyId).then(setFavorite(false)).catch(console.log)
-  }
+    destroySavedProperty(favorite.id).then(setFavorite(false)).catch(console.log)
+  } 
 
   /*=============== Funciones para renderear el card del costado =============*/
   
@@ -151,10 +160,10 @@ export function PropertyDetail({isAuth, handleOpen}) {
           <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
           <FlexColumn style={{gap: "8px"}}>
             <button style={{border: "none", backgroundColor: "white"}}>
-              { favorite ? <AiFillHeart style={{cursor: "pointer"}} onClick={handleDeleteFavorite} size="40px" color="pink"/> 
+              { favorite.isFavorite ? <AiFillHeart style={{cursor: "pointer"}} onClick={handleDeleteFavorite} size="40px" color="pink"/> 
                            : <AiOutlineHeart style={{cursor: "pointer"}} onClick={handleSetFavorite} size="40px"/> }
             </button>
-            { favorite ? <p>Remove favorite</p> : <p>Add to favorites</p> }
+            { favorite.isFavorite ? <p>Remove favorite</p> : <p>Add to favorites</p> }
           </FlexColumn>
         </CardContainer>
       </FlexColumn>
@@ -175,7 +184,7 @@ export function PropertyDetail({isAuth, handleOpen}) {
             <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Phone</p>
             <p style={{textAlign: "center"}}>{user_info.phone}</p>
           </div>
-          <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"Back"}/>
+          {/* <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"Back"}/> */}
         </CardContainer>
       </FlexColumn>
     )
