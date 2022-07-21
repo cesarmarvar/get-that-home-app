@@ -75,6 +75,11 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     id: savedProperty ? savedProperty.id : null
   })
   
+  const [ contacted, setContacted ] = useState({
+    isContacted: savedProperty && savedProperty.property_status === "contacted",
+    id: savedProperty ? savedProperty.id : null                                                                                                                             
+  })
+
   const { 
     address,
     price, 
@@ -92,6 +97,10 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
 
   function handleShowContact(e) {
   e.preventDefault();
+  createSavedProperty({
+    property_id: params.id,
+    property_status: 1
+  }).then(console.log).catch(console.log)
   setShowContact(!showContact)
   }
 
@@ -101,7 +110,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     .catch(console.log)
   }, []);
   
-  console.log(favorite)
+  // console.log(favorite)
 
   function handleSetFavorite(e) { 
     e.preventDefault();
@@ -175,7 +184,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
             <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Phone</p>
             <p style={{textAlign: "center"}}>{user_info.phone}</p>
           </div>
-          <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"Back"}/>
+          {/* <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"Back"}/> */}
         </CardContainer>
       </FlexColumn>
     )
