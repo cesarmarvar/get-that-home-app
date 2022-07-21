@@ -78,8 +78,9 @@ function PropertiesPage() {
         <Input />
       </Filters>
       <CardsContainer>
-        { currentProps?.map(prop => (
+        { currentProps?.map((prop, index) => (
             <PropertyCard
+              key={index}
               user="homeseeker"
               data={prop}
             />
