@@ -55,7 +55,6 @@ function Form({title="Create a property listing"}) {
   const { newProperty } = useProperties();
   const [operationType, setOperationType] = useState("rent");
   const [images, setImages] = useState([]);
-  const [isUploading, setIsUploading] = useState(true);
   const [urls, setUrls] = useState([]);
 
   const [formData, setFormData] = useState({
@@ -131,18 +130,21 @@ function Form({title="Create a property listing"}) {
     formData.maintanance = !!formData.maintanance ? parseInt(formData.maintanance): null;
     formData.operation_type = operationType ==="rent" ? 0: 1;
     images.forEach(img => {
-      uploadImage(img).then(data => {
-          setIsUploading(false);
+      uploadImage(img).then((data) => {
           setUrls(urls => {
-            return [...urls, data.secure_url]
+            return [...urls, data.secure_url];
           });
       });
     });
-    if(!isUploading) {
+  }
+
+  useEffect(() => {
+    if(images.length === 0) return;
+    if(images.length === urls.length) {
       formData.image_urls = urls;
       newProperty(formData);
     }
-  }
+  }, [urls, formData, images, newProperty]);
 
   return(
     <WrapperForm onSubmit={handleSubmit}>

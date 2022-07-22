@@ -1,6 +1,6 @@
 import { Container, customStyles, Label, StyleSelect } from "./styles";
 
-function MultiSelect({ isMulti=true, label="", handleChangeFilters, setFilters, type, options, placeholder, withBorder = true, ...other}) {
+function MultiSelect({ isMulti=true, label="", setFilters, type, options, placeholder, withBorder = true, ...other}) {
   
   function handleChange(item) {
     if(type === "type") {
@@ -24,7 +24,6 @@ function MultiSelect({ isMulti=true, label="", handleChangeFilters, setFilters, 
         isSearchable
         onChange={(item) => {
           handleChange(item);
-          handleChangeFilters();
         }}
         border={withBorder}
         {...other}

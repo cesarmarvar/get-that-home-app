@@ -56,16 +56,12 @@ const CardContainer = styled.div`
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 8px
 `
-const PropertyImage = styled.img`
-  width: 512;
-  height: 384;
-`
 
 export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
 
   const params = useParams();
 
-  const savedProperty = savedProperties.find(prop => prop.property.id === parseInt(params.id))
+  const savedProperty = savedProperties ? savedProperties.find(prop => prop.property?.id === parseInt(params?.id)) : {};
   
   const [ property, setProperty ] = useState({});
   const { user } = useAuth();
@@ -99,7 +95,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     getProperty(params.id)
     .then(setProperty)
     .catch(console.log)
-  }, []);
+  }, [params]);
   
   function handleContactAdvertiser(e) {
   e.preventDefault();
@@ -145,7 +141,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
   function LandlordButton() {
     return(
       <FlexColumn style={{width: "340px", height: "104px", padding: "32px", alignItems: "center", justifyContent: "center"}}>
-        <Button IconL={ TiEdit } type={"primary"} size={"l"} children={"EDIT PROPERTY"}/>
+        <Button IconL={ TiEdit } type={"primary"} children={"EDIT PROPERTY"}/>
       </FlexColumn>
     )
   }
@@ -244,7 +240,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
           /> : null}
         </FlexColumn>
         { !isAuth ? <NotLogged /> :
-          isAuth && user_info?.email != user?.email ? (contacted.isContacted ? <LoggedBuyerContactDetail /> : <LoggedBuyerButton />) :
+          isAuth && user_info?.email !== user?.email ? (contacted.isContacted ? <LoggedBuyerContactDetail /> : <LoggedBuyerButton />) :
           isAuth && user_info?.email === user?.email ? <LandlordButton /> : null }
 
     </Container>
