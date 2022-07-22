@@ -32,7 +32,7 @@ async function getHomeClient(endpoint, { method, headers, body } = {}){
     }catch(e) {
       throw new Error(response.statusText);
     }
-    throw new Error(data.errors);
+    throw new Error(JSON.stringify(data.errors));
   }
 
   try {

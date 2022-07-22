@@ -6,9 +6,10 @@ import * as Style from "./styles";
 import { BsPersonPlusFill } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { colors } from "../../styles";
+import { useEffect } from "react";
 
 function LoginForm({ handleOpen }){
-  const { login } = useAuth(); 
+  const { login, error, setError, user } = useAuth();
 
   function validate(values){
     const { email, password } = values;
@@ -33,8 +34,16 @@ function LoginForm({ handleOpen }){
 
   function handleSubmit(values){
     login(values);
-    handleOpen(false);
   }
+
+  useEffect(() => {
+    if(user) {
+      handleOpen(false);
+      setError(null)
+    }
+  }, [user, handleOpen, setError])
+
+  console.log(error);
 
   return (
     <Formik
@@ -85,6 +94,7 @@ function LoginForm({ handleOpen }){
           {errors.password && touched.password && (
             <Style.ErrorMessage>{errors.password}</Style.ErrorMessage>
           )}
+          { error ? <p> Email or password is incorrect </p> : null }
           <Button
             disabled={!isValid}
             IconL={ BsPersonPlusFill }
