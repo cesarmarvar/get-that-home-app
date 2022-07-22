@@ -31,7 +31,7 @@ function Header({ isAuth, typeUser, handleOpen }) {
 
   function Profile() {
     return (
-      <Button IconL={ RiUserLine } type="primary" size="sm" children="PROFILE"/>
+      <Button onClick={() => navigate("/profile")}  IconL={ RiUserLine } type="primary" size="sm" children="PROFILE"/>
     )
   }
 
