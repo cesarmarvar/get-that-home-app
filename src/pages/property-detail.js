@@ -14,7 +14,7 @@ import GoogleMaps from "simple-react-google-maps";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { createSavedProperty, destroySavedProperty } from "../services/saved-properties-service";
-
+import SimpleImageSlider from "react-simple-image-slider";
 
 const FlexRow = styled.div`
   display: flex;
@@ -79,7 +79,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     isContacted: savedProperty && savedProperty.property_status === "contacted",
     id: savedProperty ? savedProperty.id : null                                                                                                                             
   })
-  console.log(contacted.isContacted)
+
   const { 
     address,
     price, 
@@ -94,13 +94,13 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     long,
     image_urls,
   } = property
-
+  
   useEffect(() => {
     getProperty(params.id)
     .then(setProperty)
     .catch(console.log)
   }, []);
-
+  
   function handleContactAdvertiser(e) {
   e.preventDefault();
   createSavedProperty({
@@ -192,7 +192,12 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
   return (
     <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
-      { image_urls ? <PropertyImage src={JSON.parse(image_urls)[0]} /> : null}
+      { image_urls ? <SimpleImageSlider
+                       width={830}
+                       height={504}
+                       images={JSON.parse(image_urls)}
+                       showBullets={true}
+                       showNavs={true} /> : null}
         <FlexRow style={{width: "100%", padding: "1rem 0", justifyContent: "space-between", fontFamily: `${fonts.secundary}`}}>
           <FlexColumn>
             <h3 css={css`${typography.headline.h4}`}>{address}</h3>
