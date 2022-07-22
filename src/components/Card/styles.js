@@ -47,8 +47,9 @@ export const DefaultCard = styled.div`
 `;
 
 export const PropertyImg = styled.img`
-  width: 300;
+  width: 300px;
   height: 200px;
+  object-fit: cover;
 `;
 
 export const PropertyData = styled.div`

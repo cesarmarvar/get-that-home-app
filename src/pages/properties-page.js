@@ -114,18 +114,20 @@ function PropertiesPage() {
               data={prop}
             />
         )) }
+      </CardsContainer>
       {
-        !filters.isFiltering
+        (!filters.isFiltering) && (!search.isSearching)
         ?
-        <Pagination 
-          array={Object.keys(properties)}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+        <div style={{margin: "1rem auto", width: "fit-content"}}>
+          <Pagination 
+            array={Object.keys(properties)}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
         :
         null
       }
-      </CardsContainer>
     </Container>
   );
 }
