@@ -13,7 +13,8 @@ import { TiEdit } from "react-icons/ti";
 import GoogleMaps from "simple-react-google-maps";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
-import { createSavedProperty, destroySavedProperty, getSavedProperties } from "../services/saved-properties-service";
+import { createSavedProperty, destroySavedProperty } from "../services/saved-properties-service";
+import SimpleImageSlider from "react-simple-image-slider";
 
 const FlexRow = styled.div`
   display: flex;
@@ -67,7 +68,6 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
   const savedProperty = savedProperties.find(prop => prop.property.id === parseInt(params.id))
   
   const [ property, setProperty ] = useState({});
-  const [ showContact, setShowContact ] = useState(false);
   const { user } = useAuth();
   
   const [ favorite, setFavorite ] = useState({
@@ -94,23 +94,22 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     long,
     image_urls,
   } = property
-
-  function handleShowContact(e) {
-  e.preventDefault();
-  createSavedProperty({
-    property_id: params.id,
-    property_status: 1
-  }).then(console.log).catch(console.log)
-  setShowContact(!showContact)
-  }
-
+  
   useEffect(() => {
     getProperty(params.id)
     .then(setProperty)
     .catch(console.log)
   }, []);
   
-  // console.log(favorite)
+  function handleContactAdvertiser(e) {
+  e.preventDefault();
+  createSavedProperty({
+    property_id: params.id,
+    property_status: 1
+  }).then(response => {
+    setContacted({isContacted: true, id: response.id})})
+    .catch(console.log)
+  }
 
   function handleSetFavorite(e) { 
     e.preventDefault();
@@ -120,7 +119,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     }).then(response => {
       setFavorite({isFavorite: true, id: response.id})})
       .catch(console.log)
-    }
+  }
 
   
   function handleDeleteFavorite(e) { 
@@ -157,7 +156,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
     return(
       <FlexColumn style={{width: "340px", height: "248px", padding: "32px"}}>
         <CardContainer >
-          <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
+          <Button onClick={handleContactAdvertiser} type={"primary"} size={"sm"} children={"CONTACT ADVERTISER"}/>
           <FlexColumn style={{gap: "8px"}}>
             <button style={{border: "none", backgroundColor: "white"}}>
               { favorite.isFavorite ? <AiFillHeart style={{cursor: "pointer"}} onClick={handleDeleteFavorite} size="40px" color="pink"/> 
@@ -178,11 +177,11 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
           <p css={css`${typography.headline.h6}`}>Contact information</p>
           <div>
             <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Email</p>
-            <p style={{textAlign: "center"}}>{user_info.email}</p>
+            <p style={{textAlign: "center"}}>{user_info?.email}</p>
           </div>
           <div>
             <p style={{textAlign: "center", color: `${colors.pink.dark}`}}>Phone</p>
-            <p style={{textAlign: "center"}}>{user_info.phone}</p>
+            <p style={{textAlign: "center"}}>{user_info?.phone}</p>
           </div>
           {/* <Button onClick={handleShowContact} type={"primary"} size={"sm"} children={"Back"}/> */}
         </CardContainer>
@@ -193,7 +192,12 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
   return (
     <Container>
       <FlexColumn style={{maxWidth: "830px"}}>
-      { image_urls ? <PropertyImage src={JSON.parse(image_urls)[0]} /> : null}
+      { image_urls ? <SimpleImageSlider
+                       width={830}
+                       height={504}
+                       images={JSON.parse(image_urls)}
+                       showBullets={true}
+                       showNavs={true} /> : null}
         <FlexRow style={{width: "100%", padding: "1rem 0", justifyContent: "space-between", fontFamily: `${fonts.secundary}`}}>
           <FlexColumn>
             <h3 css={css`${typography.headline.h4}`}>{address}</h3>
@@ -240,7 +244,7 @@ export function PropertyDetail({isAuth, handleOpen, savedProperties}) {
           /> : null}
         </FlexColumn>
         { !isAuth ? <NotLogged /> :
-          isAuth && user_info?.email != user?.email ? (!showContact ? <LoggedBuyerButton /> : <LoggedBuyerContactDetail />) :
+          isAuth && user_info?.email != user?.email ? (contacted.isContacted ? <LoggedBuyerContactDetail /> : <LoggedBuyerButton />) :
           isAuth && user_info?.email === user?.email ? <LandlordButton /> : null }
 
     </Container>
