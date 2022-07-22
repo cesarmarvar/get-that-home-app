@@ -6,7 +6,9 @@ import { colors } from "../../styles/colors";
 import { typography } from "../../styles/typography";
 import { fonts } from "../../styles/fonts";
 import { AiOutlineCloseCircle, AiFillHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useProperties } from "../../context/property-context";
+
 
 const RentalChip = styled.div`
   width: 110px;
@@ -171,19 +173,20 @@ const LandlordButtons = styled.div`
     flex-direction: row;
     gap: 8px;
     align-items: center;
-  `
+  `;
 
 // style={{border: "2px solid brown"}} ====> debug
 
 export function PropertyCard({user, data}) {
-
-  const { id, address, price,property_type, pets, bedrooms, bathrooms, area, operation_type, image_urls } = data
-
+  const { id, address, price,property_type, pets, bedrooms, bathrooms, area, operation_type, image_urls, is_active } = data;
+  const { togleStatus } = useProperties();
+  
+  const navigate = useNavigate();
+  
   return(
     <>
-    <Link to={`/properties/${id}`}>
       <div style={{cursor: "pointer"}}>
-        <DefaultCard>
+        <DefaultCard onClick={()=> navigate(`/properties/${id}`)}>
           { operation_type === "rent" ? (
             <RentalChip>
               <RiCoinsLine size="22px"/>
@@ -225,7 +228,6 @@ export function PropertyCard({user, data}) {
                   <div>{area} m2</div>
                 </SingleIcon>
                 { pets ? <FaPaw size="20px" color={`${colors.gray.regular}`}/> : null}
-
                 <AiFillHeart size="20px" color={`${colors.gray.regular}`}/>
               </IconsRow>
             </AddressAndIcons>
@@ -239,15 +241,14 @@ export function PropertyCard({user, data}) {
               <FaRegEdit size="18px"/>
               <p>EDIT</p>
             </CardButton>
-            <CardButton>
+            <CardButton onClick={()=>togleStatus(id)}>
               <AiOutlineCloseCircle size="20px"/>
-              <p>CLOSE</p>
+             { is_active? <p>CLOSE</p>:<p>RESTORE</p>}
             </CardButton>
           </ButtonsContainer>
         </LandlordButtons>
         ) : null}
       </div>
-    </Link>
     </>
   )
 }

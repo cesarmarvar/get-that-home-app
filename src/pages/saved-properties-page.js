@@ -112,13 +112,9 @@ function SavedProperties() {
 
   function ActiveProperties() {
     const active = properties[currentPage]?.filter(property => property.is_active)
-    const size = [];
-    Object.values(properties).forEach(prop => {
-      size.push(...prop);
-    })
     return (
       <>
-        <Info>{size.length} Properties found</Info>
+        <Info>{active?.length} Properties found</Info>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
             {active?.map(casa => (
@@ -126,7 +122,7 @@ function SavedProperties() {
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination currentPage={currentPage} array={Object.keys(properties)} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={active} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
@@ -139,7 +135,7 @@ function SavedProperties() {
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
             {closed?.map(casa => (
-              <PropertyCard key={casa.id} data={casa} />
+              <PropertyCard key={casa.id} data={casa} user={user?.user_type}/>
             ))}
           </PropertiesContainer>
         </div>
