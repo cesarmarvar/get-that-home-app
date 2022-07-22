@@ -15,7 +15,11 @@ import { PropertyDetail } from "./pages/property-detail";
 import Loader from "./components/Loader";
 import NotFound from "./pages/not-found";
 import { getSavedProperties } from "./services/saved-properties-service";
+<<<<<<< HEAD
 import EditForm from "./components/EditForm";
+=======
+import { ProfilePage } from "./pages/profile-page";
+>>>>>>> c22e25b (Added route to profile page)
 
 function App() {
   const { user, isLoading } = useAuth();
@@ -55,6 +59,7 @@ function App() {
             <Route path="/register" element={<Signup setUserType={setUserType}/>}/>
             <Route path="/register/form" element={<SignupForm userType={userType}/>}/>
             <Route path="/properties/:id" element={<PropertyDetail savedProperties={savedProperties} isAuth={!!user} handleOpen={setIsOpen}/>}/>
+            <Route path="/profile" element={<ProfilePage />}/>
             {
               user
               &&
