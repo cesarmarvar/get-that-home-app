@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createProperty, getProperties } from "../services/properties-service";
+import { createProperty, getProperties, updateProperty } from "../services/properties-service";
 
 const PropertyContext = createContext();
 
@@ -43,6 +43,16 @@ function PropertyProvider({ children }) {
     return properties.filter(prop => prop.address.toLowerCase().includes(query.toLowerCase()));
   }
 
+  function togleStatus(id) {
+    const property =  properties.find(prop => prop.id === id);
+    const new_properties = properties.filter(prop => prop.id !== id); 
+    console.log(property)
+    const is_active =  !property.is_active;
+    property.is_active = is_active;
+    setProperties([...new_properties, property]);
+    updateProperty({is_active: is_active}, id).then(console.log)
+  }
+
   return (
     <PropertyContext.Provider
       value={{
@@ -50,7 +60,8 @@ function PropertyProvider({ children }) {
         error,
         paginate,
         searchByAddress,
-        newProperty
+        newProperty,
+        togleStatus
       }}
     >
       { children }
