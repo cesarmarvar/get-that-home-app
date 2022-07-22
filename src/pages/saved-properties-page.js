@@ -1,18 +1,21 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
+import Button from "../components/Button/button";
 import { PropertyCard } from "../components/Card/card";
 import Pagination from "../components/pagination/pagination";
 import { useAuth } from "../context/auth-context";
 import { useProperties } from "../context/property-context";
 import { getSavedProperties } from "../services/saved-properties-service";
+import { GoDiffAdded } from "react-icons/go";
+import { useNavigate } from "react-router-dom";
 
 const PropertiesContainer = styled.div`
   width: 1136px;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 32px 86px;
-`
+`;
 
 const Boton = styled.button`
   border: none;
@@ -23,22 +26,20 @@ const Boton = styled.button`
   color: #373737;
   border-bottom: 2px solid #BDBDBD;
   background: white;
-  margin-top: 2rem;
-  // &:focus {
-  //   border-bottom: 2px solid #F48FB1;
-  //   color: #373737;
-  // }
-`
+`;
 
-const Info = styled.p`
-  width: 1136px;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 28px;
-  letter-spacing: 0.15px;´
-  color: #616161;
-  margin: 1rem auto;
-`
+const Container = styled.div`
+  display: flex;
+  width: 80%;
+  margin: 1.5rem auto;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Section = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
 
 function SavedProperties() {
   const {paginate} = useProperties()
@@ -48,6 +49,7 @@ function SavedProperties() {
   const [landlordProperties, setLandlordProperties] = useState(2);
   const {user} = useAuth();
   const [currentSelect, setCurrentSelect] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
       getSavedProperties()
@@ -56,32 +58,40 @@ function SavedProperties() {
           setProperties(properties);
         })
         .catch(console.log);
-  }, [])
+  }, [paginate]);
 
   function LandlordButtons() {
     return (
-      <div style={{display: "flex", gap: "1.5rem", width: "1136px", margin: "0 auto"}}>
-        <Boton 
-          style={{  
-            borderBottom: currentSelect === 0 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: currentSelect === 0 ? "#373737" : "#8E8E8E"
-          }} 
-          onClick={() => {
-            setLandlordProperties(2);
-            setCurrentSelect(0)
-          }}>ACTIVE
-        </Boton>
-        <Boton
-          style={{  
-            borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: currentSelect === 1 ? "#373737" : "#8E8E8E"
-          }}
-          onClick={() => {
-            setLandlordProperties(3);
-            setCurrentSelect(1);
-            }}>CLOSED
+      <Container>
+        <Section>
+          <Boton 
+            style={{  
+              borderBottom: currentSelect === 0 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+              color: currentSelect === 0 ? "#373737" : "#8E8E8E"
+            }} 
+            onClick={() => {
+              setLandlordProperties(2);
+              setCurrentSelect(0)
+            }}>ACTIVE
           </Boton>
-      </div>
+          <Boton
+            style={{  
+              borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+              color: currentSelect === 1 ? "#373737" : "#8E8E8E"
+            }}
+            onClick={() => {
+              setLandlordProperties(3);
+              setCurrentSelect(1);
+              }}>CLOSED
+            </Boton>
+        </Section>
+        <Button 
+          IconL={GoDiffAdded}
+          onClick={() => navigate("/new-property")}
+        >
+          New property
+        </Button>
+      </Container>
     )
   }
 
@@ -114,7 +124,7 @@ function SavedProperties() {
     const active = properties[currentPage]?.filter(property => property.is_active)
     return (
       <>
-        <Info>{active?.length} Properties found</Info>
+        <Container>{active?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
             {active?.map(casa => (
@@ -131,7 +141,7 @@ function SavedProperties() {
     const closed = properties[currentPage]?.filter(property => !property.is_active)
     return (
       <>
-        <Info>{closed?.length} Properties found</Info>
+        <Container>{closed?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
             {closed?.map(casa => (
@@ -148,7 +158,7 @@ function SavedProperties() {
     const favorites = properties[currentPage]?.filter(property => property.property_status === "favorite")
     return (
       <>
-        <Info>{favorites?.length} Properties found</Info>
+        <Container>{favorites?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
             {favorites?.map(casa => (
@@ -165,7 +175,7 @@ function SavedProperties() {
     const contacted = properties[currentPage]?.filter(property => property.property_status === "contacted")
     return (
       <>
-        <Info>{contacted?.length} Properties found</Info>
+        <Container>{contacted?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer>
             {contacted?.map(casa => (
