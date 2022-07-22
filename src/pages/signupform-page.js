@@ -1,17 +1,17 @@
 import styled from "@emotion/styled"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Button from "../components/Button/button"
 import Input from "../components/Input"
 import { useAuth } from "../context/auth-context"
 import { typography } from "../styles"
+import { Modal } from "./ui"
+import { RiCloseFill } from "react-icons/ri"
 
 function Form({userType}) {
 
-  const { signup } = useAuth();
-
+  const { signup, error, setError, user } = useAuth();
   const navigate = useNavigate();
-
   const [dataForm, setDataForm] = useState({
     name: "",
     user_type: userType,
@@ -19,12 +19,10 @@ function Form({userType}) {
     password: "",
     phone: ""
   })
-
   const [passwordValid, setPasswordValid] = useState({
     password: "",
     isValid: null
   })
-  
   const { name, email, password, phone } = dataForm;
   
   function handleChange(e) {
@@ -38,9 +36,14 @@ function Form({userType}) {
   
   function handleSubmit(e) {
     e.preventDefault();
-    signup(dataForm)
-    navigate("/");
+    signup(dataForm);
   }
+
+  useEffect(() => {
+    if(user) {
+      navigate("/")
+    }
+  }, [user, navigate])
 
   const Sugerence = styled.p`
     font-weight: 400;
@@ -49,6 +52,38 @@ function Form({userType}) {
     letter-spacing: 0.4px;
     color: #8E8E8E;
   `
+
+  function ErrorModal({children}) {
+
+    const ModalBox = styled.div`
+      background: white;
+      width: 358px;
+      min-height: 150px;
+      box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      // align-items: center;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 0.5rem;
+      color: red;
+    `
+    console.log(children)
+
+    return (
+      <Modal>
+        <ModalBox>
+          <div style={{display: "flex", justifyContent: "flex-end", width: "100%"}}>
+            <div style={{width: "16px", height: "16px"}}></div>
+            <RiCloseFill onClick={() => setError(null)} style={{ size: "24px", cursor: "pointer"}} />
+          </div>
+          {children}
+        </ModalBox>
+      </Modal>
+    )
+  }
+
 
   return (
     <>
@@ -115,6 +150,7 @@ function Form({userType}) {
           />
           {password && !passwordValid.isValid && <Sugerence>NO COINCIDE</Sugerence>}
         </div>
+        { error ? <ErrorModal>{Object.values(JSON.parse(error)).map(e => <p>{e}</p>)}</ErrorModal> : null }
         <Button style={{margin: "1rem"}} type="primary" children="CREATE ACCOUNT" >CREATE ACCOUNT</Button>
       </form>
     </>

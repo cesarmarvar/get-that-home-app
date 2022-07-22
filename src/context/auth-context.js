@@ -24,7 +24,7 @@ function AuthProvider({ children }){
     return login(credentials).then(user => {
       setUser(user);
     }).catch(e => {
-      setError(e.message);
+      setError(e);
     });
   }
 
