@@ -22,11 +22,8 @@ const SearchSection = styled.main`
   align-items: center;
   height: 600px;
   gap: 60px;
-  background-image: url("assets/illustration.svg");
-  // // background-position: top;
-  // background-repeat: no-repeat;
-  // background-size: contain;
-  background-attachment: fixed;
+  background: url("assets/illustration.svg")rgba(0, 0, 0, 0.1);
+  background-blend-mode: screen;
 `
 
 const Introduction = styled.div`
