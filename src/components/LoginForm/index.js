@@ -43,8 +43,6 @@ function LoginForm({ handleOpen }){
     }
   }, [user, handleOpen, setError])
 
-  console.log(error);
-
   return (
     <Formik
       initialValues={initialValues}
