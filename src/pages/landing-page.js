@@ -230,7 +230,7 @@ export function LandingPage() {
         </TextsContainer>
         <ExampleCardsContainer>
           {currentProps.slice(0, 3)?.map((property, index) => {
-            return <PropertyCard key={index} user="homeseeker" data={property}/>
+            return <PropertyCard key={index} user="buyer" data={property}/>
           })}
         </ExampleCardsContainer>
       </ExamplesSection>
