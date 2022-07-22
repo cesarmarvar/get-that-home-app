@@ -42,25 +42,25 @@ function PropertiesPage() {
     }
   }, [properties, query, currentPage, searchByAddress]);
 
-  function handleFilters(){
-    const allProperties = []
-    console.log("here!")
-    Object.values(properties).forEach(prop => {
-      allProperties.push(...prop);
-    });
-    if(!filters.contract) {
-      setFilters(filters => {
-        return {...filters, isFiltering: false}
-      });
-      setCurrentProps(properties[1]);
-      return;
-    }
-    const newProps = filters.contract ? allProperties.filter(prop => prop.operation_type === filters.contract) : allProperties;
-    setCurrentProps(newProps);
-    setFilters(filters => {
-      return {...filters, isFiltering: true}
-    });
-  }
+  // function handleFilters(){
+  //   const allProperties = []
+  //   console.log("here!")
+  //   Object.values(properties).forEach(prop => {
+  //     allProperties.push(...prop);
+  //   });
+  //   if(!filters.contract) {
+  //     setFilters(filters => {
+  //       return {...filters, isFiltering: false}
+  //     });
+  //     setCurrentProps(properties[1]);
+  //     return;
+  //   }
+  //   const newProps = filters.contract ? allProperties.filter(prop => prop.operation_type === filters.contract) : allProperties;
+  //   setCurrentProps(newProps);
+  //   setFilters(filters => {
+  //     return {...filters, isFiltering: true}
+  //   });
+  // }
 
   return (
     <Container>
@@ -97,7 +97,6 @@ function PropertiesPage() {
         </FilterSection>
         <MultiSelect
           setFilters={setFilters}
-          handleChangeFilters={handleFilters}
           type="contract"
           withBorder
           isMulti={false}
