@@ -15,7 +15,6 @@ import { PropertyDetail } from "./pages/property-detail";
 import Loader from "./components/Loader";
 import NotFound from "./pages/not-found";
 import { getSavedProperties } from "./services/saved-properties-service";
-import EditForm from "./components/EditForm";
 import { ProfilePage } from "./pages/profile-page";
 
 function App() {
@@ -65,7 +64,6 @@ function App() {
                   user.user_type === "landlord" && (
                     <>
                       <Route path="/new-property" element={<PropertyFormPage />} />
-                      <Route path="/edit-property/:id" element={<EditForm />} />
                     </>
                   )
                 }

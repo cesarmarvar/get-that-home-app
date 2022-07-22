@@ -162,7 +162,6 @@ export function LandingPage() {
     newProperties = filters.contract ? newProperties.filter(prop => prop.operation_type === filters.contract) : newProperties;
     newProperties = filters.where.length > 0 ? newProperties.filter(prop => filters.where.includes(prop.address)) : newProperties;
     setCurrentProps(newProperties);
-    console.log(filters.where)
   }
 
   const navigate = useNavigate();
@@ -231,7 +230,7 @@ export function LandingPage() {
         </TextsContainer>
         <ExampleCardsContainer>
           {currentProps.slice(0, 3)?.map((property, index) => {
-            return <PropertyCard key={index} user="homeseeker" data={property}/>
+            return <PropertyCard key={index} user="buyer" data={property}/>
           })}
         </ExampleCardsContainer>
       </ExamplesSection>

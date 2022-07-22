@@ -43,7 +43,7 @@ const Section = styled.div`
 
 function SavedProperties() {
   const {paginate} = useProperties()
-  const [properties, setProperties] = useState({});
+  const [properties, setProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1)
   const [buyerProperties, setBuyerProperties] = useState(0);
   const [landlordProperties, setLandlordProperties] = useState(2);
@@ -54,11 +54,10 @@ function SavedProperties() {
   useEffect(() => {
       getSavedProperties()
         .then((data) => {
-          const properties = paginate(data);
-          setProperties(properties);
+          setProperties(data);
         })
         .catch(console.log);
-  }, [paginate]);
+  }, []);
 
   function LandlordButtons() {
     return (
@@ -97,93 +96,99 @@ function SavedProperties() {
 
   function BuyerButtons() {
     return (
-      <div style={{display: "flex", gap: "1.5rem"}}>
-        <Boton
-          style={{  
-            borderBottom: currentSelect === 0 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: currentSelect === 0 ? "#373737" : "#8E8E8E"
-          }}
-          onClick={() => {
-            setBuyerProperties(0);
-            setCurrentSelect(0);
-          }}>FAVORITES</Boton>
-        <Boton
-          style={{  
-            borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
-            color: currentSelect === 1 ? "#373737" : "#8E8E8E"
-          }}
-          onClick={() => {
-            setBuyerProperties(1);
-            setCurrentSelect(1);
-          }}>CONTACTED</Boton>
-      </div>
+      <Container>
+        <Section>
+          <Boton
+            style={{  
+              borderBottom: currentSelect === 0 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+              color: currentSelect === 0 ? "#373737" : "#8E8E8E"
+            }}
+            onClick={() => {
+              setBuyerProperties(0);
+              setCurrentSelect(0);
+            }}>FAVORITES</Boton>
+          <Boton
+            style={{  
+              borderBottom: currentSelect === 1 ? "2px solid #F48FB1" : "2px solid #BDBDBD", 
+              color: currentSelect === 1 ? "#373737" : "#8E8E8E"
+            }}
+            onClick={() => {
+              setBuyerProperties(1);
+              setCurrentSelect(1);
+            }}>CONTACTED</Boton>
+        </Section>
+      </Container>
     )
   }
 
   function ActiveProperties() {
-    const active = properties[currentPage]?.filter(property => property.is_active)
+    const active = properties?.filter(property => property.is_active);
+    const size = active ? paginate(active) : [];
     return (
       <>
-        <Container>{active?.length} Properties found</Container>
+        <Container>{size[currentPage]?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {active?.map(casa => (
+            {size[currentPage]?.map(casa => (
               <PropertyCard key={casa.id} data={casa} user={user?.user_type} />
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination currentPage={currentPage} array={active} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={Object.keys(size)} setCurrentPage={setCurrentPage}/>
       </>
-    )
+    );
   }
 
   function ClosedProperties() {
-    const closed = properties[currentPage]?.filter(property => !property.is_active)
+    const closed = properties?.filter(property => !property.is_active);
+    const size = closed ? paginate(closed) : [];
     return (
       <>
-        <Container>{closed?.length} Properties found</Container>
+        <Container>{size[currentPage]?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {closed?.map(casa => (
+            {size[currentPage]?.map(casa => (
               <PropertyCard key={casa.id} data={casa} user={user?.user_type}/>
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination currentPage={currentPage} array={closed} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={Object.keys(size)} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   function FavoritesProperties() {
-    const favorites = properties[currentPage]?.filter(property => property.property_status === "favorite")
+    const favorites = properties?.filter(property => property.property_status === "favorite");
+    const size = favorites ? paginate(favorites) : [];
     return (
       <>
-        <Container>{favorites?.length} Properties found</Container>
+        <Container>{size[currentPage]?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer style={{display: "flex"}}>
-            {favorites?.map(casa => (
-              <PropertyCard key={casa.id} data={casa.property} />
+            {size[currentPage]?.map(casa => (
+              <PropertyCard key={casa.id} data={casa.property} user={user?.user_type}/>
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination currentPage={currentPage} array={favorites} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={Object.keys(size)} setCurrentPage={setCurrentPage}/>
       </>
     )
   }
 
   function ContactedProperties() {
-    const contacted = properties[currentPage]?.filter(property => property.property_status === "contacted")
+    const contacted = properties?.filter(property => property.property_status === "contacted");
+    const size = contacted ? paginate(contacted) : [];
     return (
       <>
-        <Container>{contacted?.length} Properties found</Container>
+        <Container>{size[currentPage]?.length} Properties found</Container>
         <div style={{display: "flex", justifyContent: "center"}}>
           <PropertiesContainer>
-            {contacted?.map(casa => (
-              <PropertyCard key={casa.id} data={casa.property} />
+            {size[currentPage]?.map(casa => (
+              <PropertyCard key={casa.id} data={casa.property} user={user?.user_type}/>
             ))}
           </PropertiesContainer>
         </div>
-        <Pagination currentPage={currentPage} array={contacted} setCurrentPage={setCurrentPage}/>
+        <Pagination currentPage={currentPage} array={Object.keys(size)} setCurrentPage={setCurrentPage}/>
       </>
     )
   }

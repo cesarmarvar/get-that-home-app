@@ -110,7 +110,7 @@ function PropertiesPage() {
         { currentProps?.map((prop, index) => (
             <PropertyCard
               key={index}
-              user="homeseeker"
+              user="buyer"
               data={prop}
             />
         )) }

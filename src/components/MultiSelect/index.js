@@ -4,7 +4,7 @@ function MultiSelect({ isMulti=true, label="", setFilters, type, options, placeh
   
   function handleChange(item) {
     if(type === "type") {
-      setFilters(filters => ({...filters, type: item.value}));
+      setFilters(filters => ({...filters, type: item ? item.value : null}));
     }else if(type === "contract"){
       setFilters(filters => ({...filters, contract: item ? item.value : null}));
     }else {
