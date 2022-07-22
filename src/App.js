@@ -15,11 +15,8 @@ import { PropertyDetail } from "./pages/property-detail";
 import Loader from "./components/Loader";
 import NotFound from "./pages/not-found";
 import { getSavedProperties } from "./services/saved-properties-service";
-<<<<<<< HEAD
 import EditForm from "./components/EditForm";
-=======
 import { ProfilePage } from "./pages/profile-page";
->>>>>>> c22e25b (Added route to profile page)
 
 function App() {
   const { user, isLoading } = useAuth();
